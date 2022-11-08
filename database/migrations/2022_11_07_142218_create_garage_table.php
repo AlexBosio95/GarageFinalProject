@@ -15,6 +15,7 @@ class CreateGarageTable extends Migration
     {
         Schema::create('garages', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique();
             $table->string('title');
             $table->unsignedSmallInteger('sqmt')->nullable();
             $table->tinyInteger('length')->nullable();

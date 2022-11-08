@@ -2,6 +2,7 @@
 
 use App\Models\Garage;
 use Illuminate\Database\Seeder;
+Use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
 class GaragesSeeder extends Seeder
@@ -15,6 +16,7 @@ class GaragesSeeder extends Seeder
     {
         for ($i=0; $i<50; $i++) {
             $newGarage = new Garage();
+            
             $newGarage->title = $faker->sentence();
             $newGarage->sqmt = $faker->numberBetween(20, 150);
             $newGarage->length = $faker->numberBetween(3, 20);
@@ -25,8 +27,24 @@ class GaragesSeeder extends Seeder
             $newGarage->longitude = $faker->randomDigit();
             $newGarage->latitude = $faker->randomDigit();
             $newGarage->description = $faker->paragraph();
+            $newGarage->slug = $this->getSlug($newGarage->title);
 
             $newGarage->save();
         }
+    }
+    protected function getSlug($title) 
+    {
+        //*Crea uno slug univoco per ogni titolo/
+        $slug = Str::slug($title, '-');
+        $checkSlug = Garage::where('slug', $slug)->first();
+        $counter = 1;
+
+        while($checkSlug) {
+            $slug = Str::slug($title . '-' . $counter, '-');
+            $counter++;
+            $checkSlug = Garage::where('slug', $slug)->first();
+        }
+
+        return $slug;
     }
 }

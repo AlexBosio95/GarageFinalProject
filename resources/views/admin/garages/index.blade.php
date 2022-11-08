@@ -24,6 +24,7 @@
                     @endforeach
                 </tbody>
               </table>
+              <a href="{{ route('admin.garages.create') }}" class="btn btn-primary"> create </a>
         </div>
     </div>
 </div>
