@@ -11,10 +11,18 @@ class Garage extends Model
     }
 
     public function messages() {
-        return $this->hasMany('App\Message');
+        return $this->hasMany('App\Models\Message');
     }
 
     public function views() {
-        return $this->hasMany('App\View');
+        return $this->hasMany('App\Models\View');
+    }
+
+    public function sponsors() {
+        return $this->belongsToMany('App\Models\Sponsor');
+    }
+
+    public function services() {
+        return $this->belongsToMany('App\Models\Service');
     }
 }
