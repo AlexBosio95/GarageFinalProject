@@ -49,13 +49,13 @@ class GaragesController extends Controller
 
         $request->validate([
             'title'=>'required|max:255|min:3',
-            'sqmt'=> 'nullable|max:255|min:3',
-            'length' => 'nullable|max:255|min:3',
-            'width'=> 'nullable|max:255|min:1',
-            'height'=> 'nullable|max:255|min:1', 
-            'n_parking'=> 'required|max:255|min:1', 
+            'sqmt'=> 'nullable|max:255',
+            'length' => 'nullable|max:255',
+            'width'=> 'nullable|max:255',
+            'height'=> 'nullable|max:255', 
+            'n_parking'=> 'required|max:255', //! needs fix (forse exist come con services) 
             'address'=> 'required|max:255|min:1',
-            //'services'=> 'exists:services,id',
+            'services'=> 'exists:services,id',
             //'image'=> 'nullable|max:10000|image',
             'description'=> 'nullable|max:65535|min:1'
         ]);
@@ -73,7 +73,8 @@ class GaragesController extends Controller
 
         $newGarage->slug=$slug;
 
-        
+        //* Il Garage viene correttamente creato nel database, ma non visualizzato nella index, bisognerebbe anceh fare la sync tra lo user id e il garage così verrà visualizzato.
+            
 
         $newGarage->save();
 
