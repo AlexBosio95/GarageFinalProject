@@ -21,11 +21,12 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::middleware('auth')
-        ->namespace('Admin') 
-        ->name('admin.') 
-        ->prefix('admin') 
+        ->namespace('Admin')
+        ->name('admin.')
+        ->prefix('admin')
         ->group(function () {
             Route::get('/', 'HomeController@index')->name('home');
+            Route::resource('garages', 'GaragesController');
         });
 
 Route::get('{any?}', function() {

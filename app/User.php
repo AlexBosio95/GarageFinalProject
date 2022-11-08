@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'surname', 'email', 'date_of_birth', 'password', 
+        'name', 'surname', 'email', 'date_of_birth', 'password',
     ];
 
     /**
@@ -36,8 +36,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
-    public function gareges() {
+
+    public function garages() {
         return $this->hasMany('App\Models\Garage');
     }
 }
