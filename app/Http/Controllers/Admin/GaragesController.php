@@ -142,7 +142,7 @@ class GaragesController extends Controller
             'n_parking'=> 'required|numeric|between:1,5',
             'address'=> 'required|max:255|min:1',
             'services'=> 'exists:services,id',
-            //'image'=> 'nullable|max:10000|image',
+            'image'=> 'nullable|max:10000|image',
             'description'=> 'nullable|max:65535|min:1'
         ]);
         $data = $request->all();
@@ -157,8 +157,16 @@ class GaragesController extends Controller
             $slug = $this->getSlug($garage->title);
             $garage->slug=$slug;
         }
+
+        if (array_key_exists('image', $data)){
+
+            if ($garage->image){
+                Storage::delete($garage->image);
+            }
+            $image = Storage::put('uploads', $data[ 'image']);
+            $data['image'] = $image;
+        } 
         
-        //$garage->user_id = Auth::id();
         $garage->update($data);
         
         if (array_key_exists('services', $data)){
@@ -195,6 +203,19 @@ class GaragesController extends Controller
         }
 
         return $slug;
+    }
+
+    public function deleteCover(Garage $garage) {
+
+        if ($garage->image) {
+            Storage::delete($garage->image);
+        }
+
+        $garage->image = null;
+        $garage->save();
+
+        return redirect()->route('admin.garages.edit', [ 'garage' => $garage->id])->with('status', 'Immagine cancellata con successo');
+
     }
 
 }

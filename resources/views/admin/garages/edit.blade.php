@@ -105,9 +105,31 @@
           @enderror
         </div>
 
-
+        
+        <img src="{{ asset('storage/'. $garage->image) }}" alt="image garage">
+        
+        <div class="form-group">
+          <label for="image">Images</label>
+          <input type="file" class="form-control @error ('image') is-invalid @enderror" id="image" name="image">
+          @error('image')
+          <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+        </div>
+        
+        
         <button type="submit" class="btn btn-primary">Edit</button>
       </form>
       
+      @if ($garage->image)
+      
+      <form action="{{route('admin.garages.deleteCover', ['garage' => $garage])}}" method="POST" id="deleteCoverForm">
+        @csrf
+        @method('DELETE')
+        
+        <button type="submit" class="btn btn-danger"> Delete </button>
+        
+      </form>
+      @endif
+
 </div>
 @endsection

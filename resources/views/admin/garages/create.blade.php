@@ -99,7 +99,7 @@
 
         <div class="form-group">
           <label for="image">Images</label>
-          <input type="file" class="form-control @error ('image') is-invalid @enderror" id="GarageTitle" name="image">
+          <input type="file" class="form-control @error ('image') is-invalid @enderror" id="image" name="image">
           @error('image')
             <div class="alert alert-danger">{{ $message }}</div>
           @enderror
