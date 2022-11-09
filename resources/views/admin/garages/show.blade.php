@@ -35,5 +35,9 @@
     <h3>Description</h3>
     <p>{{ $garage->description }}</p>
 
+    <h3>Images</h3>
+
+    <img src="{{ asset('storage/'. $garage->image) }}" alt="image garage">
+
 </div>
 @endsection

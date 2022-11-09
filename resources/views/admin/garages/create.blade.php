@@ -2,8 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form action="{{ route('admin.garages.store') }}" method="POST">
-
+    <form enctype="multipart/form-data" action="{{ route('admin.garages.store') }}" method="POST">
         @csrf
 
         <div class="form-group">
@@ -95,6 +94,14 @@
 
           @error('description')
               <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+        </div>
+
+        <div class="form-group">
+          <label for="image">Images</label>
+          <input type="file" class="form-control @error ('image') is-invalid @enderror" id="GarageTitle" name="image">
+          @error('image')
+            <div class="alert alert-danger">{{ $message }}</div>
           @enderror
         </div>
 

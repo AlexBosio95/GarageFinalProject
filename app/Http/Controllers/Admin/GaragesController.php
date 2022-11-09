@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 Use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
+Use Illuminate\Support\Facades\Storage;
 
 class GaragesController extends Controller
 {
@@ -54,12 +55,18 @@ class GaragesController extends Controller
             'n_parking'=> 'required|numeric|between:1,5',
             'address'=> 'required|max:255|min:1',
             'services'=> 'exists:services,id',
-            //'image'=> 'nullable|max:10000|image',
+            'image'=> 'nullable|max:10000|image',
             'description'=> 'nullable|max:65535|min:1'
         ]);
         $data = $request->all();
         
         $newGarage = new Garage();
+        
+        if (array_key_exists('image', $data)){
+            
+            $image = Storage::put('uploads', $data[ 'image']);
+            $data['image'] = $image;
+        }
 
         $newGarage->fill($data);
 
