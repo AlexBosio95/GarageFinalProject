@@ -92,7 +92,15 @@ class GaragesController extends Controller
      */
     public function show($id)
     {
-        //
+        $garage = Garage::find($id);
+        
+        //per visualizzare errore 404
+        if($garage){
+            
+            return view('admin.garages.show');
+        } else{
+            abort(404);
+        }
     }
 
     /**
