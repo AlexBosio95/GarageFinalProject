@@ -105,8 +105,11 @@
           @enderror
         </div>
 
+        @if ($garage->image)
         
-        <img src="{{ asset('storage/'. $garage->image) }}" alt="image garage">
+          <img src="{{ asset('storage/'. $garage->image) }}" alt="image garage">
+
+        @endif
         
         <div class="form-group">
           <label for="image">Images</label>
@@ -115,8 +118,7 @@
           <div class="alert alert-danger">{{ $message }}</div>
           @enderror
         </div>
-        
-        
+                
         <button type="submit" class="btn btn-primary">Edit</button>
       </form>
       

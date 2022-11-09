@@ -211,7 +211,7 @@ class GaragesController extends Controller
             Storage::delete($garage->image);
         }
 
-        $garage->image = null;
+        $garage->image = '';
         $garage->save();
 
         return redirect()->route('admin.garages.edit', [ 'garage' => $garage->id])->with('status', 'Immagine cancellata con successo');
