@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 Use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
 
 class GaragesController extends Controller
 {
@@ -44,16 +45,13 @@ class GaragesController extends Controller
      */
     public function store(Request $request)
     {
-
-        //dd($request);
-
         $request->validate([
             'title'=>'required|max:255|min:3',
             'sqmt'=> 'nullable|max:255',
             'length' => 'nullable|max:255',
             'width'=> 'nullable|max:255',
             'height'=> 'nullable|max:255', 
-            'n_parking'=> 'required|max:255', //! needs fix (forse exist come con services) 
+            'n_parking'=> 'required|numeric|between:1,5',
             'address'=> 'required|max:255|min:1',
             'services'=> 'exists:services,id',
             //'image'=> 'nullable|max:10000|image',
@@ -73,8 +71,7 @@ class GaragesController extends Controller
 
         $newGarage->slug=$slug;
 
-        //* Il Garage viene correttamente creato nel database, ma non visualizzato nella index, bisognerebbe anceh fare la sync tra lo user id e il garage così verrà visualizzato.
-            
+        $newGarage->user_id = Auth::id();
 
         $newGarage->save();
 
