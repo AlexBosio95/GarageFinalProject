@@ -97,7 +97,7 @@ class GaragesController extends Controller
         //per visualizzare errore 404
         if($garage){
             
-            return view('admin.garages.show');
+            return view('admin.garages.show', compact('garage'));
         } else{
             abort(404);
         }
