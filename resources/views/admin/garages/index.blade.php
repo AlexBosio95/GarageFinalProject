@@ -22,6 +22,7 @@
                         <td>{{$garage->sqmt}}</td>
                         <td>{{$garage->address}}</td>
                         <td><a href="{{ route('admin.garages.show',['garage'=>$garage->id]) }}" class="btn btn-primary"> show </a></td>                        
+                        <td><a href="{{ route('admin.garages.edit',['garage'=>$garage->id]) }}" class="btn btn-primary"> Edit </a></td>                        
                         </tr>
                     @endforeach
                 </tbody>

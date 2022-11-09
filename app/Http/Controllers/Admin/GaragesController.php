@@ -111,7 +111,10 @@ class GaragesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $services= Service::all();
+        $garage = Garage::find($id);
+
+        return view('admin.garages.edit', compact('services', 'garage'));
     }
 
     /**
@@ -123,7 +126,41 @@ class GaragesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title'=>'required|max:255|min:3',
+            'sqmt'=> 'nullable|max:255',
+            'length' => 'nullable|max:255',
+            'width'=> 'nullable|max:255',
+            'height'=> 'nullable|max:255', 
+            'n_parking'=> 'required|numeric|between:1,5',
+            'address'=> 'required|max:255|min:1',
+            'services'=> 'exists:services,id',
+            //'image'=> 'nullable|max:10000|image',
+            'description'=> 'nullable|max:65535|min:1'
+        ]);
+        $data = $request->all();
+        
+        $garage = Garage::find($id);
+
+        $garage->latitude = 1;
+        
+        $garage->longitude =2;
+        
+        if ($data['title'] !== $garage->title) {
+            $slug = $this->getSlug($garage->title);
+            $garage->slug=$slug;
+        }
+        
+        //$garage->user_id = Auth::id();
+        $garage->update($data);
+        
+        if (array_key_exists('services', $data)){
+            $garage->services()->sync($data['services']);
+        } else {
+            $garage->services()->sync([]);
+        }
+        
+        return redirect()->route('admin.garages.index')->with('edited', 'edited succesfully');
     }
 
     /**
