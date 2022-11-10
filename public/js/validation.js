@@ -95,7 +95,7 @@
 
 var form = document.getElementById('register-form');
 var email_regexp = /^([a-zA-Z0-9.-])+@(([a-zA-Z0-9-]{2,})+.)+([a-zA-Z0-9]{2,})+$/;
-var nameRegExp = /^[a-zA-Z]*$/;
+var nameRegExp = /^[a-zA-Zàèìòù]*$/;
 form.addEventListener('submit', function () {
   Validation('name', nameRegExp);
   Validation('surname', nameRegExp);
@@ -129,7 +129,7 @@ function Validation(userValue, regExp) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\validation.js */"./resources/js/validation.js");
+module.exports = __webpack_require__(/*! D:\Utenti\Valerio\OneDrive\Desktop\BOOLEAN\Repositorys\GarageFinalProject\resources\js\validation.js */"./resources/js/validation.js");
 
 
 /***/ })
