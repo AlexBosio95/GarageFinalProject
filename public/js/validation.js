@@ -94,16 +94,17 @@
 /***/ (function(module, exports) {
 
 var form = document.getElementById('register-form');
+var email_regexp = /^([a-zA-Z0-9.-])+@(([a-zA-Z0-9-]{2,})+.)+([a-zA-Z0-9]{2,})+$/;
+var nameRegExp = /^[a-zA-Z]*$/;
 form.addEventListener('submit', function () {
-  Validation('name');
-  Validation('surname');
+  Validation('name', nameRegExp);
+  Validation('surname', nameRegExp);
+  Validation('email', email_regexp);
 });
 
 // Validation functions
-
-function isValidCharacter(txtTitle) {
+function isValidCharacter(txtTitle, regExp) {
   var title = document.getElementById(txtTitle);
-  var regExp = /^[a-zA-Z]*$/;
   if (!regExp.test(title.value)) {
     title.value = '';
     return false;
@@ -111,10 +112,10 @@ function isValidCharacter(txtTitle) {
     return true;
   }
 }
-function Validation(userValue) {
+function Validation(userValue, regExp) {
   var txtTitles = document.getElementById(userValue);
-  if (isValidCharacter(txtTitles.id) == false) {
-    alert("Please enter valid title. No special character allowed.");
+  if (isValidCharacter(txtTitles.id, regExp) == false) {
+    alert("Please enter valid" + " " + userValue + " " + "No special character allowed.");
     return false;
   }
 }
