@@ -2,42 +2,114 @@
 
 @section('content')
 <div class="container">
+    <div class="card mb-3">
+        @if ($garage->image)
+            <img src="{{ asset('storage/'. $garage->image) }}" class="card-img-top" alt="Image for {{$garage->title}}">
+        @else
+            <h4 class="card-title text-center mt-5">Image not available</h4>            
+        @endif
 
+        <div class="card-body">
+            <h5 class="card-title">
+                <span class="text-primary">Title:</span>
+                {{$garage->title}}
+            </h5>
 
+            <p class="card-text">
+                <span class="text-primary">Address:</span>
+                <span class="text-muted">{{$garage->address}}</span> 
+            </p>
 
-    <h1>{{ $garage->title }}</h1>
+            <p class="card-text">
+                <span class="text-primary">Longitude:</span>
+                <span class="text-muted">{{$garage->longitude}}</span>
+            </p>   
+        
+            <p class="card-text">
+                <span class="text-primary">Latitude:</span>
+                <span class="text-muted">{{$garage->latitude}}</span>
+            </p>
 
-    <h3>Address</h3>
-    <h4>{{ $garage->address }}</h4>
+            @if ($garage->sqmt > 1)
+                <p class="card-text">
+                    <span class="text-primary">Garage total area:</span>
+                    {{$garage->sqmt}} sqmt
+                </p>    
+            @else
+                <p class="card-text">
+                    <span class="text-primary">Garage total area:</span>
+                    <span class="text-muted">Not available</span>
+                </p>    
+            @endif
 
-    <h3>Garage total area</h3>
-    <h4>{{ $garage->sqmt }} mt&#178</h4>
+            @if ($garage->length > 1)
+                <p class="card-text">
+                    <span class="text-primary">Length:</span>
+                    {{$garage->length}} mt
+                </p>    
+            @else
+                <p class="card-text">
+                    <span class="text-primary">Length:</span>
+                    <span class="text-muted">Not available</span>
+                </p>    
+            @endif
 
-    <h3>Length of the garage</h3>
-    <h4>{{ $garage->length }} mt</h4>
-
-    <h3>width of the garage</h3>
-    <h4>{{ $garage->width }} mt</h4>
-
-    <h3>Height of the garage</h3>
-    <h4>{{ $garage->height }} mt</h4>
-
-    <h3>Nuber of parking spots</h3>
-    <h4>{{ $garage->n_parking }}</h4>
-
-    <h4>Services</h4>
-    @foreach ($garage->services as $service )
-    <ul>
-        <li>{{ $service->name }}</li>
-    </ul>   
-    @endforeach
-
-    <h3>Description</h3>
-    <p>{{ $garage->description }}</p>
-
-    <h3>Images</h3>
-
-    <img src="{{ asset('storage/'. $garage->image) }}" alt="image garage">
-
+            @if ($garage->width > 1)
+                <p class="card-text">
+                    <span class="text-primary">Width:</span>
+                    {{$garage->width}} mt
+                </p>    
+            @else
+                <p class="card-text">
+                    <span class="text-primary">Width:</span>
+                    <span class="text-muted">Not available</span>
+                </p>    
+            @endif
+            @if ($garage->height > 1)
+                <p class="card-text">
+                    <span class="text-primary">Height:</span>
+                    {{$garage->height}} mt
+                </p>    
+            @else
+                <p class="card-text">
+                    <span class="text-primary">Height:</span>
+                    <span class="text-muted">Not available</span>
+                </p>    
+            @endif
+            
+            <p class="card-text">
+                <span class="text-primary">N_Parking:</span>
+                {{$garage->n_parking}}
+            </p>
+            
+            @if (count($garage->services) > 1)
+                <p class="card-text">
+                    <span class="text-primary">Services:</span>
+                    @foreach ($garage->services as $service)
+                        <span class="text-success">
+                            {{$service->name}} |
+                        </span>
+                    @endforeach
+                </p>
+            @else
+                <p class="card-text">
+                    <span class="text-primary">Services:</span>
+                    <span class="text-muted">Not available</span>
+                </p> 
+            @endif
+            
+            @if ($garage->description)
+                <p class="card-text">
+                    <span class="text-primary">Description:</span>
+                    {{$garage->description}}
+                </p>   
+            @else
+                <p class="card-text">
+                    <span class="text-primary">Description:</span>
+                    <span class="text-muted">Not available</span>
+                </p>
+            @endif
+        </div>
+    </div>
 </div>
 @endsection
