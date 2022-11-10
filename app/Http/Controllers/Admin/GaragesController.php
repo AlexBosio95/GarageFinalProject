@@ -86,7 +86,7 @@ class GaragesController extends Controller
             $newGarage->services()->sync($data['services']);
         }
 
-        return redirect()->route('admin.garages.index');
+        return redirect()->route('admin.garages.index')->with('created', 'Created succesfully');
     }
    
 
@@ -207,7 +207,7 @@ class GaragesController extends Controller
 
         $garage->delete();
 
-        return redirect()->route('admin.garages.index')->with('delete', 'deleted succesfully');
+        return redirect()->route('admin.garages.index')->with('deleted', 'deleted succesfully');
 
 
     }
@@ -237,7 +237,7 @@ class GaragesController extends Controller
         $garage->image = '';
         $garage->save();
 
-        return redirect()->route('admin.garages.edit', [ 'garage' => $garage->id])->with('status', 'Immagine cancellata con successo');
+        return redirect()->route('admin.garages.edit', [ 'garage' => $garage->id])->with('img-removed', 'Immagine cancellata con successo');
 
     }
 

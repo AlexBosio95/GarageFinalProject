@@ -87,6 +87,14 @@
         @enderror
 
         <div class="form-group">
+          <label for="available">Available</label>
+          <select class="form-control @error ('available') is-invalid @enderror" id="available" name="available" required>
+            <option {{old('available') == 0 ? 'selected' : ''}} value="0">Not Available</option>
+            <option {{old('available')== 1 ? 'selected' : ''}} value="1">Available</option>
+          </select>           
+        </div>
+
+        <div class="form-group">
           <label for="description">Description</label>
           <textarea class="form-control @error ('description') is-invalid @enderror" id="description" rows="3" name="description">
             {{old('description')}}

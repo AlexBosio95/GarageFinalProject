@@ -2,6 +2,31 @@
 
 @section('content')
 <div class="container">
+  {{-- ***Flash messages*** --}}
+  @if (session('img-removed'))
+    <div class="alert alert-danger">
+        {{ session('img-removed') }}
+    </div>
+  @endif
+  
+  @if (session('created'))
+    <div class="alert alert-success">
+        {{ session('created') }}
+    </div>
+  @endif
+  
+  @if (session('edited'))
+    <div class="alert alert-success">
+        {{ session('edited') }}
+    </div>
+  @endif
+  
+  @if (session('deleted'))
+    <div class="alert alert-danger">
+        {{ session('deleted') }}
+    </div>
+  @endif
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <table class="table table-striped">
@@ -30,7 +55,7 @@
                               @csrf
                               @method('DELETE')
 
-                              <button type="submit" class="btn btn-danger"> Delete </button>                    
+                              <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure? This action is irreversible')"> Delete </button>                    
           
                             </form>
                           </td>  
