@@ -186,7 +186,19 @@ class GaragesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $garage= Garage::find($id);
+
+        $garage->services()->sync([]);
+
+        if ($garage->image){
+            Storage::delete($garage->image);
+        }
+
+        $garage->delete();
+
+        return redirect()->route('admin.garages.index')->with('delete', 'deleted succesfully');
+
+
     }
 
     protected function getSlug($title) 

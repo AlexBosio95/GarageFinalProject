@@ -17,12 +17,21 @@
                 <tbody>
                     @foreach ($garages as $garage)
                         <tr>
-                        <th scope="row">{{$garage->id}}</th>
-                        <td>{{$garage->title}}</td>
-                        <td>{{$garage->sqmt}}</td>
-                        <td>{{$garage->address}}</td>
-                        <td><a href="{{ route('admin.garages.show',['garage'=>$garage->id]) }}" class="btn btn-primary"> show </a></td>                        
-                        <td><a href="{{ route('admin.garages.edit',['garage'=>$garage->id]) }}" class="btn btn-primary"> Edit </a></td>                        
+                          <th scope="row">{{$garage->id}}</th>
+                          <td>{{$garage->title}}</td>
+                          <td>{{$garage->sqmt}}</td>
+                          <td>{{$garage->address}}</td>
+                          <td><a href="{{ route('admin.garages.show',['garage'=>$garage->id]) }}" class="btn btn-primary"> show </a></td>                        
+                          <td><a href="{{ route('admin.garages.edit',['garage'=>$garage->id]) }}" class="btn btn-primary"> Edit </a></td>
+                          <td>
+                            <form action="{{ route('admin.garages.destroy',['garage'=>$garage->id]) }}" method="POST">
+                              @csrf
+                              @method('DELETE')
+
+                              <button type="submit" class="btn btn-danger"> Delete </button>                    
+          
+                            </form>
+                          </td>     
                         </tr>
                     @endforeach
                 </tbody>
