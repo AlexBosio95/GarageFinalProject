@@ -93,7 +93,31 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-console.log('hello');
+var form = document.getElementById('register-form');
+form.addEventListener('submit', function () {
+  Validation('name');
+  Validation('surname');
+});
+
+// Validation functions
+
+function isValidCharacter(txtTitle) {
+  var title = document.getElementById(txtTitle);
+  var regExp = /^[a-zA-Z]*$/;
+  if (!regExp.test(title.value)) {
+    title.value = '';
+    return false;
+  } else {
+    return true;
+  }
+}
+function Validation(userValue) {
+  var txtTitles = document.getElementById(userValue);
+  if (isValidCharacter(txtTitles.id) == false) {
+    alert("Please enter valid title. No special character allowed.");
+    return false;
+  }
+}
 
 /***/ }),
 
