@@ -2104,7 +2104,8 @@ process.umask = function() { return 0; };
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-axios.get('https://api.tomtom.com/routing/1/calculateRoute/52.50931%2C13.42936%3A52.50274%2C13.43872/json?key=qBc1vqSKVnlnj1WF2hOCYudzk69sxweG').then(function (response) {
+var apiKey = 'qBc1vqSKVnlnj1WF2hOCYudzk69sxweG';
+axios.get('https://api.tomtom.com/search/2/search/36.98844,-121.97483.json?key=' + apiKey).then(function (response) {
   // handle success
   console.log(response);
 })["catch"](function (error) {
