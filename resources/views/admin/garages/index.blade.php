@@ -23,10 +23,10 @@
                           <td>{{$garage->sqmt}}</td>
                           <td>{{$garage->address}}</td>
                           <td>
-                            <a href="{{ route('admin.garages.show',['garage'=>$garage->id]) }}" class="btn btn-primary"> show </a>                      
-                            <a href="{{ route('admin.garages.edit',['garage'=>$garage->id]) }}" class="btn btn-primary"> Edit </a>
+                            <a href="{{ route('admin.garages.show',['garage'=>$garage]) }}" class="btn btn-primary"> show </a>                      
+                            <a href="{{ route('admin.garages.edit',['garage'=>$garage]) }}" class="btn btn-primary"> Edit </a>
                           
-                            <form action="{{ route('admin.garages.destroy',['garage'=>$garage->id]) }}" method="POST">
+                            <form action="{{ route('admin.garages.destroy',['garage'=>$garage]) }}" method="POST">
                               @csrf
                               @method('DELETE')
 

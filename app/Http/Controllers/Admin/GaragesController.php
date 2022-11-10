@@ -99,15 +99,16 @@ class GaragesController extends Controller
      */
     public function show($id)
     {
+        $user_id = Auth::id();
+
         $garage = Garage::find($id);
-        
-        //per visualizzare errore 404
-        if($garage){
-            
-            return view('admin.garages.show', compact('garage'));
-        } else{
-            abort(404);
+
+        if($garage->user_id != $user_id) {
+            abort(404); 
+            //TODO: personalizzare la pagina per la richiesta fallita
         }
+        
+        return view('admin.garages.show', compact('garage'));
     }
 
     /**
@@ -119,7 +120,15 @@ class GaragesController extends Controller
     public function edit($id)
     {
         $services= Service::all();
+
+        $user_id = Auth::id();
+
         $garage = Garage::find($id);
+
+        if($garage->user_id != $user_id) {
+            abort(404);
+            //TODO: personalizzare la pagina per la richiesta fallita
+        }
 
         return view('admin.garages.edit', compact('services', 'garage'));
     }
@@ -150,6 +159,7 @@ class GaragesController extends Controller
         $data = $request->all();
         
         $garage = Garage::find($id);
+        
 
         $garage->latitude = 1;
         
@@ -198,9 +208,9 @@ class GaragesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
-        $garage= Garage::find($id);
+        $garage= Garage::find($slug);
 
         $garage->services()->sync([]);
 

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form enctype="multipart/form-data" action="{{ route('admin.garages.update', ['garage' => $garage]) }}" method="POST">
+    <form enctype="multipart/form-data" action="{{ route('admin.garages.update', ['garage' => $garage->slug]) }}" method="POST">
 
         @csrf
         @method('PUT')
