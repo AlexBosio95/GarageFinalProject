@@ -22,7 +22,7 @@
                           <td>{{$garage->title}}</td>
                           <td>{{$garage->sqmt}}</td>
                           <td>{{$garage->address}}</td>
-                          <td>
+                          <td class="d-flex justify-content-between">
                             <a href="{{ route('admin.garages.show',['garage'=>$garage]) }}" class="btn btn-primary"> show </a>                      
                             <a href="{{ route('admin.garages.edit',['garage'=>$garage]) }}" class="btn btn-primary"> Edit </a>
                           
@@ -35,7 +35,15 @@
                             </form>
                           </td>  
                           <td>
-                            {{ $garage->available }}
+                            @if ($garage->available)
+                                <span class="text-success">
+                                  Available
+                                </span>
+                            @else
+                              <span class="text-danger">
+                                Not available
+                              </span>
+                            @endif
                           </td>   
                         </tr>
                     @endforeach
