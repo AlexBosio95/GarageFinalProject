@@ -26,5 +26,5 @@ class Garage extends Model
         return $this->belongsToMany('App\Models\Service');
     }
 
-    protected $fillable=['title', 'sqmt', 'length', 'width', 'height', 'n_parking', 'address', 'image','description','slug'];
+    protected $fillable=['title', 'sqmt', 'length', 'width', 'height', 'n_parking', 'address', 'image','description','slug','available'];
 }

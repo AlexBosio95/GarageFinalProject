@@ -143,8 +143,10 @@ class GaragesController extends Controller
             'address'=> 'required|max:255|min:1',
             'services'=> 'exists:services,id',
             'image'=> 'nullable|max:10000|image',
-            'description'=> 'nullable|max:65535|min:1'
+            'description'=> 'nullable|max:65535|min:1',
+            'available'=>'boolean'
         ]);
+
         $data = $request->all();
         
         $garage = Garage::find($id);
@@ -152,6 +154,18 @@ class GaragesController extends Controller
         $garage->latitude = 1;
         
         $garage->longitude =2;
+
+        
+
+
+        if(array_key_exists('available', $data)){
+
+            $garage->available=false;
+
+            $data['available'] = false;
+
+        }
+        dd($data);
         
         if ($data['title'] !== $garage->title) {
             $slug = $this->getSlug($garage->title);

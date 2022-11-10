@@ -94,6 +94,35 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
+        <div class="custom-control custom-checkbox">
+         
+          <div class="form-check form-check-inline">
+
+
+            <input {{($garage->available || old('available', $garage->available)) ? 'checked' : ''}}  name='available' class="form-check-input" type="checkbox" id="available" value="{{ $garage->available }}" >
+
+
+
+            <label class="form-check-label" for="available">available:
+
+              @if ($garage->available)
+
+                <span>true</span>
+              
+              @else
+
+                <span>false</span>
+                
+              @endif
+            </label>
+            @error('available')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+              
+          </div>           
+      
+        </div>
+
         <div class="form-group">
           <label for="description">Description</label>
           <textarea class="form-control @error ('description') is-invalid @enderror" id="description" rows="3" name="description">
