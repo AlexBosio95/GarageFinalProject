@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <a href="{{ route('admin.garages.index') }}" class="btn btn-primary mb-2">< back </a> 
     <div class="card mb-3">
         @if ($garage->image)
             <img src="{{ asset('storage/'. $garage->image) }}" class="card-img-top" alt="Image for {{$garage->title}}">

@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+  <a href="{{ route('admin.garages.index') }}" class="btn btn-primary mb-2">< back </a> 
     <form enctype="multipart/form-data" action="{{ route('admin.garages.store') }}" method="POST">
         @csrf
 
