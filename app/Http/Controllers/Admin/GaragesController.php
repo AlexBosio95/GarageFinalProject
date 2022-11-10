@@ -158,14 +158,14 @@ class GaragesController extends Controller
         
 
 
-        if(array_key_exists('available', $data)){
+        // if(array_key_exists('available', $data)){
 
-            $garage->available=false;
+        //     $garage->available=false;
 
-            $data['available'] = false;
+        //     $data['available'] = false;
 
-        }
-        dd($data);
+        // }
+        // dd($data);
         
         if ($data['title'] !== $garage->title) {
             $slug = $this->getSlug($garage->title);
