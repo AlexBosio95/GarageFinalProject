@@ -17,18 +17,21 @@
         
         <div class="form-group">
           <label for="address">Address</label>
-          <input type="text" class="form-control @error ('address') is-invalid @enderror" id="address" placeholder="Via/piazz. rossi n 1" name="address" value="{{old('address')}}" required>
-          <button id="search-btn" class="btn btn-warning">Search</button>
+          <input type="text" class="form-control @error ('address') is-invalid @enderror" id="address" placeholder="Via/piazz. rossi n 1" value="{{old('address')}}" required>
 
-          <select id="search-results">
-            {{-- option injected by axios.js --}}
-          </select>
+          <button id="search-btn" class="btn btn-warning mt-2">Search</button>
 
+          
           @error('address')
-            <div class="alert alert-danger">{{ $message }}</div>
+          <div class="alert alert-danger">{{ $message }}</div>
           @enderror
         </div>
 
+        <select id="search-results" class="form-control mb-2" name="address">
+          <option value="" selected disabled>Select an address</option>
+          {{-- option injected by axios.js --}}
+        </select>
+        
         <div class="form-group">
             <label for="sqmt">Square Meters </label>
             <input type="number" min="10" max="200" class="form-control @error ('sqmt') is-invalid @enderror" id="sqmt" placeholder="25" name="sqmt" value="{{old('sqmt')}}"

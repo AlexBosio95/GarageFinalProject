@@ -48,14 +48,14 @@
                           <td>{{$garage->sqmt}}</td>
                           <td>{{$garage->address}}</td>
                           <td class="d-flex justify-content-between">
-                            <a href="{{ route('admin.garages.show',['garage'=>$garage]) }}" class="btn btn-primary"> show </a>                      
-                            <a href="{{ route('admin.garages.edit',['garage'=>$garage]) }}" class="btn btn-primary"> Edit </a>
+                            <a href="{{ route('admin.garages.show',['garage'=>$garage]) }}" class="btn btn-primary mr-2"> show </a>                      
+                            <a href="{{ route('admin.garages.edit',['garage'=>$garage]) }}" class="btn btn-primary mr-2"> Edit </a>
                           
                             <form action="{{ route('admin.garages.destroy',['garage'=>$garage]) }}" method="POST">
                               @csrf
                               @method('DELETE')
 
-                              <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure? This action is irreversible')"> Delete </button>                    
+                              <button type="submit" class="btn btn-danger mr-2" onclick="return confirm('Are you sure? This action is irreversible')"> Delete </button>                    
           
                             </form>
                           </td>  

@@ -2107,23 +2107,37 @@ var address = document.getElementById('address');
 var search = document.getElementById('search-btn');
 search.addEventListener('click', function (e) {
   e.preventDefault();
+  var select = document.getElementById('search-results');
+  select.innerHTML = '';
 
   //Regex per convertire le stringhe inserite
   var pattern = / /gi;
   var result = address.value.replace(pattern, '-');
+
+  // chiamata ajax
   axios.get('https://api.tomtom.com/search/2/geocode/' + result + '.json?key=' + apiKey + '&countrySet=IT').then(function (response) {
     // handle success
     var results = response.data.results;
-    var select = document.getElementById('search-results');
     results.forEach(function (result) {
-      //creazione della option + aggiunta classe results
+      //creazione della option
       var option = document.createElement('option');
-      var att = document.createAttribute("class");
-      att.value = "results";
-      option.setAttributeNode(att);
+
+      //aggiunta classe results
+      var optionAtt = document.createAttribute("class");
+      optionAtt.value = "results";
+
+      //aggiunta value delle option
+      var optionValue = document.createAttribute("value");
+
+      // attribuzione dei valori ai campi option
+      option.setAttributeNode(optionAtt);
+      option.setAttributeNode(optionValue);
 
       //inserimento dell'address come testo delle option
       option.text = result.address.freeformAddress;
+
+      //inserimento dell'address come value delle option
+      optionValue.value = result.address.freeformAddress;
       select.append(option);
     });
   })["catch"](function (error) {
