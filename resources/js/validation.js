@@ -1,15 +1,19 @@
-const form = document.getElementById('register-form');
+const { isNull } = require("lodash");
 
 const email_regexp = /^([a-zA-Z0-9.-])+@(([a-zA-Z0-9-]{2,})+.)+([a-zA-Z0-9]{2,})+$/;
-
 const nameRegExp = /^[a-zA-Zàèìòù]*$/;
 
-form.addEventListener('submit', function() {
-    Validation('name', nameRegExp);
-    Validation('surname', nameRegExp);
-    Validation('email', email_regexp);
-});
 
+if (!isNull(document.getElementById('register-form'))) {
+    const form = document.getElementById('register-form');
+    
+    form.addEventListener('submit', function() {
+        Validation('name', nameRegExp);
+        Validation('surname', nameRegExp);
+        Validation('email', email_regexp);
+    });
+
+}
 
 // Validation functions
 function isValidCharacter(txtTitle, regExp) {
