@@ -18,6 +18,10 @@
         <div class="form-group">
           <label for="address">Address</label>
           <input type="text" class="form-control @error ('address') is-invalid @enderror" id="address" placeholder="Via/piazz. rossi n 1" name="address" value="{{old('address')}}" required>
+          <button id="search-btn" class="btn btn-warning">Search</button>
+          <select id="search-results">
+            
+          </select>
 
           @error('address')
             <div class="alert alert-danger">{{ $message }}</div>

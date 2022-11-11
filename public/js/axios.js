@@ -2101,16 +2101,31 @@ process.umask = function() { return 0; };
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 var apiKey = '4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM';
 var address = document.getElementById('address');
-address.addEventListener('input', function () {
+var search = document.getElementById('search-btn');
+search.addEventListener('click', function (e) {
+  e.preventDefault();
   var pattern = / /gi;
   var result = address.value.replace(pattern, '-');
-  axios.get('https://api.tomtom.com/search/2/geocode/' + result + '.json?key=' + apiKey).then(function (response) {
+  axios.get('https://api.tomtom.com/search/2/geocode/' + result + '.json?key=' + apiKey + '&countrySet=IT').then(function (response) {
     // handle success
-    console.log(response.data);
+    var results = response.data.results;
+    var select = document.getElementById('search-results');
+    results.forEach(function (result) {
+      //console.log(result.address.freeformAddress);
+
+      //creazione della option
+      var option = document.createElement('option');
+      var att = document.createAttribute("class");
+      att.value = "results";
+      option.setAttributeNode(att);
+
+      //option.innerText(result.address.freeformAddress);
+
+      select.append(option);
+    });
   })["catch"](function (error) {
     // handle error
     console.log(error);
