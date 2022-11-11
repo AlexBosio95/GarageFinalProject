@@ -1,7 +1,8 @@
-let form = document.getElementById('register-form');
+const form = document.getElementById('register-form');
 
-let email_regexp = /^([a-zA-Z0-9.-])+@(([a-zA-Z0-9-]{2,})+.)+([a-zA-Z0-9]{2,})+$/;
-let nameRegExp = /^[a-zA-Zàèìòù]*$/;
+const email_regexp = /^([a-zA-Z0-9.-])+@(([a-zA-Z0-9-]{2,})+.)+([a-zA-Z0-9]{2,})+$/;
+
+const nameRegExp = /^[a-zA-Zàèìòù]*$/;
 
 form.addEventListener('submit', function() {
     Validation('name', nameRegExp);
