@@ -13,8 +13,8 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Scripts axios -->
-    {{-- <script src="{{ asset('js/axios.js') }}" defer></script> --}}
-    
+    <script src="{{ asset('js/axios.js') }}" defer></script>
+
     {{-- Validation scripts --}}
     <script src="{{ asset('js/validation.js') }}" defer></script>
 
@@ -59,7 +59,7 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
-                                
+
                                 <a href="{{route('admin.garages.index')}}">Garages</a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

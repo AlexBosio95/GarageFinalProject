@@ -2104,13 +2104,18 @@ process.umask = function() { return 0; };
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-var apiKey = 'qBc1vqSKVnlnj1WF2hOCYudzk69sxweG';
-axios.get('https://api.tomtom.com/search/2/search/36.98844,-121.97483.json?key=' + apiKey).then(function (response) {
-  // handle success
-  console.log(response);
-})["catch"](function (error) {
-  // handle error
-  console.log(error);
+var apiKey = 'ozgNZDzFDy0AdhocSjFCL5AnXpleMEB5';
+var address = document.getElementById('address');
+address.addEventListener('input', function () {
+  var pattern = / /gi;
+  var result = address.value.replace(pattern, '-');
+  axios.get('https://api.tomtom.com/search/2/geocode/via-roma-17.json?key=' + apiKey + '&countrySet=IT').then(function (response) {
+    // handle success
+    console.log(response.data);
+  })["catch"](function (error) {
+    // handle error
+    console.log(error);
+  });
 });
 
 /***/ }),
@@ -2122,7 +2127,7 @@ axios.get('https://api.tomtom.com/search/2/search/36.98844,-121.97483.json?key='
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\axios.js */"./resources/js/axios.js");
+module.exports = __webpack_require__(/*! D:\Utenti\Valerio\OneDrive\Desktop\BOOLEAN\Repositorys\GarageFinalProject\resources\js\axios.js */"./resources/js/axios.js");
 
 
 /***/ })
