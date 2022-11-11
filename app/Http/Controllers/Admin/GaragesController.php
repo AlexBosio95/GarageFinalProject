@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Garage;
 use App\Models\Service;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-Use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
+Use Illuminate\Support\Str;
 Use Illuminate\Support\Facades\Storage;
 
 class GaragesController extends Controller
@@ -70,9 +69,17 @@ class GaragesController extends Controller
 
         $newGarage->fill($data);
 
-        $newGarage->latitude = 1;
+        //chiamata all'endpoint
+        $tom_tom = Http::get('https://api.tomtom.com/search/2/geocode/' . str_replace('/ /gi', "-", $data['address']) . '.json?key=' . '4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT');
+        
+        $results = json_decode($tom_tom);
 
-        $newGarage->longitude =2;
+        //recupero delle coordinate
+        $coordinates = $results->results[0]->position;
+        
+        //assegnazione delle coordinate
+        $newGarage->latitude = $coordinates->lat;
+        $newGarage->longitude = $coordinates->lon;
 
         $slug = $this->getSlug($newGarage->title);
 
