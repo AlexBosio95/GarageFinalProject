@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
   <a href="{{ route('admin.garages.index') }}" class="btn btn-primary mb-2">< back </a> 
-    <form enctype="multipart/form-data" action="{{ route('admin.garages.update', ['garage' => $garage]) }}" method="POST">
+    <form enctype="multipart/form-data" action="{{ route('admin.garages.update', ['garage' => $garage]) }}" method="POST" id="edit-form">
 
         @csrf
         @method('PUT')
@@ -19,12 +19,27 @@
         
         <div class="form-group">
           <label for="address">Address</label>
-          <input type="text" class="form-control @error ('address') is-invalid @enderror" id="address" placeholder="Via/piazz. rossi n 1" name="address" value="{{old('address', $garage->address)}}" required>
+          <input type="text" class="form-control @error ('address') is-invalid @enderror" id="address" placeholder="insert a complete address for the research" value="{{old('address', $garage->address)}}" required>
 
+          <button id="search-btn" class="btn btn-warning mt-2">Search</button>
+
+          
           @error('address')
-            <div class="alert alert-danger">{{ $message }}</div>
+          <div class="alert alert-danger">{{ $message }}</div>
           @enderror
         </div>
+
+        <select id="search-results" class="form-control mb-2" name="address">
+          
+          @if (old('address', $garage->address))
+          <option value="{{$garage->address}}" selected>
+            {{$garage->address}}
+          </option>
+          @else
+            <option value="" selected disabled>Select an address</option>
+          @endif
+          {{-- option injected by axios.js --}}
+        </select>
 
         <div class="form-group">
             <label for="sqmt">Square Meters </label>

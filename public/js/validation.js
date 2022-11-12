@@ -17373,13 +17373,25 @@ module.exports = function(module) {
 var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
   isNull = _require.isNull;
 var email_regexp = /^([a-zA-Z0-9.-])+@(([a-zA-Z0-9-]{2,})+.)+([a-zA-Z0-9]{2,})+$/;
-var nameRegExp = /^[a-zA-Zàèìòù]*$/;
+var nameRegExp = /^[a-zA-Zàèìòù/ /gi]*$/;
 if (!isNull(document.getElementById('register-form'))) {
-  var form = document.getElementById('register-form');
-  form.addEventListener('submit', function () {
+  var registerForm = document.getElementById('register-form');
+  registerForm.addEventListener('submit', function () {
     Validation('name', nameRegExp);
     Validation('surname', nameRegExp);
     Validation('email', email_regexp);
+  });
+}
+if (!isNull(document.getElementById('edit-form'))) {
+  var editForm = document.getElementById('edit-form');
+  var length = document.getElementById('length').innerText;
+  var width = document.getElementById('width').innerText;
+  var height = document.getElementById('height').innerText;
+  editForm.addEventListener('submit', function () {
+    Validation('GarageTitle', nameRegExp);
+    numberValidation(length);
+    numberValidation(width);
+    numberValidation(height);
   });
 }
 
@@ -17410,7 +17422,7 @@ function Validation(userValue, regExp) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/validation.js */"./resources/js/validation.js");
+module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\validation.js */"./resources/js/validation.js");
 
 
 /***/ })

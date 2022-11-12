@@ -49,9 +49,9 @@ class GaragesController extends Controller
         $request->validate([
             'title'=>'required|max:255|min:3',
             'sqmt'=> 'nullable|max:255',
-            'length' => 'nullable|max:255',
-            'width'=> 'nullable|max:255',
-            'height'=> 'nullable|max:255', 
+            'length' => 'nullable|max:255|numeric',
+            'width'=> 'nullable|max:255|numeric',
+            'height'=> 'nullable|max:255|numeric', 
             'n_parking'=> 'required|numeric|between:1,5',
             'address'=> 'required|max:255|min:1',
             'services'=> 'exists:services,id',
@@ -151,9 +151,9 @@ class GaragesController extends Controller
         $request->validate([
             'title'=>'required|max:255|min:3',
             'sqmt'=> 'nullable|max:255',
-            'length' => 'nullable|max:255',
-            'width'=> 'nullable|max:255',
-            'height'=> 'nullable|max:255', 
+            'length' => 'nullable|max:255|numeric',
+            'width'=> 'nullable|max:255|numeric',
+            'height'=> 'nullable|max:255|numeric', 
             'n_parking'=> 'required|numeric|between:1,5',
             'address'=> 'required|max:255|min:1',
             'services'=> 'exists:services,id',
@@ -165,10 +165,6 @@ class GaragesController extends Controller
         $data = $request->all();
         
         $garage = Garage::find($id);
-        
-        $garage->latitude = 1;
-        
-        $garage->longitude =2;
         
         if ($data['title'] !== $garage->title) {
             $slug = $this->getSlug($garage->title);
@@ -184,8 +180,20 @@ class GaragesController extends Controller
             $data['image'] = $image;
         } 
         
-        $garage->update($data);
+        //chiamata all'endpoint
+        $tom_tom = Http::get('https://api.tomtom.com/search/2/geocode/' . str_replace('/ /gi', "-", $data['address']) . '.json?key=' . '4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT');
         
+        $results = json_decode($tom_tom);
+
+        //recupero delle coordinate
+        $coordinates = $results->results[0]->position;
+        
+        //assegnazione delle coordinate
+        $garage->latitude = $coordinates->lat;
+        $garage->longitude = $coordinates->lon;
+
+        $garage->update($data);
+
         if (array_key_exists('services', $data)){
             $garage->services()->sync($data['services']);
         } else {

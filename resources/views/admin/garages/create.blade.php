@@ -17,7 +17,7 @@
         
         <div class="form-group">
           <label for="address">Address</label>
-          <input type="text" class="form-control @error ('address') is-invalid @enderror" id="address" placeholder="Via/piazz. rossi n 1" value="{{old('address')}}" required>
+          <input type="text" class="form-control @error ('address') is-invalid @enderror" id="address" placeholder="insert a complete address for the research" value="{{old('address')}}" required>
 
           <button id="search-btn" class="btn btn-warning mt-2">Search</button>
 
