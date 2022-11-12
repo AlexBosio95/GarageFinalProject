@@ -11027,3 +11027,17 @@ a.text-dark:focus {
   left: 24px;
 }
 
+.button-sm {
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 992px) {
+  .button-sm {
+    width: 100%;
+  }
+
+  .small-none {
+    display: none;
+  }
+}
+
