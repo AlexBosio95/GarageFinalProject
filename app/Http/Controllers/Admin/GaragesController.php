@@ -111,7 +111,7 @@ class GaragesController extends Controller
         $garage = Garage::find($id);
 
         if($garage->user_id != $user_id) {
-            abort(404); 
+            abort(403); 
             //TODO: personalizzare la pagina per la richiesta fallita
         }
         
@@ -133,7 +133,7 @@ class GaragesController extends Controller
         $garage = Garage::find($id);
 
         if($garage->user_id != $user_id) {
-            abort(404);
+            abort(403);
             //TODO: personalizzare la pagina per la richiesta fallita
         }
 

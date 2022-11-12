@@ -17410,7 +17410,7 @@ function Validation(userValue, regExp) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\validation.js */"./resources/js/validation.js");
+module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/validation.js */"./resources/js/validation.js");
 
 
 /***/ })
