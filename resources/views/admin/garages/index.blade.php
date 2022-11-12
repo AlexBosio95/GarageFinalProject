@@ -27,16 +27,17 @@
     </div>
   @endif
 
+  <a href="{{ route('admin.garages.create') }}" class="btn btn-primary mb-3 button-sm">create</a>
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col">
             <table class="table table-striped">
                 <thead>
                   <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Title</th>
-                    <th scope="col">Square Meters</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col" class="small-none text-center">Square Meters</th>
+                    <th scope="col" class="small-none text-center">Address</th>
+                    <th scope="col" class="text-center">Actions</th>
                     <th scope="col">Available</th>               
                   </tr>
                 </thead>
@@ -45,17 +46,17 @@
                         <tr>
                           <th scope="row">{{$garage->id}}</th>
                           <td>{{$garage->title}}</td>
-                          <td>{{$garage->sqmt}}</td>
-                          <td>{{$garage->address}}</td>
-                          <td class="d-flex justify-content-between">
-                            <a href="{{ route('admin.garages.show',['garage'=>$garage]) }}" class="btn btn-primary mr-2"> show </a>                      
-                            <a href="{{ route('admin.garages.edit',['garage'=>$garage]) }}" class="btn btn-primary mr-2"> Edit </a>
+                          <td class="small-none text-center">{{$garage->sqmt}}</td>
+                          <td class="small-none">{{$garage->address}}</td>
+                          <td class="d-flex justify-content-between flex-wrap">
+                            <a href="{{ route('admin.garages.show',['garage'=>$garage]) }}" class="btn btn-primary m-1"> show </a>                      
+                            <a href="{{ route('admin.garages.edit',['garage'=>$garage]) }}" class="btn btn-primary m-1"> Edit </a>
                           
                             <form action="{{ route('admin.garages.destroy',['garage'=>$garage]) }}" method="POST">
                               @csrf
                               @method('DELETE')
 
-                              <button type="submit" class="btn btn-danger mr-2" onclick="return confirm('Are you sure? This action is irreversible')"> Delete </button>                    
+                              <button type="submit" class="btn btn-danger m-1" onclick="return confirm('Are you sure? This action is irreversible')"> Delete </button>                    
           
                             </form>
                           </td>  
@@ -74,7 +75,6 @@
                     @endforeach
                 </tbody>
               </table>
-              <a href="{{ route('admin.garages.create') }}" class="btn btn-primary"> create </a>
         </div>
     </div>
 </div>

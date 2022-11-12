@@ -95,15 +95,6 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-        
-        <div class="toggle-available my-4">
-          <h6>Available</h6>
-          <div class="toggleWrapper">
-            <input type="checkbox" name="available" class="mobileToggle @error ('available') is-invalid @enderror"  id="available" value="1" checked >
-            <label for="available"></label>
-          </div>
-        </div>
-
         <div class="form-group">
           <label for="description">Description</label>
           <textarea class="form-control @error ('description') is-invalid @enderror" id="description" rows="3" name="description">
