@@ -48,7 +48,6 @@ class GaragesController extends Controller
         
         $request->validate([
             'title'=>'required|max:255|min:3',
-            'sqmt'=> 'nullable|max:255',
             'length' => 'nullable|max:255|numeric',
             'width'=> 'nullable|max:255|numeric',
             'height'=> 'nullable|max:255|numeric', 
@@ -69,6 +68,8 @@ class GaragesController extends Controller
         }
 
         $newGarage->fill($data);
+
+        $newGarage->sqmt = $data['length'] * $data['width'];
 
         //chiamata all'endpoint
         $tom_tom = Http::get('https://api.tomtom.com/search/2/geocode/' . str_replace('/ /gi', "-", $data['address']) . '.json?key=' . '4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT');
@@ -150,7 +151,6 @@ class GaragesController extends Controller
     {
         $request->validate([
             'title'=>'required|max:255|min:3',
-            'sqmt'=> 'nullable|max:255',
             'length' => 'nullable|max:255|numeric',
             'width'=> 'nullable|max:255|numeric',
             'height'=> 'nullable|max:255|numeric', 
@@ -178,7 +178,9 @@ class GaragesController extends Controller
             }
             $image = Storage::put('uploads', $data[ 'image']);
             $data['image'] = $image;
-        } 
+        }
+        
+        $garage->sqmt = $data['length'] * $data['width'];
         
         //chiamata all'endpoint
         $tom_tom = Http::get('https://api.tomtom.com/search/2/geocode/' . str_replace('/ /gi', "-", $data['address']) . '.json?key=' . '4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT');
@@ -191,6 +193,7 @@ class GaragesController extends Controller
         //assegnazione delle coordinate
         $garage->latitude = $coordinates->lat;
         $garage->longitude = $coordinates->lon;
+
 
         $garage->update($data);
 

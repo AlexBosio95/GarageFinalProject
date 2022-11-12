@@ -33,16 +33,6 @@
         </select>
         
         <div class="form-group">
-            <label for="sqmt">Square Meters </label>
-            <input type="number" min="10" max="200" class="form-control @error ('sqmt') is-invalid @enderror" id="sqmt" placeholder="25" name="sqmt" value="{{old('sqmt')}}"
-            >
-
-            @error('sqmt')
-              <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div class="form-group">
             <label for="length">Length (mt)</label>
             <input type="number" min="3" max="20" class="form-control @error ('length') is-invalid @enderror" id="length" placeholder="6" name="length" value="{{old('length')}}">
 
