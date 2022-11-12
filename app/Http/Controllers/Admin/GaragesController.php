@@ -45,6 +45,7 @@ class GaragesController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'title'=>'required|max:255|min:3',
             'sqmt'=> 'nullable|max:255',
@@ -95,8 +96,6 @@ class GaragesController extends Controller
 
         return redirect()->route('admin.garages.index')->with('created', 'Created succesfully');
     }
-   
-
 
     /**
      * Display the specified resource.

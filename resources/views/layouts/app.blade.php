@@ -15,6 +15,9 @@
     <!-- Scripts axios -->
     <script src="{{ asset('js/axios.js') }}" defer></script>
 
+    <!-- Scripts functions -->
+    <script src="{{ asset('js/functions.js') }}" defer></script>
+
     {{-- Validation scripts --}}
     <script src="{{ asset('js/validation.js') }}" defer></script>
 
