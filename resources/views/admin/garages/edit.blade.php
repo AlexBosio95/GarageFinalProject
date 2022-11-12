@@ -103,7 +103,7 @@
         <div class="toggle-available my-4">
           <h6>Available</h6>
           <div class="toggleWrapper">
-            <input type="checkbox" name="available" class="mobileToggle @error ('available') is-invalid @enderror"  id="available" value="{{old('available', $garage->available)}}" checked >
+            <input type="checkbox" name="available" class="mobileToggle @error ('available') is-invalid @enderror"  id="available" value="1" {{old('available', $garage->available) == 1 ? 'checked' : ''}} >
             <label for="available"></label>
           </div>
         </div>
