@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Garage extends Model
 {
+
     public function user() {
         return $this->belongsTo('App\User');
     }
@@ -24,6 +25,11 @@ class Garage extends Model
 
     public function services() {
         return $this->belongsToMany('App\Models\Service');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 
     protected $fillable=['title', 'sqmt', 'length', 'width', 'height', 'n_parking', 'address', 'image','description','slug','available'];

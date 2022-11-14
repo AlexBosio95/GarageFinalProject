@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="container">
-    <a href="{{ route('admin.garages.index') }}" class="btn btn-primary mb-2">< back </a> 
+    <a href="{{ route('admin.garages.index') }}" class="btn btn-primary mb-2">< back </a>
     <div class="card mb-3">
         @if ($garage->image)
             <img src="{{ asset('storage/'. $garage->image) }}" class="card-img-top" alt="Image for {{$garage->title}}">
         @else
-            <h4 class="card-title text-center mt-5">Image not available</h4>            
+            <h4 class="card-title text-center mt-5">Image not available</h4>
         @endif
 
         <div class="card-body">
@@ -18,14 +18,14 @@
 
             <p class="card-text">
                 <span class="text-primary">Address:</span>
-                <span class="text-muted">{{$garage->address}}</span> 
+                <span class="text-muted">{{$garage->address}}</span>
             </p>
 
             <p class="card-text">
                 <span class="text-primary">Longitude:</span>
                 <span class="text-muted">{{$garage->longitude}}</span>
-            </p>   
-        
+            </p>
+
             <p class="card-text">
                 <span class="text-primary">Latitude:</span>
                 <span class="text-muted">{{$garage->latitude}}</span>
@@ -35,54 +35,54 @@
                 <p class="card-text">
                     <span class="text-primary">Garage total area:</span>
                     {{$garage->sqmt}} m²
-                </p>    
+                </p>
             @else
                 <p class="card-text">
                     <span class="text-primary">Garage total area:</span>
                     <span class="text-muted">Not available</span>
-                </p>    
+                </p>
             @endif
 
             @if ($garage->length > 1)
                 <p class="card-text">
                     <span class="text-primary">Length:</span>
                     {{$garage->length}} mt
-                </p>    
+                </p>
             @else
                 <p class="card-text">
                     <span class="text-primary">Length:</span>
                     <span class="text-muted">Not available</span>
-                </p>    
+                </p>
             @endif
 
             @if ($garage->width > 1)
                 <p class="card-text">
                     <span class="text-primary">Width:</span>
                     {{$garage->width}} mt
-                </p>    
+                </p>
             @else
                 <p class="card-text">
                     <span class="text-primary">Width:</span>
                     <span class="text-muted">Not available</span>
-                </p>    
+                </p>
             @endif
             @if ($garage->height > 1)
                 <p class="card-text">
                     <span class="text-primary">Height:</span>
                     {{$garage->height}} mt
-                </p>    
+                </p>
             @else
                 <p class="card-text">
                     <span class="text-primary">Height:</span>
                     <span class="text-muted">Not available</span>
-                </p>    
+                </p>
             @endif
-            
+
             <p class="card-text">
                 <span class="text-primary">N_Parking:</span>
                 {{$garage->n_parking}}
             </p>
-            
+
             @if (count($garage->services) > 1)
                 <p class="card-text">
                     <span class="text-primary">Services:</span>
@@ -96,14 +96,14 @@
                 <p class="card-text">
                     <span class="text-primary">Services:</span>
                     <span class="text-muted">Not available</span>
-                </p> 
+                </p>
             @endif
-            
+
             @if ($garage->description)
                 <p class="card-text">
                     <span class="text-primary">Description:</span>
                     {{$garage->description}}
-                </p>   
+                </p>
             @else
                 <p class="card-text">
                     <span class="text-primary">Description:</span>

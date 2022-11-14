@@ -45,12 +45,12 @@ class GaragesController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $request->validate([
             'title'=>'required|max:255|min:3',
             'length' => 'nullable|max:255|numeric',
             'width'=> 'nullable|max:255|numeric',
-            'height'=> 'nullable|max:255|numeric', 
+            'height'=> 'nullable|max:255|numeric',
             'n_parking'=> 'required|numeric|between:1,5',
             'address'=> 'required|max:255|min:1',
             'services'=> 'exists:services,id',
@@ -58,11 +58,11 @@ class GaragesController extends Controller
             'description'=> 'nullable|max:65535|min:1'
         ]);
         $data = $request->all();
-        
+
         $newGarage = new Garage();
-        
+
         if (array_key_exists('image', $data)){
-            
+
             $image = Storage::put('uploads', $data[ 'image']);
             $data['image'] = $image;
         }
@@ -73,12 +73,12 @@ class GaragesController extends Controller
 
         //chiamata all'endpoint
         $tom_tom = Http::get('https://api.tomtom.com/search/2/geocode/' . str_replace('/ /gi', "-", $data['address']) . '.json?key=' . '4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT');
-        
+
         $results = json_decode($tom_tom);
 
         //recupero delle coordinate
         $coordinates = $results->results[0]->position;
-        
+
         //assegnazione delle coordinate
         $newGarage->latitude = $coordinates->lat;
         $newGarage->longitude = $coordinates->lon;
@@ -88,7 +88,7 @@ class GaragesController extends Controller
         $newGarage->slug=$slug;
 
         $newGarage->user_id = Auth::id();
-
+        //dd($newGarage);
         $newGarage->save();
 
         if (array_key_exists('services', $data)){
@@ -104,16 +104,15 @@ class GaragesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Garage $garage)
     {
         $user_id = Auth::id();
 
-        
-        $garage = Garage::find($id);
+       //dd($garage[0]);
 
         if ($garage != null) {
             if($garage->user_id != $user_id) {
-                abort(403); 
+                abort(403);
             }
             return view('admin.garages.show', compact('garage'));
 
@@ -122,7 +121,7 @@ class GaragesController extends Controller
             abort(404);
         }
 
-        
+
     }
 
     /**
@@ -131,20 +130,18 @@ class GaragesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Garage $garage)
     {
         $services= Service::all();
 
         $user_id = Auth::id();
-
-        $garage = Garage::find($id);
 
         if ($garage != null) {
 
             if($garage->user_id != $user_id) {
                 abort(403);
             }
-            
+
             return view('admin.garages.edit', compact('services', 'garage'));
 
         } else {
@@ -162,13 +159,13 @@ class GaragesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Garage $garage)
     {
         $request->validate([
             'title'=>'required|max:255|min:3',
             'length' => 'nullable|max:255|numeric',
             'width'=> 'nullable|max:255|numeric',
-            'height'=> 'nullable|max:255|numeric', 
+            'height'=> 'nullable|max:255|numeric',
             'n_parking'=> 'required|numeric|between:1,5',
             'address'=> 'required|max:255|min:1',
             'services'=> 'exists:services,id',
@@ -179,13 +176,14 @@ class GaragesController extends Controller
 
 
         $data = $request->all();
-        
-        $garage = Garage::find($id);
+
 
         if (!array_key_exists('available', $data)) {
             $garage->available = false;
         }
-        
+
+
+
         if ($data['title'] !== $garage->title) {
             $slug = $this->getSlug($garage->title);
             $garage->slug=$slug;
@@ -199,17 +197,17 @@ class GaragesController extends Controller
             $image = Storage::put('uploads', $data[ 'image']);
             $data['image'] = $image;
         }
-        
+
         $garage->sqmt = $data['length'] * $data['width'];
-        
+
         //chiamata all'endpoint
         $tom_tom = Http::get('https://api.tomtom.com/search/2/geocode/' . str_replace('/ /gi', "-", $data['address']) . '.json?key=' . '4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT');
-        
+
         $results = json_decode($tom_tom);
 
         //recupero delle coordinate
         $coordinates = $results->results[0]->position;
-        
+
         //assegnazione delle coordinate
         $garage->latitude = $coordinates->lat;
         $garage->longitude = $coordinates->lon;
@@ -222,7 +220,7 @@ class GaragesController extends Controller
         } else {
             $garage->services()->sync([]);
         }
-        
+
         return redirect()->route('admin.garages.index')->with('edited', 'edited succesfully');
     }
 
@@ -249,7 +247,7 @@ class GaragesController extends Controller
 
     }
 
-    protected function getSlug($title) 
+    protected function getSlug($title)
     {
         //*Crea uno slug univoco per ogni titolo/
         $slug = Str::slug($title, '-');
@@ -274,7 +272,7 @@ class GaragesController extends Controller
         $garage->image = '';
         $garage->save();
 
-        return redirect()->route('admin.garages.edit', [ 'garage' => $garage->id])->with('img-removed', 'Immagine cancellata con successo');
+        return redirect()->route('admin.garages.edit', [ 'garage' => $garage->slug])->with('img-removed', 'Immagine cancellata con successo');
 
     }
 
