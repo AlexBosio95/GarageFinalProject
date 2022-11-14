@@ -18,6 +18,7 @@ if (!isNull(document.getElementById('register-form'))) {
 
 if (!isNull(document.getElementById('edit-form'))) {
     const msgWrapper = document.createElement('div');
+    const title = document.getElementById('title');
 
     title.addEventListener('keyup', function () {
         Validation('title', nameRegExp, msgWrapper);
