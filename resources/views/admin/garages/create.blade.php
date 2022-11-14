@@ -34,7 +34,7 @@
 
         <div class="form-group">
             <label for="length">Length (mt)</label>
-            <input type="number" min="3" max="20" class="form-control @error ('length') is-invalid @enderror" id="length" placeholder="example: 5" name="length" value="{{old('length')}}">
+            <input type="number" min="3" max="20" class="form-control @error ('length') is-invalid @enderror" id="length" placeholder="Example: 5" name="length" value="{{old('length')}}">
 
             @error('length')
               <div class="alert alert-danger">{{ $message }}</div>
@@ -42,7 +42,7 @@
         </div>
         <div class="form-group">
             <label for="width">width (mt)</label>
-            <input type="number" min="1" max="10" class="form-control @error ('width') is-invalid @enderror" id="width" placeholder="example: 5" name="width" value="{{old('width')}}">
+            <input type="number" min="1" max="10" class="form-control @error ('width') is-invalid @enderror" id="width" placeholder="Example: 5" name="width" value="{{old('width')}}">
 
             @error('width')
               <div class="alert alert-danger">{{ $message }}</div>
@@ -50,7 +50,7 @@
         </div>
         <div class="form-group">
             <label for="height">height (mt)</label>
-            <input type="number" min="1" max="6" class="form-control @error ('height') is-invalid @enderror" id="height" placeholder="example: 5" name="height" value="{{old('height')}}">
+            <input type="number" min="1" max="6" class="form-control @error ('height') is-invalid @enderror" id="height" placeholder="Example: 5" name="height" value="{{old('height')}}">
 
             @error('height')
               <div class="alert alert-danger">{{ $message }}</div>
