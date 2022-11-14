@@ -25,4 +25,18 @@ class GarageController extends Controller
             'results' => $garages
         ]);
     }
+
+    public function search($address)
+    {
+
+        $garage = Garage::where('address', $address)->get();
+
+        return response()->json([
+
+            'success' => 'ok',
+            'results' => $garage
+
+        ]);
+
+    }
 }

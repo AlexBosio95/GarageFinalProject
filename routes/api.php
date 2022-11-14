@@ -19,3 +19,5 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('garages', 'Api\GarageController@index');
+Route::get('garages/{address}', 'Api\GarageController@search');
+

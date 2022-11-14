@@ -3,7 +3,7 @@
         <h1 class="text-center">HomePage</h1>
         <form>
             <div class="form-group">
-                <input placeholder="Search Garages" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input placeholder="Search Garages" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="searchText">
             </div>
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
@@ -38,6 +38,7 @@ export default {
             ArrayGarages: [],
             currentPage: 1,
             lastPage: null,
+            searchText: ''
         }
     },
     methods: {
@@ -51,6 +52,11 @@ export default {
                 this.lastPage = response.data.results.last_page;
                 console.log(this.ArrayGarages);
             });
+        },
+
+        searchGarages(){
+            axios.get('/api/garages/' + this.searchText)
+
         }
     },
     mounted(){

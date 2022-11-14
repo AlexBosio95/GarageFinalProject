@@ -1973,7 +1973,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       ArrayGarages: [],
       currentPage: 1,
-      lastPage: null
+      lastPage: null,
+      searchText: ''
     };
   },
   methods: {
@@ -1989,6 +1990,9 @@ __webpack_require__.r(__webpack_exports__);
         _this.lastPage = response.data.results.last_page;
         console.log(_this.ArrayGarages);
       });
+    },
+    searchGarages: function searchGarages() {
+      axios.get('/api/garages/' + this.searchText);
     }
   },
   mounted: function mounted() {
@@ -2157,7 +2161,37 @@ var render = function render() {
     staticClass: "container"
   }, [_c("h1", {
     staticClass: "text-center"
-  }, [_vm._v("HomePage")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("nav", {
+  }, [_vm._v("HomePage")]), _vm._v(" "), _c("form", [_c("div", {
+    staticClass: "form-group"
+  }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.searchText,
+      expression: "searchText"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      placeholder: "Search Garages",
+      type: "text",
+      id: "exampleInputEmail1",
+      "aria-describedby": "emailHelp"
+    },
+    domProps: {
+      value: _vm.searchText
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.searchText = $event.target.value;
+      }
+    }
+  })]), _vm._v(" "), _c("button", {
+    staticClass: "btn btn-primary",
+    attrs: {
+      type: "submit"
+    }
+  }, [_vm._v("Search")])]), _vm._v(" "), _c("nav", {
     attrs: {
       "aria-label": "Page navigation example"
     }
@@ -2221,26 +2255,7 @@ var render = function render() {
     }, [_vm._v("View more")])])])]);
   }), 0)]);
 };
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("form", [_c("div", {
-    staticClass: "form-group"
-  }, [_c("input", {
-    staticClass: "form-control",
-    attrs: {
-      placeholder: "Search Garages",
-      type: "text",
-      id: "exampleInputEmail1",
-      "aria-describedby": "emailHelp"
-    }
-  })]), _vm._v(" "), _c("button", {
-    staticClass: "btn btn-primary",
-    attrs: {
-      type: "submit"
-    }
-  }, [_vm._v("Search")])]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -18283,7 +18298,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\marco\OneDrive\Desktop\Garagefinal projet\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })
