@@ -1985,8 +1985,8 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         _this.ArrayGarages = response.data.results.data;
-        // this.currentPage = response.data.results.current_page;
-        // this.lastPage = response.data.results.last_page;
+        _this.currentPage = response.data.results.current_page;
+        _this.lastPage = response.data.results.last_page;
         console.log(_this.ArrayGarages);
       });
     }
@@ -2157,17 +2157,48 @@ var render = function render() {
     staticClass: "container"
   }, [_c("h1", {
     staticClass: "text-center"
-  }, [_vm._v("HomePage")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
-    staticClass: "row row-cols-4"
+  }, [_vm._v("HomePage")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("nav", {
+    attrs: {
+      "aria-label": "Page navigation example"
+    }
+  }, [_c("ul", {
+    staticClass: "pagination"
+  }, [_c("li", {
+    staticClass: "page-item",
+    "class": _vm.currentPage == 1 ? "disabled" : ""
+  }, [_c("a", {
+    staticClass: "page-link",
+    attrs: {
+      href: "#"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.getAllGarages(_vm.currentPage - 1);
+      }
+    }
+  }, [_vm._v("Previous")])]), _vm._v(" "), _c("li", {
+    staticClass: "page-item",
+    "class": _vm.currentPage == _vm.lastPage ? "disabled" : ""
+  }, [_c("a", {
+    staticClass: "page-link",
+    attrs: {
+      href: "#"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.getAllGarages(_vm.currentPage + 1);
+      }
+    }
+  }, [_vm._v("Next")])])])]), _vm._v(" "), _c("div", {
+    staticClass: "row row-cols-4 mt-4"
   }, _vm._l(_vm.ArrayGarages, function (garage, index) {
     return _c("div", {
       key: index,
       staticClass: "col"
     }, [_c("div", {
-      staticClass: "card",
-      staticStyle: {
-        width: "18rem"
-      }
+      staticClass: "card m-2"
     }, [_c("img", {
       staticClass: "card-img-top",
       attrs: {
@@ -2180,12 +2211,14 @@ var render = function render() {
       staticClass: "card-title"
     }, [_vm._v(_vm._s(garage.title))]), _vm._v(" "), _c("p", {
       staticClass: "card-text"
-    }, [_vm._v("Some quick example text to build on the card title and make up the bulk of the card's content.")]), _vm._v(" "), _c("a", {
+    }, [_vm._v("Parking = " + _vm._s(garage.n_parking))]), _vm._v(" "), _c("p", {
+      staticClass: "card-text"
+    }, [_vm._v("Address = " + _vm._s(garage.address))]), _vm._v(" "), _c("a", {
       staticClass: "btn btn-primary",
       attrs: {
         href: "#"
       }
-    }, [_vm._v("Go somewhere")])])])]);
+    }, [_vm._v("View more")])])])]);
   }), 0)]);
 };
 var staticRenderFns = [function () {
