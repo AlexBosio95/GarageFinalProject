@@ -177,13 +177,16 @@ class GaragesController extends Controller
             'available'=>'boolean'
         ]);
 
+
         $data = $request->all();
         
         $garage = Garage::find($id);
 
-        if (array_key_exists('available', $data)) {
+        if (!array_key_exists('available', $data)) {
             $garage->available = false;
         }
+
+        
         
         if ($data['title'] !== $garage->title) {
             $slug = $this->getSlug($garage->title);
