@@ -88,7 +88,7 @@ class GaragesController extends Controller
         $newGarage->slug=$slug;
 
         $newGarage->user_id = Auth::id();
-
+        //dd($newGarage);
         $newGarage->save();
 
         if (array_key_exists('services', $data)){
@@ -104,20 +104,20 @@ class GaragesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show(Garage $garage)
     {
         $user_id = Auth::id();
 
-        $garage = Garage::where('slug', $slug)->get();
        //dd($garage[0]);
 
         if ($garage != null) {
-            if($garage[0]->user_id != $user_id) {
+            if($garage->user_id != $user_id) {
                 abort(403);
             }
-            return view('admin.garages.show', ['garage'=>$garage[0]]);
+            return view('admin.garages.show', compact('garage'));
 
         } else {
+
             abort(404);
         }
 
@@ -130,13 +130,11 @@ class GaragesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Garage $garage)
     {
         $services= Service::all();
 
         $user_id = Auth::id();
-
-        $garage = Garage::find($id);
 
         if ($garage != null) {
 
@@ -161,7 +159,7 @@ class GaragesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Garage $garage)
     {
         $request->validate([
             'title'=>'required|max:255|min:3',
@@ -179,11 +177,12 @@ class GaragesController extends Controller
 
         $data = $request->all();
 
-        $garage = Garage::find($id);
 
         if (!array_key_exists('available', $data)) {
             $garage->available = false;
         }
+
+
 
         if ($data['title'] !== $garage->title) {
             $slug = $this->getSlug($garage->title);
@@ -273,7 +272,7 @@ class GaragesController extends Controller
         $garage->image = '';
         $garage->save();
 
-        return redirect()->route('admin.garages.edit', [ 'garage' => $garage->id])->with('img-removed', 'Immagine cancellata con successo');
+        return redirect()->route('admin.garages.edit', [ 'garage' => $garage->slug])->with('img-removed', 'Immagine cancellata con successo');
 
     }
 
