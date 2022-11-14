@@ -23,7 +23,7 @@ export default {
         return {
             menu:[
                 {
-                    title: 'Posts',
+                    title: 'Home',
                     routeLink : 'home'
                 },
                 {

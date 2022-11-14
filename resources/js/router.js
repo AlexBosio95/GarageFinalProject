@@ -4,7 +4,7 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 import HomePage from './pages/HomePage.vue';
-
+import AboutUs from './pages/AboutUs.vue';
 
 const router = new VueRouter({
     mode: 'history',
@@ -13,6 +13,11 @@ const router = new VueRouter({
             path: '/',
             name: 'home',
             component: HomePage
+        },
+        {
+            path: '/about-us/',
+            name: 'about-us',
+            component: AboutUs
         },
 
         
