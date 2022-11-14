@@ -108,14 +108,21 @@ class GaragesController extends Controller
     {
         $user_id = Auth::id();
 
+        
         $garage = Garage::find($id);
 
-        if($garage->user_id != $user_id) {
-            abort(403); 
-            //TODO: personalizzare la pagina per la richiesta fallita
+        if ($garage != null) {
+            if($garage->user_id != $user_id) {
+                abort(403); 
+            }
+            return view('admin.garages.show', compact('garage'));
+
+        } else {
+
+            abort(404);
         }
+
         
-        return view('admin.garages.show', compact('garage'));
     }
 
     /**
@@ -132,12 +139,20 @@ class GaragesController extends Controller
 
         $garage = Garage::find($id);
 
-        if($garage->user_id != $user_id) {
-            abort(403);
-            //TODO: personalizzare la pagina per la richiesta fallita
+        if ($garage != null) {
+
+            if($garage->user_id != $user_id) {
+                abort(403);
+            }
+            
+            return view('admin.garages.edit', compact('services', 'garage'));
+
+        } else {
+
+            abort(404);
         }
 
-        return view('admin.garages.edit', compact('services', 'garage'));
+
     }
 
     /**
