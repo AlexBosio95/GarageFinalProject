@@ -17374,24 +17374,21 @@ var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.j
   isNull = _require.isNull;
 var email_regexp = /^([a-zA-Z0-9.-])+@(([a-zA-Z0-9-]{2,})+.)+([a-zA-Z0-9]{2,})+$/;
 var nameRegExp = /^[a-zA-Zàèìòù/ /gi]*$/;
+
+//! modificare con alert
 if (!isNull(document.getElementById('register-form'))) {
   var registerForm = document.getElementById('register-form');
+  var msgWrapper = document.createElement('div');
   registerForm.addEventListener('submit', function () {
-    Validation('name', nameRegExp);
-    Validation('surname', nameRegExp);
-    Validation('email', email_regexp);
+    Validation('name', nameRegExp, msgWrapper);
+    Validation('surname', nameRegExp, msgWrapper);
+    Validation('email', email_regexp, msgWrapper);
   });
 }
 if (!isNull(document.getElementById('edit-form'))) {
-  var editForm = document.getElementById('edit-form');
-  var length = document.getElementById('length').innerText;
-  var width = document.getElementById('width').innerText;
-  var height = document.getElementById('height').innerText;
-  editForm.addEventListener('submit', function () {
-    Validation('GarageTitle', nameRegExp);
-    numberValidation(length);
-    numberValidation(width);
-    numberValidation(height);
+  var _msgWrapper = document.createElement('div');
+  title.addEventListener('keyup', function () {
+    Validation('title', nameRegExp, _msgWrapper);
   });
 }
 
@@ -17399,17 +17396,24 @@ if (!isNull(document.getElementById('edit-form'))) {
 function isValidCharacter(txtTitle, regExp) {
   var title = document.getElementById(txtTitle);
   if (!regExp.test(title.value)) {
-    title.value = '';
     return false;
   } else {
     return true;
   }
 }
-function Validation(userValue, regExp) {
+function Validation(userValue, regExp, msgWrapper) {
   var txtTitles = document.getElementById(userValue);
-  if (isValidCharacter(txtTitles.id, regExp) == false) {
-    alert("Please enter valid" + " " + userValue + " " + "No special character allowed.");
-    return false;
+  if (!isValidCharacter(txtTitles.id, regExp)) {
+    var message = "Please enter valid" + " " + userValue + " " + "No special character allowed.";
+    msgWrapper.classList.add('alert');
+    msgWrapper.classList.add('alert-danger');
+    msgWrapper.innerText = message;
+    txtTitles.after(msgWrapper);
+    txtTitles.addEventListener('blur', function () {
+      txtTitles.value = '';
+    });
+  } else if (isValidCharacter(txtTitles.id, regExp)) {
+    msgWrapper.remove();
   }
 }
 

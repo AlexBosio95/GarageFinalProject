@@ -10,7 +10,7 @@
 
         <div class="form-group">
           <label for="GarageTitle">Title</label>
-          <input type="text" class="form-control @error ('title') is-invalid @enderror" id="GarageTitle" placeholder="MyGarage" name="title" value="{{old('title', $garage->title)}}" required>
+          <input type="text" class="form-control @error ('title') is-invalid @enderror" id="title" placeholder="MyGarage" name="title" value="{{old('title', $garage->title)}}" required>
 
           @error('title')
             <div class="alert alert-danger">{{ $message }}</div>

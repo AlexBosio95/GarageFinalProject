@@ -94,7 +94,7 @@ class GaragesController extends Controller
         if (array_key_exists('services', $data)){
             $newGarage->services()->sync($data['services']);
         }
-
+        
         return redirect()->route('admin.garages.index')->with('created', 'Created succesfully');
     }
 

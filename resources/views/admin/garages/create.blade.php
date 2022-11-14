@@ -3,12 +3,12 @@
 @section('content')
 <div class="container">
   <a href="{{ route('admin.garages.index') }}" class="btn btn-primary mb-2">< back </a>
-    <form enctype="multipart/form-data" action="{{ route('admin.garages.store') }}" method="POST" id="login-form">
+    <form enctype="multipart/form-data" action="{{ route('admin.garages.store') }}" method="POST">
         @csrf
 
         <div class="form-group">
           <label for="GarageTitle">Title</label>
-          <input type="text" class="form-control @error ('title') is-invalid @enderror" id="GarageTitle" placeholder="MyGarage" name="title" value="{{old('title')}}" required>
+          <input type="text" class="form-control @error ('title') is-invalid @enderror" id="title" placeholder="MyGarage" name="title" value="{{old('title')}}" required>
 
           @error('title')
             <div class="alert alert-danger">{{ $message }}</div>
