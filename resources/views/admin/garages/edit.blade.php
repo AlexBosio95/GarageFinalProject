@@ -121,19 +121,22 @@
 
         @if ($garage->image)
         
-          <img src="{{ asset('storage/'. $garage->image) }}" alt="image garage">
+          <img src="{{ asset('storage/'. $garage->image) }}" alt="image garage" class="w-100">
+
+        @else
+
+          <div class="form-group">
+            <label for="image">Images</label>
+            <input type="file" class="form-control @error ('image') is-invalid @enderror" id="image" name="image">
+            @error('image')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+          </div>
 
         @endif
         
-        <div class="form-group">
-          <label for="image">Images</label>
-          <input type="file" class="form-control @error ('image') is-invalid @enderror" id="image" name="image">
-          @error('image')
-          <div class="alert alert-danger">{{ $message }}</div>
-          @enderror
-        </div>
-                
-        <button type="submit" class="btn btn-primary">Edit</button>
+        <button type="submit" class="btn btn-primary my-4">Edit</button>
+
       </form>
       
       @if ($garage->image)
@@ -142,9 +145,10 @@
         @csrf
         @method('DELETE')
         
-        <button type="submit" class="btn btn-danger"> Delete </button>
+        <button type="submit" class="btn btn-danger"> Delete image</button>
         
       </form>
+
       @endif
 
 </div>
