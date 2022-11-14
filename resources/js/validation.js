@@ -17,15 +17,17 @@ if (!isNull(document.getElementById('register-form'))) {
 
 if (!isNull(document.getElementById('edit-form'))) {
     const editForm = document.getElementById('edit-form');
-    const length = document.getElementById('length').innerText;
-    const width = document.getElementById('width').innerText;
-    const height = document.getElementById('height').innerText;
 
     editForm.addEventListener('submit', function () {
         Validation('GarageTitle', nameRegExp);
-        numberValidation(length);
-        numberValidation(width);
-        numberValidation(height);
+    });
+}
+
+if (!isNull(document.getElementById('login-form'))) {
+    const loginForm = document.getElementById('login-form');
+
+    loginForm.addEventListener('submit', function () {
+        Validation('GarageTitle', nameRegExp);
     });
 }
 
