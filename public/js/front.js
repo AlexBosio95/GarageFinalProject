@@ -1988,11 +1988,18 @@ __webpack_require__.r(__webpack_exports__);
         _this.ArrayGarages = response.data.results.data;
         _this.currentPage = response.data.results.current_page;
         _this.lastPage = response.data.results.last_page;
-        console.log(_this.ArrayGarages);
+        //console.log(this.ArrayGarages);
       });
     },
     searchGarages: function searchGarages() {
-      axios.get('/api/garages/' + this.searchText);
+      var _this2 = this;
+      axios.get('/api/garages/' + this.searchText).then(function (response) {
+        _this2.ArrayGarages = [];
+        _this2.ArrayGarages = response.data.results;
+        if (_this2.searchText == '') {
+          _this2.getAllGarages(1);
+        }
+      });
     }
   },
   mounted: function mounted() {
@@ -2172,26 +2179,21 @@ var render = function render() {
     }],
     staticClass: "form-control",
     attrs: {
-      placeholder: "Search Garages",
+      placeholder: "Insert an address to start looking for your perfect garage",
       type: "text",
-      id: "exampleInputEmail1",
+      id: "search-bar",
       "aria-describedby": "emailHelp"
     },
     domProps: {
       value: _vm.searchText
     },
     on: {
-      input: function input($event) {
+      input: [function ($event) {
         if ($event.target.composing) return;
         _vm.searchText = $event.target.value;
-      }
+      }, _vm.searchGarages]
     }
-  })]), _vm._v(" "), _c("button", {
-    staticClass: "btn btn-primary",
-    attrs: {
-      type: "submit"
-    }
-  }, [_vm._v("Search")])]), _vm._v(" "), _c("nav", {
+  })])]), _vm._v(" "), _c("nav", {
     attrs: {
       "aria-label": "Page navigation example"
     }
@@ -2225,7 +2227,7 @@ var render = function render() {
         return _vm.getAllGarages(_vm.currentPage + 1);
       }
     }
-  }, [_vm._v("Next")])])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Next")])])])]), _vm._v(" "), _vm.ArrayGarages.length > 0 ? _c("div", {
     staticClass: "row row-cols-4 mt-4"
   }, _vm._l(_vm.ArrayGarages, function (garage, index) {
     return _c("div", {
@@ -2253,7 +2255,7 @@ var render = function render() {
         href: "#"
       }
     }, [_vm._v("View more")])])])]);
-  }), 0)]);
+  }), 0) : _vm._e()]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -18298,7 +18300,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

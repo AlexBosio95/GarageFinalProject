@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Garage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GarageController extends Controller
 {
@@ -29,7 +30,7 @@ class GarageController extends Controller
     public function search($address)
     {
 
-        $garage = Garage::where('address', $address)->get();
+        $garage = Garage::where('address', 'like', '%' . $address . '%')->get();
 
         return response()->json([
 

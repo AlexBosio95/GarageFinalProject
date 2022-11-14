@@ -3,9 +3,8 @@
         <h1 class="text-center">HomePage</h1>
         <form>
             <div class="form-group">
-                <input placeholder="Search Garages" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="searchText">
+                <input placeholder="Insert an address to start looking for your perfect garage" type="text" class="form-control" id="search-bar" aria-describedby="emailHelp" v-model="searchText" @input="searchGarages">
             </div>
-            <button type="submit" class="btn btn-primary">Search</button>
         </form>
         <nav aria-label="Page navigation example">
             <ul class="pagination">
@@ -13,7 +12,7 @@
                 <li class="page-item" :class="(currentPage == lastPage) ? 'disabled': '' "><a class="page-link" href="#" @click.prevent="getAllGarages(currentPage + 1)">Next</a></li>
             </ul>
         </nav>
-        <div class="row row-cols-4 mt-4">
+        <div class="row row-cols-4 mt-4" v-if="ArrayGarages.length > 0">
             <div class="col" v-for="(garage, index) in ArrayGarages" :key="index">
                 <div class="card m-2">
                     <img :src="garage.image" class="card-img-top" :alt="garage.title">
@@ -23,7 +22,7 @@
                         <p class="card-text">Address = {{garage.address}}</p>
                         <a href="#" class="btn btn-primary">View more</a>
                     </div>
-                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -38,7 +37,7 @@ export default {
             ArrayGarages: [],
             currentPage: 1,
             lastPage: null,
-            searchText: ''
+            searchText: '',
         }
     },
     methods: {
@@ -50,13 +49,20 @@ export default {
                 this.ArrayGarages = response.data.results.data;
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
-                console.log(this.ArrayGarages);
+                //console.log(this.ArrayGarages);
             });
         },
 
         searchGarages(){
             axios.get('/api/garages/' + this.searchText)
+            .then((response) => {
+                this.ArrayGarages = [];
+                this.ArrayGarages = response.data.results;
 
+                if (this.searchText == '') {
+                    this.getAllGarages(1);
+                }
+            });
         }
     },
     mounted(){
