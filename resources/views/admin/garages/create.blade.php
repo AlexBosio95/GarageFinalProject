@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-  <a href="{{ route('admin.garages.index') }}" class="btn btn-primary mb-2">< back </a> 
+  <a href="{{ route('admin.garages.index') }}" class="btn btn-primary mb-2">< back </a>
     <form enctype="multipart/form-data" action="{{ route('admin.garages.store') }}" method="POST" id="login-form">
         @csrf
 
@@ -14,14 +14,14 @@
             <div class="alert alert-danger">{{ $message }}</div>
           @enderror
         </div>
-        
+
         <div class="form-group">
           <label for="address">Address</label>
           <input type="text" class="form-control @error ('address') is-invalid @enderror" id="address" placeholder="insert a complete address for the research" value="{{old('address')}}" required>
 
           <button id="search-btn" class="btn btn-warning mt-2">Search</button>
 
-          
+
           @error('address')
           <div class="alert alert-danger">{{ $message }}</div>
           @enderror
@@ -31,10 +31,10 @@
           <option value="" selected disabled>Select an address</option>
           {{-- option injected by axios.js --}}
         </select>
-        
+
         <div class="form-group">
             <label for="length">Length (mt)</label>
-            <input type="number" min="3" max="20" class="form-control @error ('length') is-invalid @enderror" id="length" placeholder="6" name="length" value="{{old('length')}}">
+            <input type="number" min="3" max="20" class="form-control @error ('length') is-invalid @enderror" id="length" placeholder="example: 5" name="length" value="{{old('length')}}">
 
             @error('length')
               <div class="alert alert-danger">{{ $message }}</div>
@@ -42,7 +42,7 @@
         </div>
         <div class="form-group">
             <label for="width">width (mt)</label>
-            <input type="number" min="1" max="10" class="form-control @error ('width') is-invalid @enderror" id="width" placeholder="2" name="width" value="{{old('width')}}">
+            <input type="number" min="1" max="10" class="form-control @error ('width') is-invalid @enderror" id="width" placeholder="example: 5" name="width" value="{{old('width')}}">
 
             @error('width')
               <div class="alert alert-danger">{{ $message }}</div>
@@ -50,7 +50,7 @@
         </div>
         <div class="form-group">
             <label for="height">height (mt)</label>
-            <input type="number" min="1" max="6" class="form-control @error ('height') is-invalid @enderror" id="height" placeholder="2" name="height" value="{{old('height')}}">
+            <input type="number" min="1" max="6" class="form-control @error ('height') is-invalid @enderror" id="height" placeholder="example: 5" name="height" value="{{old('height')}}">
 
             @error('height')
               <div class="alert alert-danger">{{ $message }}</div>
@@ -74,10 +74,10 @@
 
         @foreach ($services as $service)
             <div class="custom-control custom-checkbox">
-            
+
                 <input type="checkbox" class="custom-control-input @error ('services') is-invalid @enderror" id="{{ $service->id }}" name="services[]" value="{{ $service->id }}" {{(in_array($service->id, old('services', []))) ? 'checked' : ''}}>
                 <label class="custom-control-label" for="{{ $service->id }}">{{ $service->name }}</label>
-            
+
             </div>
         @endforeach
 
@@ -107,6 +107,6 @@
 
         <button type="submit" class="btn btn-primary">Create</button>
       </form>
-      
+
 </div>
 @endsection
