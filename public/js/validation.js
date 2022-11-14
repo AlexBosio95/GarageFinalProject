@@ -17386,9 +17386,21 @@ if (!isNull(document.getElementById('register-form'))) {
   });
 }
 if (!isNull(document.getElementById('edit-form'))) {
-  var _msgWrapper = document.createElement('div');
-  title.addEventListener('keyup', function () {
-    Validation('title', nameRegExp, _msgWrapper);
+  var editForm = document.getElementById('edit-form');
+  var length = document.getElementById('length').innerText;
+  var width = document.getElementById('width').innerText;
+  var height = document.getElementById('height').innerText;
+  editForm.addEventListener('submit', function () {
+    Validation('GarageTitle', nameRegExp);
+    numberValidation(length);
+    numberValidation(width);
+    numberValidation(height);
+  });
+}
+if (!isNull(document.getElementById('login-form'))) {
+  var loginForm = document.getElementById('login-form');
+  loginForm.addEventListener('submit', function () {
+    Validation('GarageTitle', nameRegExp);
   });
 }
 
@@ -17426,7 +17438,7 @@ function Validation(userValue, regExp, msgWrapper) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\validation.js */"./resources/js/validation.js");
+module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/validation.js */"./resources/js/validation.js");
 
 
 /***/ })
