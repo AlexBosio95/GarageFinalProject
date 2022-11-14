@@ -21,9 +21,6 @@
           <label for="address">Address</label>
           <input type="text" class="form-control @error ('address') is-invalid @enderror" id="address" placeholder="insert a complete address for the research" value="{{old('address', $garage->address)}}" required>
 
-          <button id="search-btn" class="btn btn-warning mt-2">Search</button>
-
-
           @error('address')
           <div class="alert alert-danger">{{ $message }}</div>
           @enderror

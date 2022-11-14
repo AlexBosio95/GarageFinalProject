@@ -5,12 +5,12 @@ const apiKey = '4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM';
 
 const address = document.getElementById('address');
 
-if (!isNull(document.getElementById('search-btn'))) {
+if (!isNull(document.getElementById('address'))) {
 
-    const search = document.getElementById('search-btn');
+    const search = document.getElementById('address');
     
-    search.addEventListener('click', function(e){
-        e.preventDefault();
+    search.addEventListener('input', function(){
+        //e.preventDefault();
     
         const select = document.getElementById('search-results');
         select.innerHTML = '';

@@ -19383,10 +19383,11 @@ var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.j
   isNull = _require.isNull;
 var apiKey = '4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM';
 var address = document.getElementById('address');
-if (!isNull(document.getElementById('search-btn'))) {
-  var search = document.getElementById('search-btn');
-  search.addEventListener('click', function (e) {
-    e.preventDefault();
+if (!isNull(document.getElementById('address'))) {
+  var search = document.getElementById('address');
+  search.addEventListener('input', function () {
+    //e.preventDefault();
+
     var select = document.getElementById('search-results');
     select.innerHTML = '';
 
@@ -19436,7 +19437,7 @@ if (!isNull(document.getElementById('search-btn'))) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/axios.js */"./resources/js/axios.js");
+module.exports = __webpack_require__(/*! C:\Users\marco\OneDrive\Desktop\Garagefinal projet\GarageFinalProject\resources\js\axios.js */"./resources/js/axios.js");
 
 
 /***/ })
