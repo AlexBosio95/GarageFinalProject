@@ -135,7 +135,7 @@
 
         @endif
 
-        <button type="submit" class="btn btn-primary my-4">Edit</button>
+        <button type="submit" class="btn btn-primary my-4" id="submit-btn">Edit</button>
 
       </form>
 

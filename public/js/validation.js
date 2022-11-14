@@ -17374,22 +17374,31 @@ var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.j
   isNull = _require.isNull;
 var email_regexp = /^([a-zA-Z0-9.-])+@(([a-zA-Z0-9-]{2,})+.)+([a-zA-Z0-9]{2,})+$/;
 var nameRegExp = /^[a-zA-Zàèìòù/ /gi]*$/;
-
-//! modificare con alert
 if (!isNull(document.getElementById('register-form'))) {
-  var registerForm = document.getElementById('register-form');
   var msgWrapper = document.createElement('div');
-  registerForm.addEventListener('submit', function () {
+  var name = document.getElementById('name');
+  var surName = document.getElementById('surname');
+  var email = document.getElementById('email');
+  name.addEventListener('keyup', function () {
     Validation('name', nameRegExp, msgWrapper);
+  });
+  surName.addEventListener('keyup', function () {
     Validation('surname', nameRegExp, msgWrapper);
+  });
+  email.addEventListener('keyup', function () {
     Validation('email', email_regexp, msgWrapper);
   });
 }
 if (!isNull(document.getElementById('edit-form'))) {
   var _msgWrapper = document.createElement('div');
-  var title = document.getElementById('title');
   title.addEventListener('keyup', function () {
     Validation('title', nameRegExp, _msgWrapper);
+  });
+}
+if (!isNull(document.getElementById('create-form'))) {
+  var _msgWrapper2 = document.createElement('div');
+  title.addEventListener('keyup', function () {
+    Validation('title', nameRegExp, _msgWrapper2);
   });
 }
 
@@ -17402,6 +17411,20 @@ function isValidCharacter(txtTitle, regExp) {
     return true;
   }
 }
+function resetValue() {
+  if (!isNull(document.getElementById('create-form')) || !isNull(document.getElementById('edit-form'))) {
+    document.getElementById('title').value = '';
+  }
+  if (!isValidCharacter('name', nameRegExp)) {
+    document.getElementById('name').value = '';
+  }
+  if (!isValidCharacter('surname', nameRegExp)) {
+    document.getElementById('surname').value = '';
+  }
+  if (!isValidCharacter('email', email_regexp)) {
+    document.getElementById('email').value = '';
+  }
+}
 function Validation(userValue, regExp, msgWrapper) {
   var txtTitles = document.getElementById(userValue);
   if (!isValidCharacter(txtTitles.id, regExp)) {
@@ -17410,10 +17433,9 @@ function Validation(userValue, regExp, msgWrapper) {
     msgWrapper.classList.add('alert-danger');
     msgWrapper.innerText = message;
     txtTitles.after(msgWrapper);
-    txtTitles.addEventListener('blur', function () {
-      txtTitles.value = '';
-    });
+    txtTitles.addEventListener('blur', resetValue);
   } else if (isValidCharacter(txtTitles.id, regExp)) {
+    txtTitles.removeEventListener('blur', resetValue);
     msgWrapper.remove();
   }
 }
