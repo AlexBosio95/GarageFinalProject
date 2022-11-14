@@ -34,7 +34,7 @@
             @if ($garage->sqmt > 1)
                 <p class="card-text">
                     <span class="text-primary">Garage total area:</span>
-                    {{$garage->sqmt}} sqmt
+                    {{$garage->sqmt}} m²
                 </p>    
             @else
                 <p class="card-text">
