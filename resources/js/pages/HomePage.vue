@@ -83,6 +83,12 @@ export default {
             });
         },
         getCityData(){
+
+            //reset Array
+            this.ArrayGarages = [];
+            this.ArrayRadius = [];
+            this.data = [];
+
             // Recupriamo i dati relativi alla ricerca dell'utente
             axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&limit=1&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')
                 .then((response) => {

@@ -2007,6 +2007,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     getCityData: function getCityData() {
       var _this3 = this;
+      //reset Array
+      this.ArrayGarages = [];
+      this.ArrayRadius = [];
+      this.data = [];
+
       // Recupriamo i dati relativi alla ricerca dell'utente
       axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&limit=1&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
         _this3.data = response.data.results;
