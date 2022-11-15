@@ -70,12 +70,19 @@ export default {
                 this.lastPage = response.data.results.last_page;
             });
         },
-
         searchGarages(){
-            axios.get('/api/garages/' + this.searchText)
+            axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&limit=1&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')
             .then((response) => {
-                this.ArrayGarages = [];
-                this.ArrayGarages = response.data.results;
+                this.data = response.data.results;
+                console.log(this.data[0])
+                
+                this.currentLat = this.data[0].position.lat;
+                this.currentLong = this.data[0].position.lon;
+
+                axios.get('/api/garages/' + this.currentRadius + '/' + this.currentLat + '/' + this.currentLong)
+                .then(response => {
+                    console.log(response.data);
+                })
 
                 if (this.searchText == '') {
                     this.getAllGarages(1);
@@ -104,7 +111,7 @@ export default {
                             this.ArrayRadius = response.data.results;
 
                             this.ArrayRadius.forEach(element => {
-                                console.log(element.position);
+                                //console.log(element.position);
                             });
                         });
 
@@ -113,6 +120,8 @@ export default {
                     //     .then((response) => {
                     //     console.log(response);
                     //     });
+
+                    
             });
 
 

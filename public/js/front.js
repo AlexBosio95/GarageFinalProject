@@ -1997,9 +1997,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     searchGarages: function searchGarages() {
       var _this2 = this;
-      axios.get('/api/garages/' + this.searchText).then(function (response) {
-        _this2.ArrayGarages = [];
-        _this2.ArrayGarages = response.data.results;
+      axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&limit=1&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
+        _this2.data = response.data.results;
+        console.log(_this2.data[0]);
+        _this2.currentLat = _this2.data[0].position.lat;
+        _this2.currentLong = _this2.data[0].position.lon;
+        axios.get('/api/garages/' + _this2.currentRadius + '/' + _this2.currentLat + '/' + _this2.currentLong).then(function (response) {
+          console.log(response.data);
+        });
         if (_this2.searchText == '') {
           _this2.getAllGarages(1);
         }
@@ -2024,7 +2029,7 @@ __webpack_require__.r(__webpack_exports__);
         axios.get('https://api.tomtom.com/search/2/geocode/' + _this3.searchText + '.json?lat=' + _this3.currentLat + '&lon=' + _this3.currentLong + '&radius=' + _this3.currentRadius + '&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM').then(function (response) {
           _this3.ArrayRadius = response.data.results;
           _this3.ArrayRadius.forEach(function (element) {
-            console.log(element.position);
+            //console.log(element.position);
           });
         });
 
@@ -18369,7 +18374,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
