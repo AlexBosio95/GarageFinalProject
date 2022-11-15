@@ -1979,7 +1979,8 @@ __webpack_require__.r(__webpack_exports__);
       currentLong: 0,
       currentRadius: 20000,
       data: [],
-      ArrayRadius: []
+      ArrayRadius: [],
+      addressArray: []
     };
   },
   methods: {
@@ -1997,47 +1998,20 @@ __webpack_require__.r(__webpack_exports__);
     },
     searchGarages: function searchGarages() {
       var _this2 = this;
-      axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&limit=1&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
+      axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
         _this2.data = response.data.results;
-        console.log(_this2.data[0]);
+        _this2.addressArray = _this2.data;
+        //console.log(this.addressArray)
+
         _this2.currentLat = _this2.data[0].position.lat;
         _this2.currentLong = _this2.data[0].position.lon;
         axios.get('/api/garages/' + _this2.currentRadius + '/' + _this2.currentLat + '/' + _this2.currentLong).then(function (response) {
           console.log(response.data);
+          _this2.ArrayGarages = response.data.results;
         });
         if (_this2.searchText == '') {
           _this2.getAllGarages(1);
         }
-      });
-    },
-    getCityData: function getCityData() {
-      var _this3 = this;
-      //reset Array
-      this.ArrayGarages = [];
-      this.ArrayRadius = [];
-      this.data = [];
-
-      // Recupriamo i dati relativi alla ricerca dell'utente
-      axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&limit=1&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
-        _this3.data = response.data.results;
-        _this3.data.forEach(function (element) {
-          _this3.currentLat = element.position.lat;
-          _this3.currentLong = element.position.lon;
-        });
-
-        // recupero il raggio per la ricerca
-        axios.get('https://api.tomtom.com/search/2/geocode/' + _this3.searchText + '.json?lat=' + _this3.currentLat + '&lon=' + _this3.currentLong + '&radius=' + _this3.currentRadius + '&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM').then(function (response) {
-          _this3.ArrayRadius = response.data.results;
-          _this3.ArrayRadius.forEach(function (element) {
-            //console.log(element.position);
-          });
-        });
-
-        //Chaiamta al Backend per il recupero dei garages inerenti 
-        // axios.get('/api/garages/' + this.currentRadius + '/' + this.currentLat + '/' + this.currentLong)
-        //     .then((response) => {
-        //     console.log(response);
-        //     });
       });
     }
   },
@@ -2232,7 +2206,18 @@ var render = function render() {
         _vm.searchText = $event.target.value;
       }, _vm.searchGarages]
     }
-  })])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _vm.addressArray.length > 0 ? _c("select", {
+    attrs: {
+      id: "address-suggestion"
+    }
+  }, _vm._l(_vm.addressArray, function (garage, index) {
+    return _c("option", {
+      key: index,
+      domProps: {
+        value: garage.address.freeformAddress
+      }
+    }, [_vm._v("\n                    " + _vm._s(garage.address.freeformAddress) + "\n                ")]);
+  }), 0) : _vm._e()])]), _vm._v(" "), _c("div", {
     staticClass: "input-group mb-3"
   }, [_vm._m(0), _vm._v(" "), _c("select", {
     staticClass: "custom-select",
@@ -2251,13 +2236,7 @@ var render = function render() {
     attrs: {
       value: "50000"
     }
-  }, [_vm._v("50 km")])])]), _vm._v(" "), _c("button", {
-    on: {
-      click: function click($event) {
-        return _vm.getCityData();
-      }
-    }
-  }, [_vm._v("Search")]), _vm._v(" "), _c("nav", {
+  }, [_vm._v("50 km")])])]), _vm._v(" "), _c("nav", {
     attrs: {
       "aria-label": "Page navigation example"
     }
