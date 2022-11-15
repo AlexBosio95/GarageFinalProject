@@ -1974,7 +1974,12 @@ __webpack_require__.r(__webpack_exports__);
       ArrayGarages: [],
       currentPage: 1,
       lastPage: null,
-      searchText: ''
+      searchText: '',
+      currentLat: 0,
+      currentLong: 0,
+      currentRadius: 20000,
+      data: [],
+      ArrayRadius: []
     };
   },
   methods: {
@@ -1988,7 +1993,6 @@ __webpack_require__.r(__webpack_exports__);
         _this.ArrayGarages = response.data.results.data;
         _this.currentPage = response.data.results.current_page;
         _this.lastPage = response.data.results.last_page;
-        //console.log(this.ArrayGarages);
       });
     },
     searchGarages: function searchGarages() {
@@ -1999,6 +2003,31 @@ __webpack_require__.r(__webpack_exports__);
         if (_this2.searchText == '') {
           _this2.getAllGarages(1);
         }
+      });
+    },
+    getCityData: function getCityData() {
+      var _this3 = this;
+      // Recupriamo i dati relativi alla ricerca dell'utente
+      axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&limit=1&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
+        _this3.data = response.data.results;
+        _this3.data.forEach(function (element) {
+          _this3.currentLat = element.position.lat;
+          _this3.currentLong = element.position.lon;
+        });
+
+        // recupero il raggio per la ricerca
+        axios.get('https://api.tomtom.com/search/2/geocode/' + _this3.searchText + '.json?lat=' + _this3.currentLat + '&lon=' + _this3.currentLong + '&radius=' + _this3.currentRadius + '&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM').then(function (response) {
+          _this3.ArrayRadius = response.data.results;
+          _this3.ArrayRadius.forEach(function (element) {
+            console.log(element.position);
+          });
+        });
+
+        //Chaiamta al Backend per il recupero dei garages inerenti 
+        // axios.get('/api/garages/' + this.currentRadius + '/' + this.currentLat + '/' + this.currentLong)
+        //     .then((response) => {
+        //     console.log(response);
+        //     });
       });
     }
   },
@@ -2193,7 +2222,32 @@ var render = function render() {
         _vm.searchText = $event.target.value;
       }, _vm.searchGarages]
     }
-  })])]), _vm._v(" "), _c("nav", {
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "input-group mb-3"
+  }, [_vm._m(0), _vm._v(" "), _c("select", {
+    staticClass: "custom-select",
+    attrs: {
+      id: "inputGroupSelect01"
+    },
+    on: {
+      change: _vm.currentRadius
+    }
+  }, [_c("option", {
+    attrs: {
+      selected: "",
+      value: "20000"
+    }
+  }, [_vm._v("20 km")]), _vm._v(" "), _c("option", {
+    attrs: {
+      value: "50000"
+    }
+  }, [_vm._v("50 km")])])]), _vm._v(" "), _c("button", {
+    on: {
+      click: function click($event) {
+        return _vm.getCityData();
+      }
+    }
+  }, [_vm._v("Search")]), _vm._v(" "), _c("nav", {
     attrs: {
       "aria-label": "Page navigation example"
     }
@@ -2257,7 +2311,18 @@ var render = function render() {
     }, [_vm._v("View more")])])])]);
   }), 0) : _vm._e()]);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "input-group-prepend"
+  }, [_c("label", {
+    staticClass: "input-group-text",
+    attrs: {
+      "for": "inputGroupSelect01"
+    }
+  }, [_vm._v("Select Radius")])]);
+}];
 render._withStripped = true;
 
 
@@ -18037,7 +18102,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /* harmony import */ var _views_App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/App */ "./resources/js/views/App.vue");
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
 
@@ -18300,7 +18364,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })
