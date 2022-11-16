@@ -1980,7 +1980,8 @@ __webpack_require__.r(__webpack_exports__);
       currentRadius: 20000,
       data: [],
       ArrayRadius: [],
-      addressArray: []
+      addressArray: [],
+      selectValue: ''
     };
   },
   methods: {
@@ -1998,21 +1999,26 @@ __webpack_require__.r(__webpack_exports__);
     },
     searchGarages: function searchGarages() {
       var _this2 = this;
-      axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
+      axios.get('https://api.tomtom.com/search/2/geocode/' + this.selectValue + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
         _this2.data = response.data.results;
-        _this2.addressArray = _this2.data;
-        //console.log(this.addressArray)
-
         _this2.currentLat = _this2.data[0].position.lat;
         _this2.currentLong = _this2.data[0].position.lon;
         axios.get('/api/garages/' + _this2.currentRadius + '/' + _this2.currentLat + '/' + _this2.currentLong).then(function (response) {
-          console.log(response.data);
           _this2.ArrayGarages = response.data.results;
         });
-        if (_this2.searchText == '') {
-          _this2.getAllGarages(1);
-        }
       });
+    },
+    selectCity: function selectCity() {
+      var _this3 = this;
+      if (this.searchText == '') {
+        this.selectValue = '';
+        this.addressArray = [];
+        this.getAllGarages(1);
+      } else {
+        axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
+          _this3.addressArray = response.data.results;
+        });
+      }
     }
   },
   mounted: function mounted() {
@@ -2204,11 +2210,28 @@ var render = function render() {
       input: [function ($event) {
         if ($event.target.composing) return;
         _vm.searchText = $event.target.value;
-      }, _vm.searchGarages]
+      }, _vm.selectCity]
     }
   }), _vm._v(" "), _vm.addressArray.length > 0 ? _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.selectValue,
+      expression: "selectValue"
+    }],
     attrs: {
       id: "address-suggestion"
+    },
+    on: {
+      change: [function ($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.selectValue = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }, _vm.searchGarages]
     }
   }, _vm._l(_vm.addressArray, function (garage, index) {
     return _c("option", {
@@ -18353,7 +18376,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })
