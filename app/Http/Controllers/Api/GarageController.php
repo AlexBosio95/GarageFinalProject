@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Garage;
+use Dotenv\Result\Success;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -76,13 +77,29 @@ class GarageController extends Controller
 
 
         $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->get();
+        
+        /*if($n_parking) {
+            $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->where('n_parking', $n_parking)->get();
 
+            return response()->json([
+                'success' => 'top',
+                'results' => $garage
+            ]); 
+        }*/
+        
         return response()->json([
 
             'success' => 'ok',
             'results' => $garage
 
         ]);
+    }
 
+    public function searchByParking($n_parking) {
+        $garages = Garage::where('n_parking', $n_parking)->get();
+        return response()->json([
+            'success' => 'ok',
+            'results' => $garages
+        ]);
     }
 }
