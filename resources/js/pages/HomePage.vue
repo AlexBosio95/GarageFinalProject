@@ -54,6 +54,15 @@
 
                 </div>
             </div>
+
+            <div class="col-12">
+                <div class="mb-3">
+                     <div class="form-check form-check-inline" v-for="(service, index) in services" :key="index">
+                        <input type="checkbox" class="form-check-input mr-2" :id="service.name" :value="service.id" v-model="selectedServices">
+                        <label :for="service.name" class="form-check-label">{{service.name}}</label>
+                     </div>
+                </div>
+            </div>
         </div>
         
         
@@ -126,7 +135,8 @@ export default {
                     { text: '5 Parking' , value: 5},
                 ]
             },
-        
+            services: [],
+            selectedServices: []
         }
     },
     methods: {
@@ -138,23 +148,36 @@ export default {
                 this.ArrayGarages = response.data.results.data;
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
+
+                console.log(response.data)
             });
         },
+        getAllServices() {
+            axios.get('/api/services')
+            .then(response => {
+                this.services = response.data.results;
+            })
+        },
         searchGarages(){
+
+
             axios.get('https://api.tomtom.com/search/2/geocode/' + this.selectValue + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')
             .then((response) => {
                 this.data = response.data.results;                
                 this.currentLat = this.data[0].position.lat;
                 this.currentLong = this.data[0].position.lon;
                 
-                
-                axios.get('/api/garages/' + this.currentRadius + '/' + this.currentLat + '/' + this.currentLong + '/' + this.currentParkingNumber)
+                if (this.selectedServices.length == 0) {
+                    this.selectedServices = 0
+                }
+
+                axios.get('/api/garages/' + this.currentRadius + '/' + this.currentLat + '/' + this.currentLong + '/' + this.currentParkingNumber + '/' + this.selectedServices)
                 .then(response => {
                     this.ArrayGarages = response.data.results;
+                    console.log(response.data.results)
                 })         
             });
         },
-
         selectCity(){
 
             if (this.searchText == '') {
@@ -172,6 +195,7 @@ export default {
     },
     mounted(){
         this.getAllGarages(1);
+        this.getAllServices();
     }
 }
 </script>

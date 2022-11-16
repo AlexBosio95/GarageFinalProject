@@ -20,6 +20,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('garages', 'Api\GarageController@index');
 Route::get('garages/{address}', 'Api\GarageController@search');
+Route::get('garages/{radius}/{lat}/{long}/{n_parking}/{services}', 'Api\GarageController@searchForRadius');
 
-
-Route::get('garages/{radius}/{lat}/{long}/{n_parking}', 'Api\GarageController@searchForRadius');
+Route::get('services', 'Api\ServicesController@index');

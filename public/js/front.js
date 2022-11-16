@@ -2014,7 +2014,9 @@ __webpack_require__.r(__webpack_exports__);
           text: '5 Parking',
           value: 5
         }]
-      }
+      },
+      services: [],
+      selectedServices: []
     };
   },
   methods: {
@@ -2028,34 +2030,46 @@ __webpack_require__.r(__webpack_exports__);
         _this.ArrayGarages = response.data.results.data;
         _this.currentPage = response.data.results.current_page;
         _this.lastPage = response.data.results.last_page;
+        console.log(response.data);
+      });
+    },
+    getAllServices: function getAllServices() {
+      var _this2 = this;
+      axios.get('/api/services').then(function (response) {
+        _this2.services = response.data.results;
       });
     },
     searchGarages: function searchGarages() {
-      var _this2 = this;
+      var _this3 = this;
       axios.get('https://api.tomtom.com/search/2/geocode/' + this.selectValue + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
-        _this2.data = response.data.results;
-        _this2.currentLat = _this2.data[0].position.lat;
-        _this2.currentLong = _this2.data[0].position.lon;
-        axios.get('/api/garages/' + _this2.currentRadius + '/' + _this2.currentLat + '/' + _this2.currentLong + '/' + _this2.currentParkingNumber).then(function (response) {
-          _this2.ArrayGarages = response.data.results;
+        _this3.data = response.data.results;
+        _this3.currentLat = _this3.data[0].position.lat;
+        _this3.currentLong = _this3.data[0].position.lon;
+        if (_this3.selectedServices.length == 0) {
+          _this3.selectedServices = 0;
+        }
+        axios.get('/api/garages/' + _this3.currentRadius + '/' + _this3.currentLat + '/' + _this3.currentLong + '/' + _this3.currentParkingNumber + '/' + _this3.selectedServices).then(function (response) {
+          _this3.ArrayGarages = response.data.results;
+          console.log(response.data.results);
         });
       });
     },
     selectCity: function selectCity() {
-      var _this3 = this;
+      var _this4 = this;
       if (this.searchText == '') {
         this.selectValue = '';
         this.addressArray = [];
         this.getAllGarages(1);
       } else {
         axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
-          _this3.addressArray = response.data.results;
+          _this4.addressArray = response.data.results;
         });
       }
     }
   },
   mounted: function mounted() {
     this.getAllGarages(1);
+    this.getAllServices();
   }
 });
 
@@ -2346,7 +2360,55 @@ var render = function render() {
         value: option.value
       }
     }, [_vm._v(_vm._s(option.text))]);
-  }), 0)])])]), _vm._v(" "), _c("button", {
+  }), 0)])]), _vm._v(" "), _c("div", {
+    staticClass: "col-12"
+  }, [_c("div", {
+    staticClass: "mb-3"
+  }, _vm._l(_vm.services, function (service, index) {
+    return _c("div", {
+      key: index,
+      staticClass: "form-check form-check-inline"
+    }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.selectedServices,
+        expression: "selectedServices"
+      }],
+      staticClass: "form-check-input mr-2",
+      attrs: {
+        type: "checkbox",
+        id: service.name
+      },
+      domProps: {
+        value: service.id,
+        checked: Array.isArray(_vm.selectedServices) ? _vm._i(_vm.selectedServices, service.id) > -1 : _vm.selectedServices
+      },
+      on: {
+        change: function change($event) {
+          var $$a = _vm.selectedServices,
+            $$el = $event.target,
+            $$c = $$el.checked ? true : false;
+          if (Array.isArray($$a)) {
+            var $$v = service.id,
+              $$i = _vm._i($$a, $$v);
+            if ($$el.checked) {
+              $$i < 0 && (_vm.selectedServices = $$a.concat([$$v]));
+            } else {
+              $$i > -1 && (_vm.selectedServices = $$a.slice(0, $$i).concat($$a.slice($$i + 1)));
+            }
+          } else {
+            _vm.selectedServices = $$c;
+          }
+        }
+      }
+    }), _vm._v(" "), _c("label", {
+      staticClass: "form-check-label",
+      attrs: {
+        "for": service.name
+      }
+    }, [_vm._v(_vm._s(service.name))])]);
+  }), 0)])]), _vm._v(" "), _c("button", {
     staticClass: "btn btn-primary w-100",
     on: {
       click: _vm.searchGarages

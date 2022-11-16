@@ -14,7 +14,8 @@ class GarageController extends Controller
 {
     public function index()
     {
-        $garages = Garage::with(['services'])->paginate(10);
+        $garages = Garage::with(['services'])->get();
+        //dd($garages);
 
         foreach ($garages as $garage) {
             if ($garage->cover) {
@@ -44,9 +45,8 @@ class GarageController extends Controller
 
     }
 
-    public function searchForRadius($radius, $lat, $long, $n_parking)
+    public function searchForRadius($radius, $lat, $long, $n_parking, $services)
     {
-        
         $latVar = 0;
         $longVar = 0;
 
@@ -77,11 +77,13 @@ class GarageController extends Controller
         $maxLong = $long + $longVar;
 
         
-        if($n_parking == 0) {
+        if($n_parking == 0 && $services == 0) {
             $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->get();
-        } else if ($n_parking > 0) {
-            $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->where('n_parking', $n_parking)->get();
+        } else if ($n_parking > 0 && count($services) > 0) {
+            $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->where('n_parking', $n_parking)->where()->get();
         }
+
+       
         
         
         return response()->json([
