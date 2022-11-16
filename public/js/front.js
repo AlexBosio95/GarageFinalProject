@@ -1978,7 +1978,7 @@ __webpack_require__.r(__webpack_exports__);
       currentLat: 0,
       currentLong: 0,
       currentRadius: 20000,
-      currentParkingNumber: 1,
+      currentParkingNumber: 0,
       data: [],
       ArrayRadius: [],
       addressArray: [],
@@ -2036,9 +2036,15 @@ __webpack_require__.r(__webpack_exports__);
         _this2.data = response.data.results;
         _this2.currentLat = _this2.data[0].position.lat;
         _this2.currentLong = _this2.data[0].position.lon;
-        axios.get('/api/garages/' + _this2.currentRadius + '/' + _this2.currentLat + '/' + _this2.currentLong).then(function (response) {
-          _this2.ArrayGarages = response.data.results;
-        });
+        if (_this2.currentParkingNumber != 0) {
+          axios.get('/api/garages/' + _this2.currentRadius + '/' + _this2.currentLat + '/' + _this2.currentLong).then(function (response) {
+            _this2.ArrayGarages = response.data.results;
+          });
+        } else {
+          axios.get('/api/garages/' + _this2.currentRadius + '/' + _this2.currentLat + '/' + _this2.currentLong).then(function (response) {
+            _this2.ArrayGarages = response.data.results;
+          });
+        }
       });
     },
     selectCity: function selectCity() {
@@ -2219,11 +2225,15 @@ var render = function render() {
   return _c("div", {
     staticClass: "container"
   }, [_c("h1", {
-    staticClass: "text-center"
-  }, [_vm._v("HomePage")]), _vm._v(" "), _c("div", {
-    staticClass: "row"
-  }), _vm._v(" "), _c("form", [_c("div", {
+    staticClass: "text-center mb-4"
+  }, [_vm._v("HomePage")]), _vm._v(" "), _c("form", {
+    staticClass: "pb-4"
+  }, [_c("div", {
     staticClass: "form-group"
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col"
   }, [_c("input", {
     directives: [{
       name: "model",
@@ -2247,13 +2257,18 @@ var render = function render() {
         _vm.searchText = $event.target.value;
       }, _vm.selectCity]
     }
-  }), _vm._v(" "), _vm.addressArray.length > 0 ? _c("select", {
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_vm.addressArray.length > 0 ? _c("div", {
+    staticClass: "input-group mb-3"
+  }, [_vm._m(0), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.selectValue,
       expression: "selectValue"
     }],
+    staticClass: "custom-select",
     attrs: {
       id: "address-suggestion"
     },
@@ -2274,10 +2289,14 @@ var render = function render() {
       domProps: {
         value: garage.address.freeformAddress
       }
-    }, [_vm._v("\n                    " + _vm._s(garage.address.freeformAddress) + "\n                ")]);
-  }), 0) : _vm._e()])]), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n                                " + _vm._s(garage.address.freeformAddress) + "\n                            ")]);
+  }), 0)]) : _vm._e()])])])]), _vm._v(" "), _c("h6", [_vm._v("Filter Selection")]), _vm._v(" "), _c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col"
+  }, [_c("div", {
     staticClass: "input-group mb-3"
-  }, [_vm._m(0), _vm._v(" "), _c("select", {
+  }, [_vm._m(1), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -2303,9 +2322,11 @@ var render = function render() {
         value: option.value
       }
     }, [_vm._v(_vm._s(option.text))]);
-  }), 0)]), _vm._v(" "), _c("div", {
+  }), 0)])]), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_c("div", {
     staticClass: "input-group mb-3"
-  }, [_vm._m(1), _vm._v(" "), _c("select", {
+  }, [_vm._m(2), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -2331,7 +2352,7 @@ var render = function render() {
         value: option.value
       }
     }, [_vm._v(_vm._s(option.text))]);
-  }), 0)]), _vm._v(" "), _c("button", {
+  }), 0)])])]), _vm._v(" "), _c("button", {
     staticClass: "btn btn-primary w-100",
     on: {
       click: _vm.searchGarages
@@ -2403,6 +2424,17 @@ var render = function render() {
   }), 0) : _vm._e()]);
 };
 var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "input-group-prepend"
+  }, [_c("label", {
+    staticClass: "input-group-text",
+    attrs: {
+      "for": "inputGroupSelect01"
+    }
+  }, [_vm._v("Select City")])]);
+}, function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {

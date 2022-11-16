@@ -1,46 +1,64 @@
 <template>
     <div class="container">
-        <h1 class="text-center">HomePage</h1>
+        <h1 class="text-center mb-4">HomePage</h1>
 
         <!-- Header navigation -->
 
-        <div class="row">
-
-        </div>
-        <form>
+        <!-- Select City or address -->
+        <form class="pb-4">
             <div class="form-group">
-                <input placeholder="Insert an address to start looking for your perfect garage" type="text" class="form-control" id="search-bar" aria-describedby="emailHelp"  v-model="searchText" @input="selectCity">
-
-                <select id="address-suggestion" v-if="addressArray.length > 0" v-model="selectValue">
-                    <option v-for="(garage, index) in addressArray" :key="index" :value="garage.address.freeformAddress" >
-                        {{garage.address.freeformAddress}}
-                    </option>
-                </select>
-
+                <div class="row">
+                    <div class="col">
+                        <input placeholder="Insert an address to start looking for your perfect garage" type="text" class="form-control" id="search-bar" aria-describedby="emailHelp"  v-model="searchText" @input="selectCity">
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3" v-if="addressArray.length > 0">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Select City</label>
+                            </div>
+                            <select class="custom-select" id="address-suggestion"  v-model="selectValue">
+                                <option v-for="(garage, index) in addressArray" :key="index" :value="garage.address.freeformAddress" >
+                                    {{garage.address.freeformAddress}}
+                                </option>
+                            </select>   
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
+
+        <!-- Filter selection -->
+
+        <h6>Filter Selection</h6>
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Select Radius</label>
+                    </div>
+                    <select class="custom-select" v-model="currentRadius">
+                        <option v-for="(option, index) in dataRadius.options" :key="index" :value="option.value">{{option.text}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Parking Number</label>
+                    </div>
+
+                    <select class="custom-select" v-model="currentParkingNumber">
+                        <option v-for="(option, index) in ParkingNumber.options" :key="index" :value="option.value">{{option.text}}</option>
+                    </select>
+
+                </div>
+            </div>
+        </div>
         
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Select Radius</label>
-            </div>
+        
 
-            <select class="custom-select" v-model="currentRadius">
-                <option v-for="(option, index) in dataRadius.options" :key="index" :value="option.value">{{option.text}}</option>
-            </select>
-
-        </div>
-
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Parking Number</label>
-            </div>
-
-            <select class="custom-select" v-model="currentParkingNumber">
-                <option v-for="(option, index) in ParkingNumber.options" :key="index" :value="option.value">{{option.text}}</option>
-            </select>
-
-        </div>
+        
 
         <button class="btn btn-primary w-100" @click="searchGarages">Search</button>
 
@@ -83,7 +101,7 @@ export default {
             currentLat: 0,
             currentLong: 0,
             currentRadius: 20000,
-            currentParkingNumber: 1,
+            currentParkingNumber: 0,
             data: [],
             ArrayRadius: [],
             addressArray: [],
@@ -132,10 +150,22 @@ export default {
                 this.currentLat = this.data[0].position.lat;
                 this.currentLong = this.data[0].position.lon;
                 
-                axios.get('/api/garages/' + this.currentRadius + '/' + this.currentLat + '/' + this.currentLong)
-                .then(response => {
+                
+
+                if (this.currentParkingNumber != 0) {
+                    axios.get('/api/garages/' + this.currentRadius + '/' + this.currentLat + '/' + this.currentLong)
+                    .then(response => {
                     this.ArrayGarages = response.data.results;
                 })
+
+                } else {
+
+                    axios.get('/api/garages/' + this.currentRadius + '/' + this.currentLat + '/' + this.currentLong)
+                    .then(response => {
+                    this.ArrayGarages = response.data.results;
+                })
+
+                }
             });
         },
 
