@@ -44,8 +44,9 @@ class GarageController extends Controller
 
     }
 
-    public function searchForRadius($radius, $lat, $long)
+    public function searchForRadius($radius, $lat, $long, $n_parking)
     {
+        
         $latVar = 0;
         $longVar = 0;
 
@@ -75,31 +76,19 @@ class GarageController extends Controller
         $minLong = $long - $longVar;
         $maxLong = $long + $longVar;
 
-
-        $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->get();
         
-        /*if($n_parking) {
+        if($n_parking == 0) {
+            $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->get();
+        } else if ($n_parking > 0) {
             $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->where('n_parking', $n_parking)->get();
-
-            return response()->json([
-                'success' => 'top',
-                'results' => $garage
-            ]); 
-        }*/
+        }
+        
         
         return response()->json([
 
             'success' => 'ok',
             'results' => $garage
 
-        ]);
-    }
-
-    public function searchByParking($n_parking) {
-        $garages = Garage::where('n_parking', $n_parking)->get();
-        return response()->json([
-            'success' => 'ok',
-            'results' => $garages
         ]);
     }
 }

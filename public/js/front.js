@@ -2036,15 +2036,9 @@ __webpack_require__.r(__webpack_exports__);
         _this2.data = response.data.results;
         _this2.currentLat = _this2.data[0].position.lat;
         _this2.currentLong = _this2.data[0].position.lon;
-        if (_this2.currentParkingNumber != 0) {
-          axios.get('/api/garages/' + _this2.currentRadius + '/' + _this2.currentLat + '/' + _this2.currentLong).then(function (response) {
-            _this2.ArrayGarages = response.data.results;
-          });
-        } else {
-          axios.get('/api/garages/' + _this2.currentRadius + '/' + _this2.currentLat + '/' + _this2.currentLong).then(function (response) {
-            _this2.ArrayGarages = response.data.results;
-          });
-        }
+        axios.get('/api/garages/' + _this2.currentRadius + '/' + _this2.currentLat + '/' + _this2.currentLong + '/' + _this2.currentParkingNumber).then(function (response) {
+          _this2.ArrayGarages = response.data.results;
+        });
       });
     },
     selectCity: function selectCity() {
