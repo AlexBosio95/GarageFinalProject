@@ -83,7 +83,7 @@
                 {{$garage->n_parking}}
             </p>
 
-            @if (count($garage->services) > 1)
+            @if (count($garage->services) > 0)
                 <p class="card-text">
                     <span class="text-primary">Services:</span>
                     @foreach ($garage->services as $service)
