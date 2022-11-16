@@ -2030,7 +2030,6 @@ __webpack_require__.r(__webpack_exports__);
         _this.ArrayGarages = response.data.results.data;
         _this.currentPage = response.data.results.current_page;
         _this.lastPage = response.data.results.last_page;
-        console.log(response.data);
       });
     },
     getAllServices: function getAllServices() {
@@ -18554,7 +18553,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })

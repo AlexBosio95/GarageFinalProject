@@ -14,14 +14,14 @@ class GarageController extends Controller
 {
     public function index()
     {
-        $garages = Garage::with(['services'])->get();
+        $garages = Garage::with(['services'])->paginate(10);
         //dd($garages);
 
         foreach ($garages as $garage) {
-            if ($garage->cover) {
-                $garage->cover = asset('storage/' . $garage->cover);
+            if ($garage->image) {
+                $garage->image = asset('storage/' . $garage->image);
             } else {
-                $garage->cover = asset('img/no_image.jpg');
+                $garage->image = asset('img/no_image.jpg');
             }
         }
 
@@ -76,14 +76,33 @@ class GarageController extends Controller
         $minLong = $long - $longVar;
         $maxLong = $long + $longVar;
 
-        
+        // caso in cui non è selezionato ne il parcheggio ne i servizi
         if($n_parking == 0 && $services == 0) {
             $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->get();
-        } else if ($n_parking > 0 && count($services) > 0) {
+        } 
+        
+        
+
+        // caso in cui è selezionato sia il parcheggio che i servizi
+        else if ($n_parking > 0 && count(array($services)) > 1) {
+            $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->where('n_parking', $n_parking)
+                        ->with(['services'])->whereHas('services', function($query) use ($services) {
+                        $query->where('service_id', $services);
+                        })->get();
+            
+        } 
+        
+        // caso in cui è selezionato solo il parcheggio
+        elseif ($n_parking > 0) {
             $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->where('n_parking', $n_parking)->get();
         }
 
-       
+        // caso in cui sono selezionati solo i servizi
+        elseif (count(array($services)) > 1) {
+            $garage = Garage::with(['services'])->whereHas('services', function($query) use ($services) {
+                    $query->where('service_id', $services);
+                    })->get();
+        }
         
         
         return response()->json([
@@ -93,6 +112,8 @@ class GarageController extends Controller
 
         ]);
     }
+
+
 
     public function prova($services) {
         $garage = Garage::with(['services'])->whereHas('services', function($query) use ($services) {

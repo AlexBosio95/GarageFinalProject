@@ -57,10 +57,10 @@
 
             <div class="col-12">
                 <div class="mb-3">
-                     <div class="form-check form-check-inline" v-for="(service, index) in services" :key="index">
+                    <div class="form-check form-check-inline" v-for="(service, index) in services" :key="index">
                         <input type="checkbox" class="form-check-input mr-2" :id="service.name" :value="service.id" v-model="selectedServices">
                         <label :for="service.name" class="form-check-label">{{service.name}}</label>
-                     </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -140,6 +140,7 @@ export default {
         }
     },
     methods: {
+        
         getAllGarages(page) {
             axios.get('/api/garages', {
                 params: { page: page }
@@ -148,16 +149,16 @@ export default {
                 this.ArrayGarages = response.data.results.data;
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
-
-                console.log(response.data)
             });
         },
+
         getAllServices() {
             axios.get('/api/services')
             .then(response => {
                 this.services = response.data.results;
             })
         },
+
         searchGarages(){
 
 
