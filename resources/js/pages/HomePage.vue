@@ -4,6 +4,12 @@
         <form>
             <div class="form-group">
                 <input placeholder="Insert an address to start looking for your perfect garage" type="text" class="form-control" id="search-bar" aria-describedby="emailHelp" v-model="searchText" @input="searchGarages">
+
+                <select id="address-suggestion" v-if="addressArray.length > 0">
+                    <option v-for="(garage, index) in addressArray" :key="index" :value="garage.address.freeformAddress">
+                        {{garage.address.freeformAddress}}
+                    </option>
+                </select>
             </div>
         </form>
         
@@ -17,7 +23,7 @@
             </select>
         </div>
 
-        <button @click="getCityData()" >Search</button>
+        <!-- <button @click="getCityData()" >Search</button> -->
 
         <nav aria-label="Page navigation example">
             <ul class="pagination">
@@ -56,7 +62,7 @@ export default {
             currentRadius: 20000,
             data: [],
             ArrayRadius: [],
-
+            addressArray: []
         }
     },
     methods: {
@@ -70,53 +76,27 @@ export default {
                 this.lastPage = response.data.results.last_page;
             });
         },
-
         searchGarages(){
-            axios.get('/api/garages/' + this.searchText)
+            axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')
             .then((response) => {
-                this.ArrayGarages = [];
-                this.ArrayGarages = response.data.results;
+                this.data = response.data.results;
+
+                this.addressArray = this.data;
+                //console.log(this.addressArray)
+                
+                this.currentLat = this.data[0].position.lat;
+                this.currentLong = this.data[0].position.lon;
+
+                axios.get('/api/garages/' + this.currentRadius + '/' + this.currentLat + '/' + this.currentLong)
+                .then(response => {
+                    console.log(response.data);
+                    this.ArrayGarages = response.data.results;
+                })
 
                 if (this.searchText == '') {
                     this.getAllGarages(1);
                 }
             });
-        },
-        getCityData(){
-
-            //reset Array
-            this.ArrayGarages = [];
-            this.ArrayRadius = [];
-            this.data = [];
-
-            // Recupriamo i dati relativi alla ricerca dell'utente
-            axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&limit=1&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')
-                .then((response) => {
-                this.data = response.data.results;
-                this.data.forEach(element => {
-                    this.currentLat = element.position.lat;
-                    this.currentLong = element.position.lon;
-                    })
-
-                    // recupero il raggio per la ricerca
-                    axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?lat='+ this.currentLat +'&lon='+ this.currentLong +'&radius='+ this.currentRadius +'&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM')
-                        .then((response) => {
-                            this.ArrayRadius = response.data.results;
-
-                            this.ArrayRadius.forEach(element => {
-                                console.log(element.position);
-                            });
-                        });
-
-                    //Chaiamta al Backend per il recupero dei garages inerenti 
-                    // axios.get('/api/garages/' + this.currentRadius + '/' + this.currentLat + '/' + this.currentLong)
-                    //     .then((response) => {
-                    //     console.log(response);
-                    //     });
-            });
-
-
-            
         }
     },
     mounted(){

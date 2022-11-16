@@ -74,8 +74,6 @@ class GarageController extends Controller
         $minLong = $long - $longVar;
         $maxLong = $long + $longVar;
 
-        dd($minLat, $maxLat);
-
 
         $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->get();
 
