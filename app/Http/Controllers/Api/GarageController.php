@@ -32,7 +32,7 @@ class GarageController extends Controller
     public function search($address)
     {
 
-        $garage = Garage::where('address', 'like', '%' . $address . '%')->get();
+        $garage = Garage::where('address', 'like', '%' . $address . '%')->get()->paginate(10);
 
         return response()->json([
 
@@ -49,30 +49,24 @@ class GarageController extends Controller
         $longVar = 0;
 
         switch ($radius) {
-            case '20000':
-                $latVar = 0.1799;
-                $longVar = 0.2353;
-
-                break;
-
             case '50000':
                 $latVar = 0.44975;
                 $longVar = 0.58823;
-                
+
                 break;
-            
+
             default:
-                $latVar = 0.1799;
-                $longVar = 0.2353;
+                $latVar = 0.17990;
+                $longVar = 0.23530;
 
                 break;
         }
 
-        $minLat = $lat - $latVar;
-        $maxLat = $lat + $latVar;
+        $minLat = round($lat - $latVar, 5);
+        $maxLat = round($lat + $latVar, 5);
 
-        $minLong = $long - $longVar;
-        $maxLong = $long + $longVar;
+        $minLong = round($long - $longVar, 5);
+        $maxLong = round($long + $longVar, 5);
 
 
         $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->get();
@@ -80,8 +74,8 @@ class GarageController extends Controller
         return response()->json([
 
             'success' => 'ok',
-            'results' => $garage
-
+            'results' => $garage,
+            'debug' => [$minLat, $maxLat, $minLong, $maxLong]
         ]);
 
     }
