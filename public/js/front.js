@@ -2267,7 +2267,7 @@ var render = function render() {
     }
   })]), _vm._v(" "), _c("div", {
     staticClass: "col"
-  }, [_vm.addressArray.length > 0 ? _c("div", {
+  }, [_c("div", {
     staticClass: "input-group mb-3"
   }, [_vm._m(0), _vm._v(" "), _c("select", {
     directives: [{
@@ -2298,7 +2298,7 @@ var render = function render() {
         value: garage.address.freeformAddress
       }
     }, [_vm._v("\n                                " + _vm._s(garage.address.freeformAddress) + "\n                            ")]);
-  }), 0)]) : _vm._e()])])])]), _vm._v(" "), _c("h6", [_vm._v("Filter Selection")]), _vm._v(" "), _c("div", {
+  }), 0)])])])])]), _vm._v(" "), _c("h6", [_vm._v("Filter Selection")]), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col"
@@ -2449,7 +2449,7 @@ var render = function render() {
         return _vm.getAllGarages(_vm.currentPage + 1);
       }
     }
-  }, [_vm._v("Next")])])])])]), _vm._v(" "), _vm.ArrayGarages.length > 0 ? _c("div", {
+  }, [_vm._v("Next")])])])])]), _vm._v(" "), _c("div", {
     staticClass: "row row-cols-4 mt-4"
   }, _vm._l(_vm.ArrayGarages, function (garage, index) {
     return _c("div", {
@@ -2477,7 +2477,7 @@ var render = function render() {
         href: "#"
       }
     }, [_vm._v("View more")])])])]);
-  }), 0) : _vm._e()]);
+  }), 0)]);
 };
 var staticRenderFns = [function () {
   var _vm = this,

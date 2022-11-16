@@ -12,7 +12,7 @@
                         <input placeholder="Insert an address to start looking for your perfect garage" type="text" class="form-control" id="search-bar" aria-describedby="emailHelp"  v-model="searchText" @input="selectCity">
                     </div>
                     <div class="col">
-                        <div class="input-group mb-3" v-if="addressArray.length > 0">
+                        <div class="input-group mb-3" >
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="inputGroupSelect01">Select City</label>
                             </div>
@@ -81,7 +81,7 @@
                 </ul>
             </nav>
         </div>
-        <div class="row row-cols-4 mt-4" v-if="ArrayGarages.length > 0">
+        <div class="row row-cols-4 mt-4">
             <div class="col" v-for="(garage, index) in ArrayGarages" :key="index">
                 <div class="card m-2">
                     <img :src="garage.image" class="card-img-top" :alt="garage.title">

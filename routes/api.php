@@ -23,3 +23,5 @@ Route::get('garages/{address}', 'Api\GarageController@search');
 Route::get('garages/{radius}/{lat}/{long}/{n_parking}/{services}', 'Api\GarageController@searchForRadius');
 
 Route::get('services', 'Api\ServicesController@index');
+
+Route::get('prova/{services}', 'Api\GarageController@prova');

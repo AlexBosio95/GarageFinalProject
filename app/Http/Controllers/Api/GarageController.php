@@ -80,12 +80,26 @@ class GarageController extends Controller
         if($n_parking == 0 && $services == 0) {
             $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->get();
         } else if ($n_parking > 0 && count($services) > 0) {
-            $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->where('n_parking', $n_parking)->where()->get();
+            $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->where('n_parking', $n_parking)->get();
         }
 
        
         
         
+        return response()->json([
+
+            'success' => 'ok',
+            'results' => $garage
+
+        ]);
+    }
+
+    public function prova($services) {
+        $garage = Garage::with(['services'])->whereHas('services', function($query) use ($services) {
+            $query->where('service_id', $services);
+        })->get();
+
+
         return response()->json([
 
             'success' => 'ok',

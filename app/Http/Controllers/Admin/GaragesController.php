@@ -230,10 +230,9 @@ class GaragesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($slug)
+    public function destroy(Garage $garage)
     {
-        $garage= Garage::find($slug);
-
+        
         $garage->services()->sync([]);
 
         if ($garage->image){
