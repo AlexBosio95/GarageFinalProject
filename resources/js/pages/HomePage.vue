@@ -1,11 +1,17 @@
 <template>
     <div class="container">
         <h1 class="text-center">HomePage</h1>
+
+        <!-- Header navigation -->
+
+        <div class="row">
+
+        </div>
         <form>
             <div class="form-group">
                 <input placeholder="Insert an address to start looking for your perfect garage" type="text" class="form-control" id="search-bar" aria-describedby="emailHelp"  v-model="searchText" @input="selectCity">
 
-                <select id="address-suggestion" v-if="addressArray.length > 0" v-model="selectValue" @change="searchGarages" >
+                <select id="address-suggestion" v-if="addressArray.length > 0" v-model="selectValue">
                     <option v-for="(garage, index) in addressArray" :key="index" :value="garage.address.freeformAddress" >
                         {{garage.address.freeformAddress}}
                     </option>
@@ -25,12 +31,29 @@
 
         </div>
 
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item" :class="(currentPage == 1) ? 'disabled': '' "><a class="page-link" href="#" @click.prevent="getAllGarages(currentPage - 1)">Previous</a></li>
-                <li class="page-item" :class="(currentPage == lastPage) ? 'disabled': '' "><a class="page-link" href="#" @click.prevent="getAllGarages(currentPage + 1)">Next</a></li>
-            </ul>
-        </nav>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Parking Number</label>
+            </div>
+
+            <select class="custom-select" v-model="currentParkingNumber">
+                <option v-for="(option, index) in ParkingNumber.options" :key="index" :value="option.value">{{option.text}}</option>
+            </select>
+
+        </div>
+
+        <button class="btn btn-primary w-100" @click="searchGarages">Search</button>
+
+        <!-- Result Garages -->
+
+        <div class="mt-4">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item" :class="(currentPage == 1) ? 'disabled': '' "><a class="page-link" href="#" @click.prevent="getAllGarages(currentPage - 1)">Previous</a></li>
+                    <li class="page-item" :class="(currentPage == lastPage) ? 'disabled': '' "><a class="page-link" href="#" @click.prevent="getAllGarages(currentPage + 1)">Next</a></li>
+                </ul>
+            </nav>
+        </div>
         <div class="row row-cols-4 mt-4" v-if="ArrayGarages.length > 0">
             <div class="col" v-for="(garage, index) in ArrayGarages" :key="index">
                 <div class="card m-2">
@@ -60,6 +83,7 @@ export default {
             currentLat: 0,
             currentLong: 0,
             currentRadius: 20000,
+            currentParkingNumber: 1,
             data: [],
             ArrayRadius: [],
             addressArray: [],
@@ -70,6 +94,18 @@ export default {
                 options: [
                     { text: '20 km' , value: 20000},
                     { text: '50 km' , value: 50000}
+                ]
+            },
+            ParkingNumber: 
+            {
+                selected: 0,
+                options: [
+                    { text: 'All' , value: 0},
+                    { text: '1 Parking' , value: 1},
+                    { text: '2 Parking' , value: 2},
+                    { text: '3 Parking' , value: 3},
+                    { text: '4 Parking' , value: 4},
+                    { text: '5 Parking' , value: 5},
                 ]
             },
         

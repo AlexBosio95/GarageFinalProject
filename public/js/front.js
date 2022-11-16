@@ -1978,6 +1978,7 @@ __webpack_require__.r(__webpack_exports__);
       currentLat: 0,
       currentLong: 0,
       currentRadius: 20000,
+      currentParkingNumber: 1,
       data: [],
       ArrayRadius: [],
       addressArray: [],
@@ -1990,6 +1991,28 @@ __webpack_require__.r(__webpack_exports__);
         }, {
           text: '50 km',
           value: 50000
+        }]
+      },
+      ParkingNumber: {
+        selected: 0,
+        options: [{
+          text: 'All',
+          value: 0
+        }, {
+          text: '1 Parking',
+          value: 1
+        }, {
+          text: '2 Parking',
+          value: 2
+        }, {
+          text: '3 Parking',
+          value: 3
+        }, {
+          text: '4 Parking',
+          value: 4
+        }, {
+          text: '5 Parking',
+          value: 5
         }]
       }
     };
@@ -2197,7 +2220,9 @@ var render = function render() {
     staticClass: "container"
   }, [_c("h1", {
     staticClass: "text-center"
-  }, [_vm._v("HomePage")]), _vm._v(" "), _c("form", [_c("div", {
+  }, [_vm._v("HomePage")]), _vm._v(" "), _c("div", {
+    staticClass: "row"
+  }), _vm._v(" "), _c("form", [_c("div", {
     staticClass: "form-group"
   }, [_c("input", {
     directives: [{
@@ -2233,7 +2258,7 @@ var render = function render() {
       id: "address-suggestion"
     },
     on: {
-      change: [function ($event) {
+      change: function change($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
           return o.selected;
         }).map(function (o) {
@@ -2241,7 +2266,7 @@ var render = function render() {
           return val;
         });
         _vm.selectValue = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
-      }, _vm.searchGarages]
+      }
     }
   }, _vm._l(_vm.addressArray, function (garage, index) {
     return _c("option", {
@@ -2278,7 +2303,42 @@ var render = function render() {
         value: option.value
       }
     }, [_vm._v(_vm._s(option.text))]);
-  }), 0)]), _vm._v(" "), _c("nav", {
+  }), 0)]), _vm._v(" "), _c("div", {
+    staticClass: "input-group mb-3"
+  }, [_vm._m(1), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.currentParkingNumber,
+      expression: "currentParkingNumber"
+    }],
+    staticClass: "custom-select",
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.currentParkingNumber = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
+    }
+  }, _vm._l(_vm.ParkingNumber.options, function (option, index) {
+    return _c("option", {
+      key: index,
+      domProps: {
+        value: option.value
+      }
+    }, [_vm._v(_vm._s(option.text))]);
+  }), 0)]), _vm._v(" "), _c("button", {
+    staticClass: "btn btn-primary w-100",
+    on: {
+      click: _vm.searchGarages
+    }
+  }, [_vm._v("Search")]), _vm._v(" "), _c("div", {
+    staticClass: "mt-4"
+  }, [_c("nav", {
     attrs: {
       "aria-label": "Page navigation example"
     }
@@ -2312,7 +2372,7 @@ var render = function render() {
         return _vm.getAllGarages(_vm.currentPage + 1);
       }
     }
-  }, [_vm._v("Next")])])])]), _vm._v(" "), _vm.ArrayGarages.length > 0 ? _c("div", {
+  }, [_vm._v("Next")])])])])]), _vm._v(" "), _vm.ArrayGarages.length > 0 ? _c("div", {
     staticClass: "row row-cols-4 mt-4"
   }, _vm._l(_vm.ArrayGarages, function (garage, index) {
     return _c("div", {
@@ -2353,6 +2413,17 @@ var staticRenderFns = [function () {
       "for": "inputGroupSelect01"
     }
   }, [_vm._v("Select Radius")])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "input-group-prepend"
+  }, [_c("label", {
+    staticClass: "input-group-text",
+    attrs: {
+      "for": "inputGroupSelect01"
+    }
+  }, [_vm._v("Parking Number")])]);
 }];
 render._withStripped = true;
 
