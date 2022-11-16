@@ -1981,7 +1981,17 @@ __webpack_require__.r(__webpack_exports__);
       data: [],
       ArrayRadius: [],
       addressArray: [],
-      selectValue: ''
+      selectValue: '',
+      dataRadius: {
+        selected: 20000,
+        options: [{
+          text: '20 km',
+          value: 20000
+        }, {
+          text: '50 km',
+          value: 50000
+        }]
+      }
     };
   },
   methods: {
@@ -2243,23 +2253,32 @@ var render = function render() {
   }), 0) : _vm._e()])]), _vm._v(" "), _c("div", {
     staticClass: "input-group mb-3"
   }, [_vm._m(0), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.currentRadius,
+      expression: "currentRadius"
+    }],
     staticClass: "custom-select",
-    attrs: {
-      id: "inputGroupSelect01"
-    },
     on: {
-      change: _vm.currentRadius
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.currentRadius = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
     }
-  }, [_c("option", {
-    attrs: {
-      selected: "",
-      value: "20000"
-    }
-  }, [_vm._v("20 km")]), _vm._v(" "), _c("option", {
-    attrs: {
-      value: "50000"
-    }
-  }, [_vm._v("50 km")])])]), _vm._v(" "), _c("nav", {
+  }, _vm._l(_vm.dataRadius.options, function (option, index) {
+    return _c("option", {
+      key: index,
+      domProps: {
+        value: option.value
+      }
+    }, [_vm._v(_vm._s(option.text))]);
+  }), 0)]), _vm._v(" "), _c("nav", {
     attrs: {
       "aria-label": "Page navigation example"
     }

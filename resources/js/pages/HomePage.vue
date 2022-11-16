@@ -18,10 +18,11 @@
             <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">Select Radius</label>
             </div>
-            <select class="custom-select" id="inputGroupSelect01" @change="currentRadius">
-                <option selected value="20000">20 km</option>
-                <option value="50000">50 km</option>
+
+            <select class="custom-select" v-model="currentRadius">
+                <option v-for="(option, index) in dataRadius.options" :key="index" :value="option.value">{{option.text}}</option>
             </select>
+
         </div>
 
         <nav aria-label="Page navigation example">
@@ -62,7 +63,16 @@ export default {
             data: [],
             ArrayRadius: [],
             addressArray: [],
-            selectValue: ''
+            selectValue: '',
+            dataRadius: 
+            {
+                selected: 20000,
+                options: [
+                    { text: '20 km' , value: 20000},
+                    { text: '50 km' , value: 50000}
+                ]
+            },
+        
         }
     },
     methods: {
@@ -106,9 +116,6 @@ export default {
                     this.addressArray = response.data.results;
                 });
             }
-
-
-            
         }
     },
     mounted(){
