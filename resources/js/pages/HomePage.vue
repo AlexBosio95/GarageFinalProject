@@ -168,7 +168,7 @@ export default {
         },
 
         searchGarages(){
-
+            
             axios.get('https://api.tomtom.com/search/2/geocode/' + this.selectValue + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')
             .then((response) => {
                 this.data = response.data.results;                
@@ -176,14 +176,17 @@ export default {
                 this.currentLong = this.data[0].position.lon;
                 
                 if (this.selectedServices.length == 0) {
-                    this.selectedServices = 0
+                    this.selectedServices.push(0);
                 }
 
                 axios.get('/api/garages/' + this.currentRadius + '/' + this.currentLat + '/' + this.currentLong + '/' + this.currentParkingNumber + '/' + this.selectedServices)
                 .then(response => {
                     this.ArrayGarages = response.data.results;
-                    this.selectedServices = [];
-                })         
+                    if (this.selectedServices.includes(0)) { 
+                        this.selectedServices.splice(0, 1);
+                    }
+                })
+
             });
         },
         selectCity(){
@@ -196,7 +199,7 @@ export default {
                 axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')
                 .then((response) => {
                     this.addressArray = response.data.results;
-                    
+
                 });
             }
         }

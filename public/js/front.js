@@ -2045,11 +2045,13 @@ __webpack_require__.r(__webpack_exports__);
         _this3.currentLat = _this3.data[0].position.lat;
         _this3.currentLong = _this3.data[0].position.lon;
         if (_this3.selectedServices.length == 0) {
-          _this3.selectedServices = 0;
+          _this3.selectedServices.push(0);
         }
         axios.get('/api/garages/' + _this3.currentRadius + '/' + _this3.currentLat + '/' + _this3.currentLong + '/' + _this3.currentParkingNumber + '/' + _this3.selectedServices).then(function (response) {
           _this3.ArrayGarages = response.data.results;
-          _this3.selectedServices = [];
+          if (_this3.selectedServices.includes(0)) {
+            _this3.selectedServices.splice(0, 1);
+          }
         });
       });
     },

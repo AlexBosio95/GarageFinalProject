@@ -70,11 +70,13 @@ class GarageController extends Controller
                 break;
         }
 
+        
         $minLat = $lat - $latVar;
         $maxLat = $lat + $latVar;
-
+        
         $minLong = $long - $longVar;
         $maxLong = $long + $longVar;
+        
 
         // caso in cui non è selezionato ne il parcheggio ne i servizi
         if($n_parking == 0 && $services == 0) {
