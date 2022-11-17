@@ -101,7 +101,7 @@ class GarageController extends Controller
         elseif ($services != 0) {
             $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])
                     ->with(['services'])->whereHas('services', function($query) use ($services) {
-                        $query->where('service_id', $services);
+                        $query->where('service_id', $services); 
                     })->paginate(10);
         }
         

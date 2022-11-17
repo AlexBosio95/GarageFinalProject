@@ -5,27 +5,33 @@
         <!-- Header navigation -->
 
         <!-- Select City or address -->
-        <form class="pb-4">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col">
-                        <input placeholder="Insert an address to start looking for your perfect garage" type="text" class="form-control" id="search-bar" aria-describedby="emailHelp"  v-model="searchText" @input="selectCity">
-                    </div>
-                    <div class="col">
-                        <div class="input-group mb-3" >
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Select City</label>
-                            </div>
-                            <select class="custom-select" id="address-suggestion" v-model="selectValue">
-                                <option v-for="(garage, index) in addressArray" :key="index" :value="garage.address.freeformAddress" >
-                                    {{garage.address.freeformAddress}}
-                                </option>
-                            </select>   
+        
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <input placeholder="Insert an address to start looking for your perfect garage" type="text" class="form-control" id="search-bar" aria-describedby="emailHelp"  v-model="searchText" @input="selectCity">
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3" >
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Select City</label>
                         </div>
+                        <select class="custom-select" id="address-suggestion" v-model="selectValue">
+                            <option selected disabled value="">Select your address</option>
+                            <option v-for="(garage, index) in addressArray" :key="index" :value="garage.address.freeformAddress" >
+                                {{garage.address.freeformAddress}}
+                            </option>
+                        </select>   
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
+        
+
+        <div v-if="alertAddress" class="alert alert-danger" role="alert">
+            {{alertAddress}}
+        </div>
+
 
         <!-- Filter selection -->
 
@@ -75,6 +81,7 @@
 
         <!-- Result Garages -->
 
+
         <div class="mt-4">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
@@ -83,6 +90,11 @@
                 </ul>
             </nav>
         </div>
+
+        <div class="alert alert-danger" :class="{ 'd-none' : isFull }"  role="alert">
+            Error
+        </div>
+
         <div class="row row-cols-4 mt-4">
             <div class="col" v-for="(garage, index) in (ArrayGarages.length == 0) ? AllArrayGarages : ArrayGarages" :key="index">
                 <div class="card m-2">
@@ -102,6 +114,8 @@
                 </div>
             </div>
         </div>
+
+
     </div>
 
 </template>
@@ -124,6 +138,8 @@ export default {
             ArrayRadius: [],
             addressArray: [],
             selectValue: '',
+            isFull: true,
+            alertAddress: null,
             dataRadius: 
             {
                 selected: 20000,
@@ -149,6 +165,7 @@ export default {
         }
     },
     methods: {
+        
 
         nextPage(page){
             
@@ -191,33 +208,52 @@ export default {
 
         searchGarages(page){
             this.AllArrayGarages = [];
+            this.alertAddress = null;
+            this.isFull = true
 
-            axios.get('https://api.tomtom.com/search/2/geocode/' + this.selectValue + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')
-            .then((response) => {
-                this.data = response.data.results;                
-                this.currentLat = this.data[0].position.lat;
-                this.currentLong = this.data[0].position.lon;
+            if (this.selectValue != '') {
                 
-                if (this.selectedServices.length == 0) {
-                    this.selectedServices.push(0);
-                }
+                axios.get('https://api.tomtom.com/search/2/geocode/' + this.selectValue + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')
+                    .then((response) => {
+                        this.data = response.data.results;                
+                        this.currentLat = this.data[0].position.lat;
+                        this.currentLong = this.data[0].position.lon;
+                        
+                        if (this.selectedServices.length == 0) {
+                            this.selectedServices.push(0);
+                        }
+        
+                        axios.get('/api/garages/' + this.currentRadius + '/' + this.currentLat + '/' + this.currentLong + '/' + this.currentParkingNumber + '/' + this.selectedServices, {
+                            params: { page: page }
+                            })
+                            .then(response => {
+                                this.ArrayGarages = response.data.results.data;
+                                this.currentPage = response.data.results.current_page;
+                                this.lastPage = response.data.results.last_page;
+            
+                                console.log(response.data.results);
+            
+                                if (this.selectedServices.includes(0)) { 
+                                    this.selectedServices.splice(0, 1);
+                                }
 
-                axios.get('/api/garages/' + this.currentRadius + '/' + this.currentLat + '/' + this.currentLong + '/' + this.currentParkingNumber + '/' + this.selectedServices, {
-                params: { page: page }
-                })
-                .then(response => {
-                    this.ArrayGarages = response.data.results.data;
-                    this.currentPage = response.data.results.current_page;
-                    this.lastPage = response.data.results.last_page;
+                                if (this.ArrayGarages.length == 0) {
+                                    this.isFull = false
+                                }
+                            })
+        
+                    })
 
-                    console.log(response.data.results);
+                    .catch((error) => {
+                        console.log(error);
 
-                    if (this.selectedServices.includes(0)) { 
-                        this.selectedServices.splice(0, 1);
-                    }
-                })
+                    })
 
-            });
+            } else {
+                this.alertAddress = 'Address is required !';
+
+            }
+
         },
         selectCity(){
 
@@ -238,7 +274,17 @@ export default {
     mounted(){
         this.getAllGarages(1);
         this.getAllServices();
-    }
+    },
+
+    // computed:{
+    //     isError(){
+    //         if (this.ArrayGarages.length == 0 || this.AllArrayGarages.length == 0) {
+    //             return 'd-none'
+    //         } else {
+    //             return ''
+    //         }
+    //     },
+    // }
 }
 </script>
 

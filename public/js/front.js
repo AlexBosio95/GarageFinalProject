@@ -1984,6 +1984,8 @@ __webpack_require__.r(__webpack_exports__);
       ArrayRadius: [],
       addressArray: [],
       selectValue: '',
+      isFull: true,
+      alertAddress: null,
       dataRadius: {
         selected: 20000,
         options: [{
@@ -2060,27 +2062,38 @@ __webpack_require__.r(__webpack_exports__);
     searchGarages: function searchGarages(page) {
       var _this3 = this;
       this.AllArrayGarages = [];
-      axios.get('https://api.tomtom.com/search/2/geocode/' + this.selectValue + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
-        _this3.data = response.data.results;
-        _this3.currentLat = _this3.data[0].position.lat;
-        _this3.currentLong = _this3.data[0].position.lon;
-        if (_this3.selectedServices.length == 0) {
-          _this3.selectedServices.push(0);
-        }
-        axios.get('/api/garages/' + _this3.currentRadius + '/' + _this3.currentLat + '/' + _this3.currentLong + '/' + _this3.currentParkingNumber + '/' + _this3.selectedServices, {
-          params: {
-            page: page
+      this.alertAddress = null;
+      this.isFull = true;
+      if (this.selectValue != '') {
+        axios.get('https://api.tomtom.com/search/2/geocode/' + this.selectValue + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
+          _this3.data = response.data.results;
+          _this3.currentLat = _this3.data[0].position.lat;
+          _this3.currentLong = _this3.data[0].position.lon;
+          if (_this3.selectedServices.length == 0) {
+            _this3.selectedServices.push(0);
           }
-        }).then(function (response) {
-          _this3.ArrayGarages = response.data.results.data;
-          _this3.currentPage = response.data.results.current_page;
-          _this3.lastPage = response.data.results.last_page;
-          console.log(response.data.results);
-          if (_this3.selectedServices.includes(0)) {
-            _this3.selectedServices.splice(0, 1);
-          }
+          axios.get('/api/garages/' + _this3.currentRadius + '/' + _this3.currentLat + '/' + _this3.currentLong + '/' + _this3.currentParkingNumber + '/' + _this3.selectedServices, {
+            params: {
+              page: page
+            }
+          }).then(function (response) {
+            _this3.ArrayGarages = response.data.results.data;
+            _this3.currentPage = response.data.results.current_page;
+            _this3.lastPage = response.data.results.last_page;
+            console.log(response.data.results);
+            if (_this3.selectedServices.includes(0)) {
+              _this3.selectedServices.splice(0, 1);
+            }
+            if (_this3.ArrayGarages.length == 0) {
+              _this3.isFull = false;
+            }
+          });
+        })["catch"](function (error) {
+          console.log(error);
         });
-      });
+      } else {
+        this.alertAddress = 'Address is required !';
+      }
     },
     selectCity: function selectCity() {
       var _this4 = this;
@@ -2099,7 +2112,15 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.getAllGarages(1);
     this.getAllServices();
-  }
+  } // computed:{
+  //     isError(){
+  //         if (this.ArrayGarages.length == 0 || this.AllArrayGarages.length == 0) {
+  //             return 'd-none'
+  //         } else {
+  //             return ''
+  //         }
+  //     },
+  // }
 });
 
 /***/ }),
@@ -2263,9 +2284,7 @@ var render = function render() {
     staticClass: "container"
   }, [_c("h1", {
     staticClass: "text-center mb-4"
-  }, [_vm._v("HomePage")]), _vm._v(" "), _c("form", {
-    staticClass: "pb-4"
-  }, [_c("div", {
+  }, [_vm._v("HomePage")]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("div", {
     staticClass: "row"
@@ -2320,14 +2339,25 @@ var render = function render() {
         _vm.selectValue = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
       }
     }
-  }, _vm._l(_vm.addressArray, function (garage, index) {
+  }, [_c("option", {
+    attrs: {
+      selected: "",
+      disabled: "",
+      value: ""
+    }
+  }, [_vm._v("Select your address")]), _vm._v(" "), _vm._l(_vm.addressArray, function (garage, index) {
     return _c("option", {
       key: index,
       domProps: {
         value: garage.address.freeformAddress
       }
-    }, [_vm._v("\n                                " + _vm._s(garage.address.freeformAddress) + "\n                            ")]);
-  }), 0)])])])])]), _vm._v(" "), _c("h6", [_vm._v("Filter Selection")]), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n                            " + _vm._s(garage.address.freeformAddress) + "\n                        ")]);
+  })], 2)])])])]), _vm._v(" "), _vm.alertAddress ? _c("div", {
+    staticClass: "alert alert-danger",
+    attrs: {
+      role: "alert"
+    }
+  }, [_vm._v("\n        " + _vm._s(_vm.alertAddress) + "\n    ")]) : _vm._e(), _vm._v(" "), _c("h6", [_vm._v("Filter Selection")]), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col"
@@ -2479,6 +2509,14 @@ var render = function render() {
       }
     }
   }, [_vm._v("Next")])])])])]), _vm._v(" "), _c("div", {
+    staticClass: "alert alert-danger",
+    "class": {
+      "d-none": _vm.isFull
+    },
+    attrs: {
+      role: "alert"
+    }
+  }, [_vm._v("\n        Error\n    ")]), _vm._v(" "), _c("div", {
     staticClass: "row row-cols-4 mt-4"
   }, _vm._l(_vm.ArrayGarages.length == 0 ? _vm.AllArrayGarages : _vm.ArrayGarages, function (garage, index) {
     return _c("div", {
