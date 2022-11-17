@@ -2307,7 +2307,29 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_vm._v("\n    Prova\n")]);
+  return _c("div", [_c("div", {
+    staticClass: "card m-2"
+  }, [_c("img", {
+    staticClass: "card-img-top",
+    attrs: {
+      src: _vm.garage.image,
+      alt: _vm.garage.title
+    }
+  }), _vm._v(" "), _c("div", {
+    staticClass: "card-body"
+  }, [_c("h5", {
+    staticClass: "card-title"
+  }, [_vm._v(_vm._s(_vm.garage.title))]), _vm._v(" "), _c("p", {
+    staticClass: "card-text"
+  }, [_vm._v("Parking = " + _vm._s(_vm.garage.n_parking))]), _vm._v(" "), _c("p", {
+    staticClass: "card-text"
+  }, [_vm._v("Address = " + _vm._s(_vm.garage.address))]), _vm._v(" "), _c("p", {
+    staticClass: "card-text"
+  }, [_vm._v("Length = " + _vm._s(_vm.garage.length))]), _vm._v(" "), _c("p", {
+    staticClass: "card-text"
+  }, [_vm._v("Width = " + _vm._s(_vm.garage.width))]), _vm._v(" "), _c("p", {
+    staticClass: "card-text"
+  }, [_vm._v("Description = " + _vm._s(_vm.garage.description))])])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -18759,7 +18781,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\marco\OneDrive\Desktop\Garagefinal projet\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
