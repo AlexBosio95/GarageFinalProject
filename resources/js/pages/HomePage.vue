@@ -5,7 +5,7 @@
         <!-- Header navigation -->
 
         <!-- Select City or address -->
-        
+
         <div class="form-group">
             <div class="row">
                 <div class="col">
@@ -21,12 +21,12 @@
                             <option v-for="(garage, index) in addressArray" :key="index" :value="garage.address.freeformAddress" >
                                 {{garage.address.freeformAddress}}
                             </option>
-                        </select>   
+                        </select>
                     </div>
                 </div>
             </div>
         </div>
-        
+
 
         <div v-if="alertAddress" class="alert alert-danger" role="alert">
             {{alertAddress}}
@@ -49,7 +49,7 @@
                     </select>
                 </div>
             </div>
-            
+
             <!-- Parking -->
             <div class="col">
                 <div class="input-group mb-3">
@@ -72,10 +72,10 @@
                 </div>
             </div>
         </div>
-        
-        
 
-        <button class="btn btn-primary w-100" @click="searchGarages(1)">Search</button>
+
+
+        <button class="btn btn-primary w-100" :disabled="searchText===''" @click="searchGarages(1)">Search</button>
 
 
 
@@ -107,7 +107,7 @@
                     </div>
                     <div class="card-footer text-muted">
                         <span v-for="(service, index) in garage.services" :key="index">
-                            {{service.name}} | 
+                            {{service.name}} |
                         </span>
                         <span v-if="garage.services.length <= 0">No Services</span>
                     </div>
@@ -140,7 +140,7 @@ export default {
             selectValue: '',
             isFull: true,
             alertAddress: null,
-            dataRadius: 
+            dataRadius:
             {
                 selected: 20000,
                 options: [
@@ -148,7 +148,7 @@ export default {
                     { text: '50 km' , value: 50000}
                 ]
             },
-            ParkingNumber: 
+            ParkingNumber:
             {
                 selected: 0,
                 options: [
@@ -165,10 +165,10 @@ export default {
         }
     },
     methods: {
-        
+
 
         nextPage(page){
-            
+
             if(this.ArrayGarages.length > 0){
                 this.searchGarages(page + 1)
                 this.currentPage ++
@@ -187,7 +187,7 @@ export default {
                 this.currentPage --
             }
         },
-        
+
         getAllGarages(page) {
             axios.get('/api/garages', {
                 params: { page: page }
@@ -212,17 +212,17 @@ export default {
             this.isFull = true
 
             if (this.selectValue != '') {
-                
+
                 axios.get('https://api.tomtom.com/search/2/geocode/' + this.selectValue + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')
                     .then((response) => {
-                        this.data = response.data.results;                
+                        this.data = response.data.results;
                         this.currentLat = this.data[0].position.lat;
                         this.currentLong = this.data[0].position.lon;
-                        
+
                         if (this.selectedServices.length == 0) {
                             this.selectedServices.push(0);
                         }
-        
+
                         axios.get('/api/garages/' + this.currentRadius + '/' + this.currentLat + '/' + this.currentLong + '/' + this.currentParkingNumber + '/' + this.selectedServices, {
                             params: { page: page }
                             })
@@ -230,10 +230,10 @@ export default {
                                 this.ArrayGarages = response.data.results.data;
                                 this.currentPage = response.data.results.current_page;
                                 this.lastPage = response.data.results.last_page;
-            
+
                                 console.log(response.data.results);
-            
-                                if (this.selectedServices.includes(0)) { 
+
+                                if (this.selectedServices.includes(0)) {
                                     this.selectedServices.splice(0, 1);
                                 }
 
@@ -241,7 +241,7 @@ export default {
                                     this.isFull = false
                                 }
                             })
-        
+
                     })
 
                     .catch((error) => {
