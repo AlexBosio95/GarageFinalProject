@@ -2049,7 +2049,7 @@ __webpack_require__.r(__webpack_exports__);
         }
         axios.get('/api/garages/' + _this3.currentRadius + '/' + _this3.currentLat + '/' + _this3.currentLong + '/' + _this3.currentParkingNumber + '/' + _this3.selectedServices).then(function (response) {
           _this3.ArrayGarages = response.data.results;
-          console.log(response.data.results);
+          _this3.selectedServices = [];
         });
       });
     },
@@ -2361,12 +2361,10 @@ var render = function render() {
     }, [_vm._v(_vm._s(option.text))]);
   }), 0)])]), _vm._v(" "), _c("div", {
     staticClass: "col-12"
-  }, [_c("div", {
-    staticClass: "mb-3"
   }, _vm._l(_vm.services, function (service, index) {
     return _c("div", {
       key: index,
-      staticClass: "form-check form-check-inline"
+      staticClass: "form-check form-check-inline mb-3"
     }, [_c("input", {
       directives: [{
         name: "model",
@@ -2407,7 +2405,7 @@ var render = function render() {
         "for": service.name
       }
     }, [_vm._v(_vm._s(service.name))])]);
-  }), 0)])]), _vm._v(" "), _c("button", {
+  }), 0)]), _vm._v(" "), _c("button", {
     staticClass: "btn btn-primary w-100",
     on: {
       click: _vm.searchGarages
@@ -2475,7 +2473,13 @@ var render = function render() {
       attrs: {
         href: "#"
       }
-    }, [_vm._v("View more")])])])]);
+    }, [_vm._v("View more")])]), _vm._v(" "), _c("div", {
+      staticClass: "card-footer text-muted"
+    }, [_vm._l(garage.services, function (service, index) {
+      return _c("span", {
+        key: index
+      }, [_vm._v("\n                        " + _vm._s(service.name) + " | \n                    ")]);
+    }), _vm._v(" "), garage.services.length <= 0 ? _c("span", [_vm._v("No Services")]) : _vm._e()], 2)])]);
   }), 0)]);
 };
 var staticRenderFns = [function () {

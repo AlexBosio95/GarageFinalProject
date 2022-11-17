@@ -16,7 +16,7 @@
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="inputGroupSelect01">Select City</label>
                             </div>
-                            <select class="custom-select" id="address-suggestion"  v-model="selectValue">
+                            <select class="custom-select" id="address-suggestion" v-model="selectValue">
                                 <option v-for="(garage, index) in addressArray" :key="index" :value="garage.address.freeformAddress" >
                                     {{garage.address.freeformAddress}}
                                 </option>
@@ -30,6 +30,8 @@
         <!-- Filter selection -->
 
         <h6>Filter Selection</h6>
+
+        <!-- Radius km -->
         <div class="row">
             <div class="col">
                 <div class="input-group mb-3">
@@ -41,7 +43,8 @@
                     </select>
                 </div>
             </div>
-
+            
+            <!-- Parking -->
             <div class="col">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -55,12 +58,11 @@
                 </div>
             </div>
 
+            <!-- Services -->
             <div class="col-12">
-                <div class="mb-3">
-                    <div class="form-check form-check-inline" v-for="(service, index) in services" :key="index">
-                        <input type="checkbox" class="form-check-input mr-2" :id="service.name" :value="service.id" v-model="selectedServices">
-                        <label :for="service.name" class="form-check-label">{{service.name}}</label>
-                    </div>
+                <div class="form-check form-check-inline mb-3" v-for="(service, index) in services" :key="index">
+                    <input type="checkbox" class="form-check-input mr-2" :id="service.name" :value="service.id" v-model="selectedServices">
+                    <label :for="service.name" class="form-check-label">{{service.name}}</label>
                 </div>
             </div>
         </div>
@@ -90,6 +92,12 @@
                         <p class="card-text">Parking = {{garage.n_parking}}</p>
                         <p class="card-text">Address = {{garage.address}}</p>
                         <a href="#" class="btn btn-primary">View more</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <span v-for="(service, index) in garage.services" :key="index">
+                            {{service.name}} | 
+                        </span>
+                        <span v-if="garage.services.length <= 0">No Services</span>
                     </div>
                 </div>
             </div>
@@ -161,7 +169,6 @@ export default {
 
         searchGarages(){
 
-
             axios.get('https://api.tomtom.com/search/2/geocode/' + this.selectValue + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')
             .then((response) => {
                 this.data = response.data.results;                
@@ -175,21 +182,21 @@ export default {
                 axios.get('/api/garages/' + this.currentRadius + '/' + this.currentLat + '/' + this.currentLong + '/' + this.currentParkingNumber + '/' + this.selectedServices)
                 .then(response => {
                     this.ArrayGarages = response.data.results;
-                    console.log(response.data.results)
+                    this.selectedServices = [];
                 })         
             });
         },
         selectCity(){
 
             if (this.searchText == '') {
-                this.selectValue = ''
-                this.addressArray = []
+                this.selectValue = '';
+                this.addressArray = [];
                 this.getAllGarages(1);
             } else {
-
                 axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')
                 .then((response) => {
                     this.addressArray = response.data.results;
+                    
                 });
             }
         }
