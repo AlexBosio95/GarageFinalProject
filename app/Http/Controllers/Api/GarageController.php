@@ -129,4 +129,27 @@ class GarageController extends Controller
 
         ]);
     }
+
+    public function show($id)
+    {
+        $garage = Garage::where('slug', $id)->with(['services'])->firstOrFail();
+
+        if ($garage->image) {
+            $garage->image = asset('storage/' . $garage->image);
+        } else {
+            $garage->image = asset('img/no_image.jpg');
+        }
+
+        if ($garage) {
+            return response()->json([
+                'success' => true,
+                'results' => $garage
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'not found'
+            ]);
+        }
+    }
 }

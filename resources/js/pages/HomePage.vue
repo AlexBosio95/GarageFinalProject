@@ -103,7 +103,7 @@
                         <h5 class="card-title">{{garage.title}}</h5>
                         <p class="card-text">Parking = {{garage.n_parking}}</p>
                         <p class="card-text">Address = {{garage.address}}</p>
-                        <a href="#" class="btn btn-primary">View more</a>
+                        <router-link :to="{name: 'garage-view', params: {slug: garage.slug}}" class="btn btn-primary">View more</router-link>
                     </div>
                     <div class="card-footer text-muted">
                         <span v-for="(service, index) in garage.services" :key="index">
