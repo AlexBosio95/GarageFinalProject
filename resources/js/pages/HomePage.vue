@@ -75,7 +75,7 @@
 
 
 
-        <button class="btn btn-primary w-100" :disabled="searchText===''" @click="searchGarages(1)">Search</button>
+        <button class="btn btn-primary w-100" :disabled = " searchText === '' " @click="searchGarages(1)">Search</button>
 
 
 
@@ -92,7 +92,7 @@
         </div>
 
         <div class="alert alert-danger" :class="{ 'd-none' : isFull }"  role="alert">
-            Error
+            The search has no results
         </div>
 
         <div class="row row-cols-4 mt-4">
@@ -275,16 +275,6 @@ export default {
         this.getAllGarages(1);
         this.getAllServices();
     },
-
-    // computed:{
-    //     isError(){
-    //         if (this.ArrayGarages.length == 0 || this.AllArrayGarages.length == 0) {
-    //             return 'd-none'
-    //         } else {
-    //             return ''
-    //         }
-    //     },
-    // }
 }
 </script>
 

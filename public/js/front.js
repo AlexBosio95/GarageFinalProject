@@ -2112,15 +2112,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.getAllGarages(1);
     this.getAllServices();
-  } // computed:{
-  //     isError(){
-  //         if (this.ArrayGarages.length == 0 || this.AllArrayGarages.length == 0) {
-  //             return 'd-none'
-  //         } else {
-  //             return ''
-  //         }
-  //     },
-  // }
+  }
 });
 
 /***/ }),
@@ -2467,6 +2459,9 @@ var render = function render() {
     }, [_vm._v(_vm._s(service.name))])]);
   }), 0)]), _vm._v(" "), _c("button", {
     staticClass: "btn btn-primary w-100",
+    attrs: {
+      disabled: _vm.searchText === ""
+    },
     on: {
       click: function click($event) {
         return _vm.searchGarages(1);
@@ -2516,7 +2511,7 @@ var render = function render() {
     attrs: {
       role: "alert"
     }
-  }, [_vm._v("\n        Error\n    ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n        The search has no results\n    ")]), _vm._v(" "), _c("div", {
     staticClass: "row row-cols-4 mt-4"
   }, _vm._l(_vm.ArrayGarages.length == 0 ? _vm.AllArrayGarages : _vm.ArrayGarages, function (garage, index) {
     return _c("div", {
@@ -2548,7 +2543,7 @@ var render = function render() {
     }, [_vm._l(garage.services, function (service, index) {
       return _c("span", {
         key: index
-      }, [_vm._v("\n                        " + _vm._s(service.name) + " | \n                    ")]);
+      }, [_vm._v("\n                        " + _vm._s(service.name) + " |\n                    ")]);
     }), _vm._v(" "), garage.services.length <= 0 ? _c("span", [_vm._v("No Services")]) : _vm._e()], 2)])]);
   }), 0)]);
 };
