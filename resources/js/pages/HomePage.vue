@@ -69,22 +69,22 @@
         
         
 
-        
+        <button class="btn btn-primary w-100" @click="searchGarages(1)">Search</button>
 
-        <button class="btn btn-primary w-100" @click="searchGarages">Search</button>
+
 
         <!-- Result Garages -->
 
         <div class="mt-4">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <li class="page-item" :class="(currentPage == 1) ? 'disabled': '' "><a class="page-link" href="#" @click.prevent="getAllGarages(currentPage - 1)">Previous</a></li>
-                    <li class="page-item" :class="(currentPage == lastPage) ? 'disabled': '' "><a class="page-link" href="#" @click.prevent="getAllGarages(currentPage + 1)">Next</a></li>
+                    <li class="page-item" :class="(currentPage == 1) ? 'disabled': '' "><a class="page-link" href="#" @click.prevent="prevPage(currentPage)">Previous</a></li>
+                    <li class="page-item" :class="(currentPage == lastPage) ? 'disabled': '' "><a class="page-link" href="#" @click.prevent="nextPage(currentPage)">Next</a></li>
                 </ul>
             </nav>
         </div>
         <div class="row row-cols-4 mt-4">
-            <div class="col" v-for="(garage, index) in ArrayGarages" :key="index">
+            <div class="col" v-for="(garage, index) in (ArrayGarages.length == 0) ? AllArrayGarages : ArrayGarages" :key="index">
                 <div class="card m-2">
                     <img :src="garage.image" class="card-img-top" :alt="garage.title">
                     <div class="card-body">
@@ -112,6 +112,7 @@ export default {
     data() {
         return{
             ArrayGarages: [],
+            AllArrayGarages: [],
             currentPage: 1,
             lastPage: null,
             searchText: '',
@@ -144,17 +145,38 @@ export default {
                 ]
             },
             services: [],
-            selectedServices: []
+            selectedServices: [],
         }
     },
     methods: {
+
+        nextPage(page){
+            
+            if(this.ArrayGarages.length > 0){
+                this.searchGarages(page + 1)
+                this.currentPage ++
+            }else {
+                this.getAllGarages(page + 1)
+                this.currentPage ++
+            }
+        },
+
+        prevPage(page){
+            if(this.ArrayGarages.length > 0){
+                this.searchGarages(page - 1)
+                this.currentPage --
+            }else {
+                this.getAllGarages(page - 1)
+                this.currentPage --
+            }
+        },
         
         getAllGarages(page) {
             axios.get('/api/garages', {
                 params: { page: page }
             })
             .then((response) => {
-                this.ArrayGarages = response.data.results.data;
+                this.AllArrayGarages = response.data.results.data;
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
             });
@@ -167,8 +189,9 @@ export default {
             })
         },
 
-        searchGarages(){
-            
+        searchGarages(page){
+            this.AllArrayGarages = [];
+
             axios.get('https://api.tomtom.com/search/2/geocode/' + this.selectValue + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')
             .then((response) => {
                 this.data = response.data.results;                
@@ -179,9 +202,16 @@ export default {
                     this.selectedServices.push(0);
                 }
 
-                axios.get('/api/garages/' + this.currentRadius + '/' + this.currentLat + '/' + this.currentLong + '/' + this.currentParkingNumber + '/' + this.selectedServices)
+                axios.get('/api/garages/' + this.currentRadius + '/' + this.currentLat + '/' + this.currentLong + '/' + this.currentParkingNumber + '/' + this.selectedServices, {
+                params: { page: page }
+                })
                 .then(response => {
-                    this.ArrayGarages = response.data.results;
+                    this.ArrayGarages = response.data.results.data;
+                    this.currentPage = response.data.results.current_page;
+                    this.lastPage = response.data.results.last_page;
+
+                    console.log(response.data.results);
+
                     if (this.selectedServices.includes(0)) { 
                         this.selectedServices.splice(0, 1);
                     }
@@ -194,6 +224,7 @@ export default {
             if (this.searchText == '') {
                 this.selectValue = '';
                 this.addressArray = [];
+                this.ArrayGarages = [];
                 this.getAllGarages(1);
             } else {
                 axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')

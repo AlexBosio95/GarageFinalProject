@@ -1972,6 +1972,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       ArrayGarages: [],
+      AllArrayGarages: [],
       currentPage: 1,
       lastPage: null,
       searchText: '',
@@ -2020,6 +2021,24 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    nextPage: function nextPage(page) {
+      if (this.ArrayGarages.length > 0) {
+        this.searchGarages(page + 1);
+        this.currentPage++;
+      } else {
+        this.getAllGarages(page + 1);
+        this.currentPage++;
+      }
+    },
+    prevPage: function prevPage(page) {
+      if (this.ArrayGarages.length > 0) {
+        this.searchGarages(page - 1);
+        this.currentPage--;
+      } else {
+        this.getAllGarages(page - 1);
+        this.currentPage--;
+      }
+    },
     getAllGarages: function getAllGarages(page) {
       var _this = this;
       axios.get('/api/garages', {
@@ -2027,7 +2046,7 @@ __webpack_require__.r(__webpack_exports__);
           page: page
         }
       }).then(function (response) {
-        _this.ArrayGarages = response.data.results.data;
+        _this.AllArrayGarages = response.data.results.data;
         _this.currentPage = response.data.results.current_page;
         _this.lastPage = response.data.results.last_page;
       });
@@ -2038,8 +2057,9 @@ __webpack_require__.r(__webpack_exports__);
         _this2.services = response.data.results;
       });
     },
-    searchGarages: function searchGarages() {
+    searchGarages: function searchGarages(page) {
       var _this3 = this;
+      this.AllArrayGarages = [];
       axios.get('https://api.tomtom.com/search/2/geocode/' + this.selectValue + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
         _this3.data = response.data.results;
         _this3.currentLat = _this3.data[0].position.lat;
@@ -2047,8 +2067,15 @@ __webpack_require__.r(__webpack_exports__);
         if (_this3.selectedServices.length == 0) {
           _this3.selectedServices.push(0);
         }
-        axios.get('/api/garages/' + _this3.currentRadius + '/' + _this3.currentLat + '/' + _this3.currentLong + '/' + _this3.currentParkingNumber + '/' + _this3.selectedServices).then(function (response) {
-          _this3.ArrayGarages = response.data.results;
+        axios.get('/api/garages/' + _this3.currentRadius + '/' + _this3.currentLat + '/' + _this3.currentLong + '/' + _this3.currentParkingNumber + '/' + _this3.selectedServices, {
+          params: {
+            page: page
+          }
+        }).then(function (response) {
+          _this3.ArrayGarages = response.data.results.data;
+          _this3.currentPage = response.data.results.current_page;
+          _this3.lastPage = response.data.results.last_page;
+          console.log(response.data.results);
           if (_this3.selectedServices.includes(0)) {
             _this3.selectedServices.splice(0, 1);
           }
@@ -2060,6 +2087,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.searchText == '') {
         this.selectValue = '';
         this.addressArray = [];
+        this.ArrayGarages = [];
         this.getAllGarages(1);
       } else {
         axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
@@ -2410,7 +2438,9 @@ var render = function render() {
   }), 0)]), _vm._v(" "), _c("button", {
     staticClass: "btn btn-primary w-100",
     on: {
-      click: _vm.searchGarages
+      click: function click($event) {
+        return _vm.searchGarages(1);
+      }
     }
   }, [_vm._v("Search")]), _vm._v(" "), _c("div", {
     staticClass: "mt-4"
@@ -2431,7 +2461,7 @@ var render = function render() {
     on: {
       click: function click($event) {
         $event.preventDefault();
-        return _vm.getAllGarages(_vm.currentPage - 1);
+        return _vm.prevPage(_vm.currentPage);
       }
     }
   }, [_vm._v("Previous")])]), _vm._v(" "), _c("li", {
@@ -2445,12 +2475,12 @@ var render = function render() {
     on: {
       click: function click($event) {
         $event.preventDefault();
-        return _vm.getAllGarages(_vm.currentPage + 1);
+        return _vm.nextPage(_vm.currentPage);
       }
     }
   }, [_vm._v("Next")])])])])]), _vm._v(" "), _c("div", {
     staticClass: "row row-cols-4 mt-4"
-  }, _vm._l(_vm.ArrayGarages, function (garage, index) {
+  }, _vm._l(_vm.ArrayGarages.length == 0 ? _vm.AllArrayGarages : _vm.ArrayGarages, function (garage, index) {
     return _c("div", {
       key: index,
       staticClass: "col"
