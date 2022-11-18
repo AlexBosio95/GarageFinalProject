@@ -211,6 +211,7 @@ export default {
         },
 
         searchGarages(page){
+            this.ArrayGarages = [];
             this.AllArrayGarages = [];
             this.alertAddress = null;
             this.isFull = true

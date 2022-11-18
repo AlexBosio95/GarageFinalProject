@@ -91,7 +91,25 @@ class GarageController extends Controller
                         ->with(['services'])->whereHas('services', function($query) use ($servicesArr) {
                         $query->whereIn('service_id', $servicesArr);
                         })->paginate(10);
-            
+
+                        $servicesId = []; 
+                    
+                        foreach($garage as $prova) {
+                            foreach($prova->services as $attribute) {
+                                $servicesId[] = $attribute->id;
+                            }
+                        }
+
+                        //dd($servicesId);
+                
+                        if($servicesId != $servicesArr) {
+                            return response()->json([
+
+                                'success' => false,
+                                'results' => []
+                    
+                            ]);
+                        }
         } 
         
         // caso in cui è selezionato solo il parcheggio
@@ -105,8 +123,27 @@ class GarageController extends Controller
                     ->with(['services'])->whereHas('services', function($query) use ($servicesArr) {
                         $query->whereIn('service_id', $servicesArr); 
                     })->paginate(10);
+                    
+                    $servicesId = []; 
+                    
+                    foreach($garage as $prova) {
+                        foreach($prova->services as $attribute) {
+                            $servicesId[] = $attribute->id;
+                        }
+                    }
+
+                    //dd($servicesId);
+            
+                    if($servicesId != $servicesArr) {
+                        return response()->json([
+
+                            'success' => false,
+                            'results' => []
+                
+                        ]);
+                    }
         }
-        
+
         
         return response()->json([
 
@@ -114,6 +151,7 @@ class GarageController extends Controller
             'results' => $garage
 
         ]);
+
     }
 
 

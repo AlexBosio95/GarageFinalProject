@@ -2096,6 +2096,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     searchGarages: function searchGarages(page) {
       var _this3 = this;
+      this.ArrayGarages = [];
       this.AllArrayGarages = [];
       this.alertAddress = null;
       this.isFull = true;
