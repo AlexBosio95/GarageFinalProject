@@ -2022,7 +2022,6 @@ __webpack_require__.r(__webpack_exports__);
       data: [],
       ArrayRadius: [],
       addressArray: [],
-      selectValue: '',
       isFull: true,
       alertAddress: null,
       dataRadius: {
@@ -2104,8 +2103,8 @@ __webpack_require__.r(__webpack_exports__);
       this.AllArrayGarages = [];
       this.alertAddress = null;
       this.isFull = true;
-      if (this.selectValue != '') {
-        axios.get('https://api.tomtom.com/search/2/geocode/' + this.selectValue + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
+      if (this.searchText != '') {
+        axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
           _this3.data = response.data.results;
           _this3.currentLat = _this3.data[0].position.lat;
           _this3.currentLong = _this3.data[0].position.lon;
@@ -2383,13 +2382,7 @@ var render = function render() {
     staticClass: "container"
   }, [_c("h1", {
     staticClass: "text-center mb-4"
-  }, [_vm._v("HomePage")]), _vm._v(" "), _c("div", {
-    staticClass: "form-group"
-  }, [_c("div", {
-    staticClass: "row"
-  }, [_c("div", {
-    staticClass: "col"
-  }, [_c("input", {
+  }, [_vm._v("HomePage")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -2398,8 +2391,9 @@ var render = function render() {
     }],
     staticClass: "form-control",
     attrs: {
+      type: "search",
+      list: "mylist",
       placeholder: "Insert an address to start looking for your perfect garage",
-      type: "text",
       id: "search-bar",
       "aria-describedby": "emailHelp"
     },
@@ -2412,31 +2406,9 @@ var render = function render() {
         _vm.searchText = $event.target.value;
       }, _vm.selectCity]
     }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "col"
-  }, [_c("div", {
-    staticClass: "input-group mb-3"
-  }, [_vm._m(0), _vm._v(" "), _c("select", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.selectValue,
-      expression: "selectValue"
-    }],
-    staticClass: "custom-select",
+  }), _vm._v(" "), _c("datalist", {
     attrs: {
-      id: "address-suggestion"
-    },
-    on: {
-      change: function change($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
-          return o.selected;
-        }).map(function (o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val;
-        });
-        _vm.selectValue = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
-      }
+      id: "mylist"
     }
   }, [_c("option", {
     attrs: {
@@ -2450,8 +2422,8 @@ var render = function render() {
       domProps: {
         value: garage.address.freeformAddress
       }
-    }, [_vm._v("\n                            " + _vm._s(garage.address.freeformAddress) + "\n                        ")]);
-  })], 2)])])])]), _vm._v(" "), _vm.alertAddress ? _c("div", {
+    }, [_vm._v("\n            " + _vm._s(garage.address.freeformAddress) + "\n        ")]);
+  })], 2), _vm._v(" "), _vm.alertAddress ? _c("div", {
     staticClass: "alert alert-danger",
     attrs: {
       role: "alert"
@@ -2462,7 +2434,7 @@ var render = function render() {
     staticClass: "col"
   }, [_c("div", {
     staticClass: "input-group mb-3"
-  }, [_vm._m(1), _vm._v(" "), _c("select", {
+  }, [_vm._m(0), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -2492,7 +2464,7 @@ var render = function render() {
     staticClass: "col"
   }, [_c("div", {
     staticClass: "input-group mb-3"
-  }, [_vm._m(2), _vm._v(" "), _c("select", {
+  }, [_vm._m(1), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -2660,17 +2632,6 @@ var render = function render() {
   }), 0)]);
 };
 var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "input-group-prepend"
-  }, [_c("label", {
-    staticClass: "input-group-text",
-    attrs: {
-      "for": "inputGroupSelect01"
-    }
-  }, [_vm._v("Select City")])]);
-}, function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
@@ -19472,7 +19433,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! D:\Utenti\Valerio\OneDrive\Desktop\BOOLEAN\Repositorys\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

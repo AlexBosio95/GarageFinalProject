@@ -6,27 +6,14 @@
 
         <!-- Select City or address -->
 
-        <div class="form-group">
-            <div class="row">
-                <div class="col">
-                    <input placeholder="Insert an address to start looking for your perfect garage" type="text" class="form-control" id="search-bar" aria-describedby="emailHelp"  v-model="searchText" @input="selectCity">
-                </div>
-                <div class="col">
-                    <div class="input-group mb-3" >
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Select City</label>
-                        </div>
-                        <select class="custom-select" id="address-suggestion" v-model="selectValue">
-                            <option selected disabled value="">Select your address</option>
-                            <option v-for="(garage, index) in addressArray" :key="index" :value="garage.address.freeformAddress" >
-                                {{garage.address.freeformAddress}}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <input type="search" list="mylist" placeholder="Insert an address to start looking for your perfect garage"  class="form-control" id="search-bar" aria-describedby="emailHelp"  v-model="searchText" @input="selectCity">
 
+        <datalist id="mylist" >
+            <option selected disabled value="">Select your address</option>
+            <option v-for="(garage, index) in addressArray" :key="index" :value="garage.address.freeformAddress" >
+                {{garage.address.freeformAddress}}
+            </option>
+        </datalist>
 
         <div v-if="alertAddress" class="alert alert-danger" role="alert">
             {{alertAddress}}
@@ -98,7 +85,7 @@
         <div class="row row-cols-4 mt-4">
             <div class="col" v-for="(garage, index) in (ArrayGarages.length == 0) ? AllArrayGarages : ArrayGarages" :key="index">
                 <div class="card m-2">
-                    <img 
+                    <img
                     :src="(ArrayGarages.length == 0)?garage.image:'storage/' + garage.image"
                     class="card-img-top"
                     :alt="garage.title"
@@ -141,7 +128,6 @@ export default {
             data: [],
             ArrayRadius: [],
             addressArray: [],
-            selectValue: '',
             isFull: true,
             alertAddress: null,
             dataRadius:
@@ -216,9 +202,9 @@ export default {
             this.alertAddress = null;
             this.isFull = true
 
-            if (this.selectValue != '') {
+            if (this.searchText != '') {
 
-                axios.get('https://api.tomtom.com/search/2/geocode/' + this.selectValue + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')
+                axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')
                     .then((response) => {
                         this.data = response.data.results;
                         this.currentLat = this.data[0].position.lat;
