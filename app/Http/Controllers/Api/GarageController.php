@@ -71,6 +71,8 @@ class GarageController extends Controller
         }
 
         
+        $servicesArr = explode(',', $services);
+
         $minLat = $lat - $latVar;
         $maxLat = $lat + $latVar;
         
@@ -86,8 +88,8 @@ class GarageController extends Controller
         // caso in cui è selezionato sia il parcheggio che i servizi
         else if ($n_parking > 0 && $services != 0) {
             $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->where('n_parking', $n_parking)
-                        ->with(['services'])->whereHas('services', function($query) use ($services) {
-                        $query->where('service_id', $services);
+                        ->with(['services'])->whereHas('services', function($query) use ($servicesArr) {
+                        $query->whereIn('service_id', $servicesArr);
                         })->paginate(10);
             
         } 
@@ -100,8 +102,8 @@ class GarageController extends Controller
         // caso in cui sono selezionati solo i servizi
         elseif ($services != 0) {
             $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])
-                    ->with(['services'])->whereHas('services', function($query) use ($services) {
-                        $query->where('service_id', $services); 
+                    ->with(['services'])->whereHas('services', function($query) use ($servicesArr) {
+                        $query->whereIn('service_id', $servicesArr); 
                     })->paginate(10);
         }
         
