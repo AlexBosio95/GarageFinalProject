@@ -266,6 +266,7 @@ export default {
                 this.selectValue = '';
                 this.addressArray = [];
                 this.ArrayGarages = [];
+                this.isFull= true;
                 this.getAllGarages(1);
             } else {
                 axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')
