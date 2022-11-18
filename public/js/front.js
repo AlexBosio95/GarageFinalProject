@@ -1971,7 +1971,9 @@ __webpack_require__.r(__webpack_exports__);
   name: 'GarageView',
   data: function data() {
     return {
-      garage: null
+      garage: '',
+      addressGarage: [],
+      imageMap: ''
     };
   },
   methods: {
@@ -1979,8 +1981,10 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       var slug = this.$route.params.slug;
       axios.get('/api/garage/' + slug).then(function (response) {
-        console.log(response);
         _this.garage = response.data.results;
+        console.log(_this.garage);
+        _this.imageMap = 'https://api.tomtom.com/map/1/staticimage?key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&zoom=9&center=' + _this.garage.longitude + ',' + _this.garage.latitude + '&format=jpg&layer=basic&style=main&width=1305&height=748&view=Unified&language=it-IT';
+        console.log(_this.imageMap);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2329,7 +2333,14 @@ var render = function render() {
     staticClass: "card-text"
   }, [_vm._v("Width = " + _vm._s(_vm.garage.width))]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
-  }, [_vm._v("Description = " + _vm._s(_vm.garage.description))])])])]);
+  }, [_vm._v("Description = " + _vm._s(_vm.garage.description))]), _vm._v(" "), _c("img", {
+    staticClass: "w-100",
+    attrs: {
+      src: _vm.imageMap,
+      alt: "",
+      srcset: ""
+    }
+  })])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -18781,7 +18792,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })

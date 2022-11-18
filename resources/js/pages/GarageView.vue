@@ -1,6 +1,6 @@
 <template>
     <div>
-         <div class="card m-2">
+        <div class="card m-2">
             <img :src="garage.image" class="card-img-top" :alt="garage.title">
             <div class="card-body">
                 <h5 class="card-title">{{garage.title}}</h5>
@@ -9,6 +9,7 @@
                 <p class="card-text">Length = {{garage.length}}</p>
                 <p class="card-text">Width = {{garage.width}}</p>
                 <p class="card-text">Description = {{garage.description}}</p>
+                <img class="w-100" :src="imageMap" alt="" srcset="">
             </div>
         </div>
     </div>
@@ -20,7 +21,9 @@ export default {
 
     data: function(){
         return{
-            garage: null,
+            garage: '',
+            addressGarage: [],
+            imageMap: ''
         }
     },
 
@@ -30,12 +33,16 @@ export default {
 
             axios.get('/api/garage/' + slug)
                 .then((response) => {
-                    console.log(response);
                     this.garage = response.data.results;
+                    console.log(this.garage);
+
+                    this.imageMap = 'https://api.tomtom.com/map/1/staticimage?key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&zoom=9&center=' + this.garage.longitude + ',' + this.garage.latitude +'&format=jpg&layer=basic&style=main&width=1305&height=748&view=Unified&language=it-IT';
+
+                    console.log(this.imageMap);
                     
-                }).catch(function (error){
-                    console.log(error);
-                })
+            }).catch(function (error){
+                console.log(error);
+            })
         }
     },
     mounted() {
