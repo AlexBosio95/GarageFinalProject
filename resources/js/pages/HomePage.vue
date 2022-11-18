@@ -98,7 +98,11 @@
         <div class="row row-cols-4 mt-4">
             <div class="col" v-for="(garage, index) in (ArrayGarages.length == 0) ? AllArrayGarages : ArrayGarages" :key="index">
                 <div class="card m-2">
-                    <img :src="garage.image" class="card-img-top" :alt="garage.title">
+                    <img 
+                    :src="(ArrayGarages.length == 0)?garage.image:'storage/' + garage.image"
+                    class="card-img-top"
+                    :alt="garage.title"
+                    >
                     <div class="card-body">
                         <h5 class="card-title">{{garage.title}}</h5>
                         <p class="card-text">Parking = {{garage.n_parking}}</p>
