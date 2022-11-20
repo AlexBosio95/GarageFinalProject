@@ -1,4 +1,5 @@
 <template>
+<div class="bg">
     <div class="container mt-4">
         <router-link class="btn btn-primary" :to="{name: 'home'}"> < Back</router-link>
         <div class="card mt-4">
@@ -21,6 +22,7 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -61,6 +63,12 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+
+@import '../../sass/variables.scss';
+
+.bg{
+    background-color: $bg-main;
+}
 
 .max-heigth{
     height: 280px;

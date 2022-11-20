@@ -1,118 +1,163 @@
 <template>
-    <div class="container">
-        <h1 class="text-center mb-4">HomePage</h1>
 
+    <div >
         <!-- Header navigation -->
 
         <!-- Select City or address -->
+        <div class="search-container">
+            
+            <div class="container">
 
-        <input type="search" list="mylist" placeholder="Insert an address to start looking for your perfect garage"  class="form-control" id="search-bar" aria-describedby="emailHelp"  v-model="searchText" @input="selectCity">
+                <h1 class="title">Garage</h1>
+                <h3 class="subtitle">The first short-term rental website for your garage</h3>
 
-        <datalist id="mylist" >
-            <option selected disabled value="">Select your address</option>
-            <option v-for="(garage, index) in addressArray" :key="index" :value="garage.address.freeformAddress" >
-                {{garage.address.freeformAddress}}
-            </option>
-        </datalist>
+                <div class="text-center">
+                    <button class="capsule-btn">About Us</button>
+                </div>
 
-        <div v-if="alertAddress" class="alert alert-danger" role="alert">
-            {{alertAddress}}
+                <div class="search-container">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-4">
+                            <div>
+                                <input type="search" list="mylist" placeholder="Insert an address to start looking for your perfect garage"  class="search-bar" id="search-bar" aria-describedby="emailHelp"  v-model="searchText" @input="selectCity">
+                            </div>
+
+                            <datalist id="mylist" class="data-list">
+                                <option selected disabled value="">Select your address</option>
+                                <option v-for="(garage, index) in addressArray" :key="index" :value="garage.address.freeformAddress" >
+                                    {{garage.address.freeformAddress}}
+                                </option>
+                            </datalist>
+
+                        </div>
+
+                        <div class="col-2 d-flex justify-content-left">
+                            <button class="search-btn" :disabled = " searchText === '' " @click="searchGarages(1)"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div v-if="alertAddress" class="alert alert-danger" role="alert">
+                    {{alertAddress}}
+                </div>
+
+            </div>
+
         </div>
-
 
         <!-- Filter selection -->
 
-        <h6>Filter Selection</h6>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
 
-        <!-- Radius km -->
-        <div class="row">
-            <div class="col">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Select Radius</label>
+                <div class="col">
+                    <!-- Radius km -->
+                    <div class="card-filter">
+                        <div class="row h-100">
+                            <div class="col-4 d-flex justify-content-center align-items-center">
+                                <i class="fa-solid fa-map-location"></i>
+                            </div>
+                            <div class="col-7 d-flex flex-column justify-content-center align-items-center">
+                                <div class="value">{{currentRadius}} km</div>
+                                <input type="range" min="5000" max="50000" step="1000" :value="currentRadius">
+                            </div>
+                        </div>
+                        <!-- <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Select Radius</label>
+                            </div>
+                            <select class="custom-select" v-model="currentRadius">
+                                <option v-for="(option, index) in dataRadius.options" :key="index" :value="option.value">{{option.text}}</option>
+                            </select>
+                        </div> -->
                     </div>
-                    <select class="custom-select" v-model="currentRadius">
-                        <option v-for="(option, index) in dataRadius.options" :key="index" :value="option.value">{{option.text}}</option>
-                    </select>
                 </div>
-            </div>
 
-            <!-- Parking -->
-            <div class="col">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Parking Number</label>
+                <div class="col">
+                    <!-- Parking -->
+                    <div class="card-filter">
+                        <div class="row h-100">
+                            <div class="col-4 d-flex justify-content-center align-items-center">
+                                <i class="fa-solid fa-square-parking"></i>
+                            </div>
+                            <div class="col-7 d-flex justify-content-center align-items-center">
+                                <select class="custom-select" v-model="currentParkingNumber">
+                                    <option v-for="(option, index) in ParkingNumber.options" :key="index" :value="option.value">{{option.text}}</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-
-                    <select class="custom-select" v-model="currentParkingNumber">
-                        <option v-for="(option, index) in ParkingNumber.options" :key="index" :value="option.value">{{option.text}}</option>
-                    </select>
-
                 </div>
-            </div>
 
-            <!-- Services -->
-            <div class="col-12">
-                <div class="form-check form-check-inline mb-3" v-for="(service, index) in services" :key="index">
-                    <input type="checkbox" class="form-check-input mr-2" :id="service.name" :value="service.id" v-model="selectedServices">
-                    <label :for="service.name" class="form-check-label">{{service.name}}</label>
+                <div class="col">
+                    <!-- Services -->
+                    <!-- <div class="form-check form-check-inline mb-3" v-for="(service, index) in services" :key="index">
+                        <input type="checkbox" class="form-check-input mr-2" :id="service.name" :value="service.id" v-model="selectedServices">
+                        <label :for="service.name" class="form-check-label">{{service.name}}</label>
+                    </div> -->
+
+                    <div class="card-filter">
+                        <div class="row h-100">
+                            <div class="col-4 d-flex justify-content-center align-items-center">
+                                <i class="fa-solid fa-wifi"></i>
+                            </div>
+                            <div class="col-7 d-flex justify-content-center align-items-center">
+                                <select class="custom-select" v-model="selectedServices">
+                                    <option v-for="(service, index) in services" :key="index" :value="service.id">{{service.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
             </div>
         </div>
-
-
-
-        <button class="btn btn-primary w-100" :disabled = " searchText === '' " @click="searchGarages(1)">Search</button>
-
 
 
         <!-- Result Garages -->
 
+        <div class="container mt-5">
 
-        <div class="mt-4">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item" :class="(currentPage == 1) ? 'disabled': '' "><a class="page-link" href="#" @click.prevent="prevPage(currentPage)">Previous</a></li>
-                    <li class="page-item" :class="(currentPage == lastPage) ? 'disabled': '' "><a class="page-link" href="#" @click.prevent="nextPage(currentPage)">Next</a></li>
-                </ul>
-            </nav>
-        </div>
+            <div class="alert alert-danger" :class="{ 'd-none' : isFull }"  role="alert">
+                The search has no results
+            </div>
 
-        <div class="alert alert-danger" :class="{ 'd-none' : isFull }"  role="alert">
-            The search has no results
-        </div>
-
-        <div class="row row-cols-4 mt-4">
-            <div class="col" v-for="(garage, index) in (ArrayGarages.length == 0) ? AllArrayGarages : ArrayGarages" :key="index">
-                <div class="card m-2">
-                    <img
-                    :src="(ArrayGarages.length == 0)?garage.image:'storage/' + garage.image"
-                    class="card-img-top"
-                    :alt="garage.title"
-                    >
-                    <div class="card-body">
-                        <h5 class="card-title">{{garage.title}}</h5>
-                        <p class="card-text">Parking = {{garage.n_parking}}</p>
-                        <p class="card-text">Address = {{garage.address}}</p>
-                        <router-link :to="{name: 'garage-view', params: {slug: garage.slug}}" class="btn btn-primary">View more</router-link>
-                    </div>
-                    <div class="card-footer text-muted">
-                        <span v-for="(service, index) in garage.services" :key="index">
-                            {{service.name}} |
-                        </span>
-                        <span v-if="garage.services.length <= 0">No Services</span>
-                    </div>
+            <div class="row row-cols-3 mt-4">
+                <div class="col" v-for="(garage, index) in (ArrayGarages.length == 0) ? AllArrayGarages : ArrayGarages" :key="index">
+                    <cardGarage
+                    :ArrayGarages = 'ArrayGarages'
+                    :title = 'garage.title'
+                    :image = 'garage.image'
+                    :n_parking = 'garage.n_parking'
+                    :address = 'garage.address'
+                    :slug = 'garage.slug'
+                    :services = 'garage.services'
+                    />
                 </div>
             </div>
-        </div>
 
+            <div class="mt-4">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item" :class="(currentPage == 1) ? 'disabled': '' "><a class="page-link" href="#" @click.prevent="prevPage(currentPage)">Previous</a></li>
+                        <li class="page-item" :class="(currentPage == lastPage) ? 'disabled': '' "><a class="page-link" href="#" @click.prevent="nextPage(currentPage)">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
 
     </div>
 
 </template>
 
 <script>
-export default {
+import cardGarage from "../components/cardGarage.vue"
+
+export default 
+    {
+    components: { cardGarage },
     name: 'MainPost',
     data() {
         return{
@@ -270,5 +315,144 @@ export default {
 }
 </script>
 
-<style>
+<style lang='scss' scoped>
+
+@import '../../sass/variables.scss';
+
+.search-container{
+    background-color: $bg-head;
+    position: relative;
+    padding-bottom: 3rem;
+
+    .title{
+        font-family: 'Inter', sans-serif;
+        color: white;
+        text-align: center;
+        font-weight: bold;
+        font-size: 48px;
+
+        &::after {
+            content: 'finder';
+            color: $my-yellow;
+}
+    }
+
+    .subtitle{
+        font-family: 'Inter', sans-serif;
+        color: white;
+        text-align: center;
+        font-weight: bold;
+        font-size: 20px;
+        
+    }
+
+    .capsule-btn{
+        background-color: $my-yellow;
+        border-radius: 2rem;
+        border: none;
+        padding: 0.1rem 1.8rem;
+        text-align: center;
+
+        &:hover{
+                transform: scale(1.1);
+                transition: .5s;
+            }
+    }
+
+    .search-container{
+        position: absolute;
+        bottom: -4.5rem;
+        left: 50%;
+        transform: translate(-50%);
+        width: 100%;
+        background-color: transparent;
+
+        .search-bar{
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            height: 46px;
+            z-index: 1;
+            width: 100%;
+            padding: .8rem;
+        }
+    
+        .search-btn{
+            border: none;
+            padding: 0 2rem;
+            background-color: $my-yellow;
+            border-radius: 4rem;
+            height: 46px;
+            cursor: pointer;
+
+            &:hover{
+                transform: scale(1.1);
+                transition: .5s;
+            }
+
+            i{
+                color: $bg-head;
+                font-size: 1.5rem;
+            }
+        }
+
+    }
+
+}
+
+.card-filter{
+    background-color: $bg-head;
+    height: 65px;
+    border-radius: .3rem;
+
+    i{
+        color: $my-yellow;
+        font-size: 2.5rem;
+    }
+
+    .value{
+        color: white;
+    }
+
+    select{
+        background-color: $my-yellow;
+        color: $bg-head;
+        border: none;
+    }
+
+    input[type="range"] {
+        display: block;
+        width: 100%;
+        -webkit-appearance: none;
+        background-color: $my-yellow;
+        height: 10px;
+        border-radius: 5px;
+        margin: 0 auto;
+        outline: 0;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        background-color: #e74c3c;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 2px solid white;
+        cursor: pointer;
+        transition: .3s ease-in-out;
+        }
+    
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background-color: white;
+            border: 2px solid #e74c3c;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:active {
+            transform: scale(1.6);
+        }
+
+}
+
+
+
 </style>

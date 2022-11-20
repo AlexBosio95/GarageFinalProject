@@ -1,8 +1,7 @@
 <template>
-    <div class="container">
+    <main>
         <router-view></router-view>
-    </div>
-
+    </main>
 </template>
 
 <script>
@@ -11,5 +10,14 @@ export default {
 }
 </script>
 
-<style>
+<style lang='scss' scoped>
+
+@import '../../sass/variables.scss';
+
+main{
+    background-color: $bg-main;
+}
+
+
+
 </style>
