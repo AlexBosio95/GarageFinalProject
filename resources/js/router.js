@@ -6,6 +6,7 @@ Vue.use(VueRouter);
 import HomePage from './pages/HomePage.vue';
 import AboutUs from './pages/AboutUs.vue';
 import GarageView from './pages/GarageView.vue';
+import EmailForm from './pages/EmailForm.vue';
 
 
 const router = new VueRouter({
@@ -26,6 +27,11 @@ const router = new VueRouter({
             path: '/garage/:slug',
             name: 'garage-view',
             component: GarageView
+        },
+        {
+            path: '/messages/',
+            name: 'messages',
+            component: EmailForm
         },
 
         
