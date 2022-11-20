@@ -2191,11 +2191,31 @@ __webpack_require__.r(__webpack_exports__);
           _this4.addressArray = response.data.results;
         });
       }
+    },
+    selectService: function selectService() {
+      var selectBtn = document.querySelector(".select-btn"),
+        items = document.querySelectorAll(".item");
+      selectBtn.addEventListener("click", function () {
+        selectBtn.classList.toggle("open");
+      });
+      items.forEach(function (item) {
+        item.addEventListener("click", function () {
+          item.classList.toggle("checked");
+          var checked = document.querySelectorAll(".checked"),
+            btnText = document.querySelector(".btn-text");
+          if (checked && checked.length > 0) {
+            btnText.innerText = "".concat(checked.length, " Selected");
+          } else {
+            btnText.innerText = "Select Language";
+          }
+        });
+      });
     }
   },
   mounted: function mounted() {
     this.getAllGarages(1);
     this.getAllServices();
+    this.selectService();
   }
 });
 
@@ -2616,36 +2636,58 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "card-filter"
   }, [_c("div", {
-    staticClass: "row h-100"
+    staticClass: "card-container"
   }, [_vm._m(3), _vm._v(" "), _c("div", {
-    staticClass: "col-7 d-flex justify-content-center align-items-center"
-  }, [_c("select", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.selectedServices,
-      expression: "selectedServices"
-    }],
-    staticClass: "custom-select",
-    on: {
-      change: function change($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
-          return o.selected;
-        }).map(function (o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val;
-        });
-        _vm.selectedServices = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
-      }
-    }
+    staticClass: "select"
+  }, [_c("div", {
+    staticClass: "my-container"
+  }, [_vm._m(4), _vm._v(" "), _c("ul", {
+    staticClass: "list-items"
   }, _vm._l(_vm.services, function (service, index) {
-    return _c("option", {
+    return _c("li", {
       key: index,
+      staticClass: "item"
+    }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.selectedServices,
+        expression: "selectedServices"
+      }],
+      staticClass: "checkbox",
+      attrs: {
+        type: "checkbox",
+        id: service.name
+      },
       domProps: {
-        value: service.id
+        value: service.id,
+        checked: Array.isArray(_vm.selectedServices) ? _vm._i(_vm.selectedServices, service.id) > -1 : _vm.selectedServices
+      },
+      on: {
+        change: function change($event) {
+          var $$a = _vm.selectedServices,
+            $$el = $event.target,
+            $$c = $$el.checked ? true : false;
+          if (Array.isArray($$a)) {
+            var $$v = service.id,
+              $$i = _vm._i($$a, $$v);
+            if ($$el.checked) {
+              $$i < 0 && (_vm.selectedServices = $$a.concat([$$v]));
+            } else {
+              $$i > -1 && (_vm.selectedServices = $$a.slice(0, $$i).concat($$a.slice($$i + 1)));
+            }
+          } else {
+            _vm.selectedServices = $$c;
+          }
+        }
       }
-    }, [_vm._v(_vm._s(service.name))]);
-  }), 0)])])])])])]), _vm._v(" "), _c("div", {
+    }), _vm._v(" "), _c("label", {
+      staticClass: "form-check-label",
+      attrs: {
+        "for": service.name
+      }
+    }, [_vm._v(_vm._s(service.name))])]);
+  }), 0)])])])])])])]), _vm._v(" "), _c("div", {
     staticClass: "container mt-5"
   }, [_c("div", {
     staticClass: "alert alert-danger",
@@ -2738,10 +2780,22 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "col-4 d-flex justify-content-center align-items-center"
+    staticClass: "icon"
   }, [_c("i", {
     staticClass: "fa-solid fa-wifi"
   })]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "select-btn"
+  }, [_c("span", {
+    staticClass: "btn-text"
+  }, [_vm._v("Select Services")]), _vm._v(" "), _c("span", {
+    staticClass: "arrow-dwn"
+  }, [_c("i", {
+    staticClass: "fa-solid fa-chevron-down"
+  })])]);
 }];
 render._withStripped = true;
 
@@ -2858,7 +2912,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".search-container[data-v-04c29797] {\n  background-color: #252525;\n  position: relative;\n  padding-bottom: 3rem;\n}\n.search-container .title[data-v-04c29797] {\n  font-family: \"Inter\", sans-serif;\n  color: white;\n  text-align: center;\n  font-weight: bold;\n  font-size: 48px;\n}\n.search-container .title[data-v-04c29797]::after {\n  content: \"finder\";\n  color: #F9D73A;\n}\n.search-container .subtitle[data-v-04c29797] {\n  font-family: \"Inter\", sans-serif;\n  color: white;\n  text-align: center;\n  font-weight: bold;\n  font-size: 20px;\n}\n.search-container .capsule-btn[data-v-04c29797] {\n  background-color: #F9D73A;\n  border-radius: 2rem;\n  border: none;\n  padding: 0.1rem 1.8rem;\n  text-align: center;\n}\n.search-container .capsule-btn[data-v-04c29797]:hover {\n  transform: scale(1.1);\n  transition: 0.5s;\n}\n.search-container .search-container[data-v-04c29797] {\n  position: absolute;\n  bottom: -4.5rem;\n  left: 50%;\n  transform: translate(-50%);\n  width: 100%;\n  background-color: transparent;\n}\n.search-container .search-container .search-bar[data-v-04c29797] {\n  border: none;\n  width: 100%;\n  border-radius: 5px;\n  height: 46px;\n  z-index: 1;\n  width: 100%;\n  padding: 0.8rem;\n}\n.search-container .search-container .search-btn[data-v-04c29797] {\n  border: none;\n  padding: 0 2rem;\n  background-color: #F9D73A;\n  border-radius: 4rem;\n  height: 46px;\n  cursor: pointer;\n}\n.search-container .search-container .search-btn[data-v-04c29797]:hover {\n  transform: scale(1.1);\n  transition: 0.5s;\n}\n.search-container .search-container .search-btn i[data-v-04c29797] {\n  color: #252525;\n  font-size: 1.5rem;\n}\n.card-filter[data-v-04c29797] {\n  background-color: #252525;\n  height: 65px;\n  border-radius: 0.3rem;\n}\n.card-filter i[data-v-04c29797] {\n  color: #F9D73A;\n  font-size: 2.5rem;\n}\n.card-filter .value[data-v-04c29797] {\n  color: white;\n}\n.card-filter select[data-v-04c29797] {\n  background-color: #F9D73A;\n  color: #252525;\n  border: none;\n}\n.card-filter input[type=range][data-v-04c29797] {\n  display: block;\n  width: 100%;\n  -webkit-appearance: none;\n  background-color: #F9D73A;\n  height: 10px;\n  border-radius: 5px;\n  margin: 0 auto;\n  outline: 0;\n}\n.card-filter input[type=range][data-v-04c29797]::-webkit-slider-thumb {\n  -webkit-appearance: none;\n  background-color: #e74c3c;\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n  border: 2px solid white;\n  cursor: pointer;\n  -webkit-transition: 0.3s ease-in-out;\n  transition: 0.3s ease-in-out;\n}\n.card-filter input[type=range][data-v-04c29797]::-webkit-slider-thumb:hover {\n  background-color: white;\n  border: 2px solid #e74c3c;\n}\n.card-filter input[type=range][data-v-04c29797]::-webkit-slider-thumb:active {\n  transform: scale(1.6);\n}", ""]);
+exports.push([module.i, ".search-container[data-v-04c29797] {\n  background-color: #252525;\n  position: relative;\n  padding-bottom: 3rem;\n}\n.search-container .title[data-v-04c29797] {\n  font-family: \"Inter\", sans-serif;\n  color: white;\n  text-align: center;\n  font-weight: bold;\n  font-size: 48px;\n}\n.search-container .title[data-v-04c29797]::after {\n  content: \"finder\";\n  color: #F9D73A;\n}\n.search-container .subtitle[data-v-04c29797] {\n  font-family: \"Inter\", sans-serif;\n  color: white;\n  text-align: center;\n  font-weight: bold;\n  font-size: 20px;\n}\n.search-container .capsule-btn[data-v-04c29797] {\n  background-color: #F9D73A;\n  border-radius: 2rem;\n  border: none;\n  padding: 0.1rem 1.8rem;\n  text-align: center;\n}\n.search-container .capsule-btn[data-v-04c29797]:hover {\n  transform: scale(1.1);\n  transition: 0.5s;\n}\n.search-container .search-container[data-v-04c29797] {\n  position: absolute;\n  bottom: -4.5rem;\n  left: 50%;\n  transform: translate(-50%);\n  width: 100%;\n  background-color: transparent;\n}\n.search-container .search-container .search-bar[data-v-04c29797] {\n  border: none;\n  width: 100%;\n  border-radius: 5px;\n  height: 46px;\n  z-index: 1;\n  width: 100%;\n  padding: 0.8rem;\n}\n.search-container .search-container .search-btn[data-v-04c29797] {\n  border: none;\n  padding: 0 2rem;\n  background-color: #F9D73A;\n  border-radius: 4rem;\n  height: 46px;\n  cursor: pointer;\n}\n.search-container .search-container .search-btn[data-v-04c29797]:hover {\n  transform: scale(1.1);\n  transition: 0.5s;\n}\n.search-container .search-container .search-btn i[data-v-04c29797] {\n  color: #252525;\n  font-size: 1.5rem;\n}\n.card-filter[data-v-04c29797] {\n  background-color: #252525;\n  height: 65px;\n  border-radius: 0.3rem;\n}\n.card-filter i[data-v-04c29797] {\n  color: #F9D73A;\n  font-size: 2.5rem;\n}\n.card-filter .value[data-v-04c29797] {\n  color: white;\n}\n.card-filter select[data-v-04c29797] {\n  background-color: #F9D73A;\n  color: #252525;\n  border: none;\n}\n.card-filter input[type=range][data-v-04c29797] {\n  display: block;\n  width: 100%;\n  -webkit-appearance: none;\n  background-color: #F9D73A;\n  height: 10px;\n  border-radius: 5px;\n  margin: 0 auto;\n  outline: 0;\n}\n.card-filter input[type=range][data-v-04c29797]::-webkit-slider-thumb {\n  -webkit-appearance: none;\n  background-color: #e74c3c;\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n  border: 2px solid white;\n  cursor: pointer;\n  -webkit-transition: 0.3s ease-in-out;\n  transition: 0.3s ease-in-out;\n}\n.card-filter input[type=range][data-v-04c29797]::-webkit-slider-thumb:hover {\n  background-color: white;\n  border: 2px solid #e74c3c;\n}\n.card-filter input[type=range][data-v-04c29797]::-webkit-slider-thumb:active {\n  transform: scale(1.6);\n}\n.card-filter[data-v-04c29797] {\n  background-color: #252525;\n  height: 65px;\n  border-radius: 0.3rem;\n}\n.card-filter .card-container[data-v-04c29797] {\n  display: flex;\n  height: 100%;\n}\n.card-filter .card-container .icon[data-v-04c29797] {\n  width: 30%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.card-filter .card-container .icon i[data-v-04c29797] {\n  color: #F9D73A;\n  font-size: 2.5rem;\n}\n.card-filter .card-container .select[data-v-04c29797] {\n  width: 70%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  padding: 0 1rem;\n}\n.card-filter .card-container .my-container[data-v-04c29797] {\n  position: relative;\n  width: 100%;\n}\n.card-filter .card-container .my-container .select-btn[data-v-04c29797] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 14px;\n  border-radius: 5px;\n  cursor: pointer;\n  background-color: #F9D73A;\n  height: 35px;\n}\n.card-filter .card-container .my-container .select-btn .btn-text[data-v-04c29797] {\n  font-size: 17px;\n  font-weight: 400;\n  color: #252525;\n}\n.card-filter .card-container .my-container .select-btn .arrow-dwn[data-v-04c29797] {\n  transition: 0.3s;\n  z-index: 1;\n}\n.card-filter .card-container .my-container .select-btn .arrow-dwn i[data-v-04c29797] {\n  color: #252525;\n  font-size: 2rem;\n}\n.card-filter .card-container .my-container .select-btn.open .arrow-dwn[data-v-04c29797] {\n  transform: rotate(-180deg);\n}\n.card-filter .card-container .my-container .list-items[data-v-04c29797] {\n  position: absolute;\n  width: 100%;\n  top: 3rem;\n  border-radius: 5px;\n  padding: 16px;\n  background-color: #F9D73A;\n  display: none;\n  z-index: 1;\n}\n.card-filter .card-container .my-container .list-items .item[data-v-04c29797] {\n  display: flex;\n  align-items: center;\n  list-style: none;\n  height: 50px;\n  cursor: pointer;\n  transition: 0.3s;\n  padding: 0 15px;\n  border-radius: 8px;\n}\n.card-filter .card-container .my-container .list-items .item[data-v-04c29797]:hover {\n  background-color: #dcba23;\n}\n.card-filter .card-container .my-container .list-items .item .checkbox[data-v-04c29797] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 16px;\n  width: 16px;\n  border-radius: 4px;\n  margin-right: 12px;\n  border: 1.5px solid #252525;\n  transition: all 0.3s ease-in-out;\n}\n.card-filter .card-container .my-container .list-items .item.checked .checkbox[data-v-04c29797] {\n  background-color: #4070f4;\n  border-color: #4070f4;\n}\n.card-filter .card-container .my-container .list-items .item .check-icon[data-v-04c29797] {\n  color: #fff;\n  font-size: 11px;\n  transform: scale(0);\n  transition: all 0.2s ease-in-out;\n}\n.card-filter .card-container .my-container .list-items .item.checked .check-icon[data-v-04c29797] {\n  transform: scale(1);\n}\n.card-filter .card-container .my-container .list-items .item-text[data-v-04c29797] {\n  font-size: 16px;\n  font-weight: 400;\n  color: #333;\n}\n.card-filter .card-container .my-container .select-btn.open ~ .list-items[data-v-04c29797] {\n  display: block;\n}", ""]);
 
 // exports
 

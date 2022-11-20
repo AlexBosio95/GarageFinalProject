@@ -1,6 +1,6 @@
 <template>
 
-    <div >
+    <div>
         <!-- Header navigation -->
 
         <!-- Select City or address -->
@@ -92,23 +92,36 @@
 
                 <div class="col">
                     <!-- Services -->
-                    <!-- <div class="form-check form-check-inline mb-3" v-for="(service, index) in services" :key="index">
-                        <input type="checkbox" class="form-check-input mr-2" :id="service.name" :value="service.id" v-model="selectedServices">
-                        <label :for="service.name" class="form-check-label">{{service.name}}</label>
-                    </div> -->
-
                     <div class="card-filter">
-                        <div class="row h-100">
-                            <div class="col-4 d-flex justify-content-center align-items-center">
+                        <div class="card-container">
+
+                            <div class="icon">
                                 <i class="fa-solid fa-wifi"></i>
                             </div>
-                            <div class="col-7 d-flex justify-content-center align-items-center">
-                                <select class="custom-select" v-model="selectedServices">
-                                    <option v-for="(service, index) in services" :key="index" :value="service.id">{{service.name}}</option>
-                                </select>
+
+                            <div class="select">
+                                <div class="my-container">
+
+                                    <div class="select-btn">
+                                        <span class="btn-text">Select Services</span>
+                                        <span class="arrow-dwn">
+                                            <i class="fa-solid fa-chevron-down"></i>
+                                        </span>
+                                    </div>
+
+                                    <ul class="list-items">
+                                        <li class="item" v-for="(service, index) in services" :key="index">
+                                            <input type="checkbox" class="checkbox" :id="service.name" :value="service.id" v-model="selectedServices">
+                                            <label :for="service.name" class="form-check-label">{{service.name}}</label>
+                                        </li>
+                                    </ul>
+
+                                </div>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
 
 
@@ -200,7 +213,6 @@ export default
         }
     },
     methods: {
-
 
         nextPage(page){
 
@@ -306,12 +318,40 @@ export default
 
                 });
             }
+        },
+
+        selectService(){
+            const selectBtn = document.querySelector(".select-btn"),
+                items = document.querySelectorAll(".item");
+
+            selectBtn.addEventListener("click", () => {
+                selectBtn.classList.toggle("open");
+            });
+
+            items.forEach(item => {
+                item.addEventListener("click", () => {
+                    item.classList.toggle("checked");
+
+                    let checked = document.querySelectorAll(".checked"),
+                        btnText = document.querySelector(".btn-text");
+
+                        if(checked && checked.length > 0){
+                            btnText.innerText = `${checked.length} Selected`;
+                        }else{
+                            btnText.innerText = "Select Language";
+                        }
+                });
+            })
+
         }
+        
     },
     mounted(){
         this.getAllGarages(1);
         this.getAllServices();
-    },
+        this.selectService();
+
+    }
 }
 </script>
 
@@ -450,6 +490,142 @@ export default
         input[type="range"]::-webkit-slider-thumb:active {
             transform: scale(1.6);
         }
+
+        
+
+}
+
+
+.card-filter{
+    background-color: $bg-head;
+    height: 65px;
+    border-radius: .3rem;
+
+    .card-container{
+        display: flex;
+        height: 100%;
+
+        .icon{
+            width: 30%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            i{
+                color: $my-yellow;
+                font-size: 2.5rem;
+            }
+        }
+
+        .select{
+            width: 70%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+
+        .my-container{
+            position: relative;
+            width: 100%;
+
+            .select-btn{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 14px;
+                border-radius: 5px;
+                cursor: pointer;
+                background-color: $my-yellow;
+                height: 35px;
+
+                .btn-text{
+                    font-size: 17px;
+                    font-weight: 400;
+                    color: $bg-head;
+                }
+
+                .arrow-dwn{
+                    transition: 0.3s;
+                    z-index: 1;
+
+                    i{
+                        color: $bg-head;
+                        font-size: 2rem;
+                    }
+                }
+
+                &.open .arrow-dwn{
+                    transform: rotate(-180deg);
+                }
+            }
+
+            .list-items{
+                position: absolute;
+                width: 100%;
+                top: 3rem;
+                border-radius: 5px;
+                padding: 16px;
+                background-color: $my-yellow;
+                display: none;
+                z-index: 1;
+
+                .item{
+                    display: flex;
+                    align-items: center;
+                    list-style: none;
+                    height: 50px;
+                    cursor: pointer;
+                    transition: 0.3s;
+                    padding: 0 15px;
+                    border-radius: 8px;
+
+                    &:hover{
+                        background-color: $my-yellow-s;
+                    }
+
+                    .checkbox{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 16px;
+                        width: 16px;
+                        border-radius: 4px;
+                        margin-right: 12px;
+                        border: 1.5px solid $bg-head;
+                        transition: all 0.3s ease-in-out;
+                    }
+
+                    &.checked .checkbox{
+                        background-color: #4070f4;
+                        border-color: #4070f4;
+                    }
+
+                    .check-icon{
+                        color: #fff;
+                        font-size: 11px;
+                        transform: scale(0);
+                        transition: all 0.2s ease-in-out;
+                    }
+
+                    &.checked .check-icon{
+                        transform: scale(1);
+                    }
+                }
+
+                .item-text{
+                    font-size: 16px;
+                    font-weight: 400;
+                    color: #333;
+                }
+            }
+
+            .select-btn.open ~ .list-items{
+                display: block;
+            }
+        }
+    }
 
 }
 
