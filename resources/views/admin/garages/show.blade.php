@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="container">
-    <a href="{{ route('admin.garages.index') }}" class="btn btn-primary mb-2">< back </a>
+    <a href="{{ route('admin.garages.index') }}" class="btn btn-primary mb-2 mr-3">< back </a>
     
-    <a href="{{ route('admin.messages', ['garage' => $garage]) }}" class="btn btn-primary mb-2">Show correlated messages</a>
+    <a href="{{ route('admin.messages', ['garage' => $garage]) }}" class="btn btn-primary mb-2 mr-3">Show correlated messages</a>
     
-    <a href="{{ route('admin.views', ['garage' => $garage]) }}" class="btn btn-primary mb-2">Check views</a>
+    <a href="{{ route('admin.views', ['garage' => $garage]) }}" class="btn btn-primary mb-2 mr-3">Check views</a>
 
     <div class="card mb-3">
         @if ($garage->image)
