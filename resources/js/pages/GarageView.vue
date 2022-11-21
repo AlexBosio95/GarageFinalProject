@@ -4,18 +4,24 @@
         <router-link class="btn btn-primary" :to="{name: 'home'}"> < Back</router-link>
         <div class="card mt-4">
             <img :src="garage.image" class="card-img-top max-heigth" :alt="garage.title">
-            <div class="card-body">
+            <div class="card-body my-card">
                 <div class="row">
                     <div class="col">
-                        <h5 class="card-title">{{garage.title}}</h5>
-                        <p class="card-text">Parking = {{garage.n_parking}}</p>
-                        <p class="card-text">Address = {{garage.address}}</p>
-                        <p class="card-text">Length = {{garage.length}}</p>
-                        <p class="card-text">Width = {{garage.width}}</p>
-                        <p class="card-text">Description = {{garage.description}}</p>
-                        <router-link class="nav-link" :to="{name: message.routeLink, params: {id: garage.id}}">
-                            {{message.title}}
-                        </router-link>
+                        <h5 class="card-title">
+                            Title: {{garage.title}}
+                        </h5>
+                        <div class="card-body">
+                            <p class="card-text">Parking number: {{garage.n_parking}}</p>
+                            <p class="card-text">Address: {{garage.address}}</p>
+
+                            <p class="card-text">Length: {{garage.length}}</p>
+                            <p class="card-text">Width: {{garage.width}}</p>
+                            <p class="card-text">Square meters: {{garage.sqmt}}</p>
+                            <p class="card-text">Description: {{garage.description}}</p>
+                            <router-link class="messages-link btn" :to="{name: message.routeLink, params: {id: garage.id}}">
+                                Send a message to the owner
+                            </router-link>
+                        </div>
                     </div>
                     <div class="col text-right">
                         <img class="img-map" :src="imageMap" :alt="garage.title" srcset="">
@@ -79,7 +85,7 @@ export default {
 }
 
 .max-heigth{
-    height: 280px;
+    height: 350px;
     object-fit: cover;
 }
 
@@ -89,6 +95,22 @@ export default {
     object-fit: cover;
     object-position: center;
     border-radius: 1rem;
+}
+
+.my-card {
+    background-color: $black;
+    .card-title {
+        color: $my-yellow;
+    }
+
+    .card-text {
+        color: $my-yellow-s;
+    }
+
+    .messages-link {
+        color: $black;
+        background-color: $my-yellow;
+    }
 }
 
 </style>

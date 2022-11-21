@@ -2660,25 +2660,29 @@ var render = function render() {
       alt: _vm.garage.title
     }
   }), _vm._v(" "), _c("div", {
-    staticClass: "card-body"
+    staticClass: "card-body my-card"
   }, [_c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col"
   }, [_c("h5", {
     staticClass: "card-title"
-  }, [_vm._v(_vm._s(_vm.garage.title))]), _vm._v(" "), _c("p", {
+  }, [_vm._v("\r\n                            Title: " + _vm._s(_vm.garage.title) + "\r\n                        ")]), _vm._v(" "), _c("div", {
+    staticClass: "card-body"
+  }, [_c("p", {
     staticClass: "card-text"
-  }, [_vm._v("Parking = " + _vm._s(_vm.garage.n_parking))]), _vm._v(" "), _c("p", {
+  }, [_vm._v("Parking number: " + _vm._s(_vm.garage.n_parking))]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
-  }, [_vm._v("Address = " + _vm._s(_vm.garage.address))]), _vm._v(" "), _c("p", {
+  }, [_vm._v("Address: " + _vm._s(_vm.garage.address))]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
-  }, [_vm._v("Length = " + _vm._s(_vm.garage.length))]), _vm._v(" "), _c("p", {
+  }, [_vm._v("Length: " + _vm._s(_vm.garage.length))]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
-  }, [_vm._v("Width = " + _vm._s(_vm.garage.width))]), _vm._v(" "), _c("p", {
+  }, [_vm._v("Width: " + _vm._s(_vm.garage.width))]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
-  }, [_vm._v("Description = " + _vm._s(_vm.garage.description))]), _vm._v(" "), _c("router-link", {
-    staticClass: "nav-link",
+  }, [_vm._v("Square meters: " + _vm._s(_vm.garage.sqmt))]), _vm._v(" "), _c("p", {
+    staticClass: "card-text"
+  }, [_vm._v("Description: " + _vm._s(_vm.garage.description))]), _vm._v(" "), _c("router-link", {
+    staticClass: "messages-link btn",
     attrs: {
       to: {
         name: _vm.message.routeLink,
@@ -2687,7 +2691,7 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("\r\n                            " + _vm._s(_vm.message.title) + "\r\n                        ")])], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v("\r\n                                Send a message to the owner\r\n                            ")])], 1)]), _vm._v(" "), _c("div", {
     staticClass: "col text-right"
   }, [_c("img", {
     staticClass: "img-map",
@@ -3132,7 +3136,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".bg[data-v-5370dab5] {\n  background-color: #2D2D2D;\n}\n.max-heigth[data-v-5370dab5] {\n  height: 280px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.img-map[data-v-5370dab5] {\n  width: 250px;\n  height: 250px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: 1rem;\n}", ""]);
+exports.push([module.i, ".bg[data-v-5370dab5] {\n  background-color: #2D2D2D;\n}\n.max-heigth[data-v-5370dab5] {\n  height: 350px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.img-map[data-v-5370dab5] {\n  width: 250px;\n  height: 250px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: 1rem;\n}\n.my-card[data-v-5370dab5] {\n  background-color: rgb(0, 0, 0);\n}\n.my-card .card-title[data-v-5370dab5] {\n  color: #F9D73A;\n}\n.my-card .card-text[data-v-5370dab5] {\n  color: #dcba23;\n}\n.my-card .messages-link[data-v-5370dab5] {\n  color: rgb(0, 0, 0);\n  background-color: #F9D73A;\n}", ""]);
 
 // exports
 
