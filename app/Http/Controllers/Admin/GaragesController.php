@@ -279,4 +279,8 @@ class GaragesController extends Controller
         return view('admin.garages.messages', compact('garage'));
     }
 
+    public function showViews(Garage $garage) {
+        return view('admin.garages.views', compact('garage'));
+    }
+
 }

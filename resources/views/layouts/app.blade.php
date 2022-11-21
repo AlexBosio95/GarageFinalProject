@@ -20,6 +20,10 @@
 
     {{-- Validation scripts --}}
     <script src="{{ asset('js/validation.js') }}" defer></script>
+    
+    {{-- Chart.js scripts --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ asset('js/chart.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

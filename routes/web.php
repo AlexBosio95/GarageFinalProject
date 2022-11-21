@@ -30,7 +30,9 @@ Route::middleware('auth')
             
             Route::delete('garages/destroy/{garage}', 'GaragesController@deleteCover')->name('garages.deleteCover');
 
-            Route::get('messages/{garage}', 'GaragesController@showMsg');
+            Route::get('messages/{garage}', 'GaragesController@showMsg')->name('messages');
+            
+            Route::get('views/{garage}', 'GaragesController@showViews')->name('views');
         });
 
 Route::get('{any?}', function() {
