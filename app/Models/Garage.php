@@ -24,7 +24,7 @@ class Garage extends Model
     }
 
     public function services() {
-        return $this->belongsToMany('App\Models\Service');
+        return $this->belongsToMany('App\Models\Service', 'garage_service', 'garage_id', 'service_id')->withPivot(['garage_id', 'service_id']);
     }
 
     public function getRouteKeyName()
