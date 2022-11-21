@@ -17449,7 +17449,7 @@ function Validation(userValue, regExp, msgWrapper) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\validation.js */"./resources/js/validation.js");
+module.exports = __webpack_require__(/*! D:\Utenti\Valerio\OneDrive\Desktop\BOOLEAN\Repositorys\GarageFinalProject\resources\js\validation.js */"./resources/js/validation.js");
 
 
 /***/ })

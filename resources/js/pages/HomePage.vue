@@ -218,11 +218,11 @@ export default {
                             params: { page: page }
                             })
                             .then(response => {
+                                console.log(response);
                                 this.ArrayGarages = response.data.results.data;
                                 this.currentPage = response.data.results.current_page;
                                 this.lastPage = response.data.results.last_page;
 
-                                console.log(response.data.results);
 
                                 if (this.selectedServices.includes(0)) {
                                     this.selectedServices.splice(0, 1);

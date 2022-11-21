@@ -2116,10 +2116,10 @@ __webpack_require__.r(__webpack_exports__);
               page: page
             }
           }).then(function (response) {
+            console.log(response);
             _this3.ArrayGarages = response.data.results.data;
             _this3.currentPage = response.data.results.current_page;
             _this3.lastPage = response.data.results.last_page;
-            console.log(response.data.results);
             if (_this3.selectedServices.includes(0)) {
               _this3.selectedServices.splice(0, 1);
             }

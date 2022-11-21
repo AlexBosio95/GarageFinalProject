@@ -47,6 +47,8 @@ class GarageController extends Controller
 
     public function searchForRadius($radius, $lat, $long, $n_parking, $services)
     {
+
+
         $latVar = 0;
         $longVar = 0;
 
@@ -60,9 +62,9 @@ class GarageController extends Controller
             case '50000':
                 $latVar = 0.44975;
                 $longVar = 0.58823;
-                
+
                 break;
-            
+
             default:
                 $latVar = 0.1799;
                 $longVar = 0.2353;
@@ -70,104 +72,49 @@ class GarageController extends Controller
                 break;
         }
 
-        
-        $servicesArr = explode(',', $services);
-
         $minLat = $lat - $latVar;
         $maxLat = $lat + $latVar;
-        
+
         $minLong = $long - $longVar;
         $maxLong = $long + $longVar;
-        
 
-        // caso in cui non è selezionato ne il parcheggio ne i servizi
-        if($n_parking == 0 && $services == 0) {
-            $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->with(['services'])->paginate(10);
-        } 
+        $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->with(['services'])
+            ->when($n_parking, function ($query , $n_parking){
+                return $query->where('n_parking','>=', $n_parking);
+            })
+            ->when($services, function ($query , $services){
+                $servicesArr =  explode(',', $services);
+                $filteredGaragesId = $this->garageIdByServices($servicesArr);
+                return $query->whereIn('id', $filteredGaragesId);
+            })->paginate(10);
 
-        // caso in cui è selezionato sia il parcheggio che i servizi
-        else if ($n_parking > 0 && $services != 0) {
-            $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->where('n_parking', $n_parking)
-                        ->with(['services'])->whereHas('services', function($query) use ($servicesArr) {
-                        $query->whereIn('service_id', $servicesArr);
-                        })->paginate(10);
-
-                        $servicesId = []; 
-                    
-                        foreach($garage as $prova) {
-                            foreach($prova->services as $attribute) {
-                                $servicesId[] = $attribute->id;
-                            }
-                        }
-
-                        //dd($servicesId);
-                
-                        if($servicesId != $servicesArr) {
-                            return response()->json([
-
-                                'success' => false,
-                                'results' => []
-                    
-                            ]);
-                        }
-        } 
-        
-        // caso in cui è selezionato solo il parcheggio
-        elseif ($n_parking > 0) {
-            $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])->where('n_parking', $n_parking)->with(['services'])->paginate(10);
-        }
-
-        // caso in cui sono selezionati solo i servizi
-        elseif ($services != 0) {
-            $garage = Garage::whereBetween('latitude', [$minLat, $maxLat])->whereBetween('longitude', [$minLong, $maxLong])
-                    ->with(['services'])->whereHas('services', function($query) use ($servicesArr) {
-                        $query->whereIn('service_id', $servicesArr); 
-                    })->paginate(10);
-                    
-                    $servicesId = []; 
-                    
-                    foreach($garage as $prova) {
-                        foreach($prova->services as $attribute) {
-                            $servicesId[] = $attribute->id;
-                        }
-                    }
-
-                    //dd($servicesId);
-            
-                    if($servicesId != $servicesArr) {
-                        return response()->json([
-
-                            'success' => false,
-                            'results' => []
-                
-                        ]);
-                    }
-        }
-
-        
         return response()->json([
-
-            'success' => 'ok',
-            'results' => $garage
-
+        'success' => 'ok',
+        'results' => $garage
         ]);
-
     }
 
+    public function garageIdByServices($servicesArr)
+    {
+        $filteredGaragesId = [];
+        foreach($servicesArr as $service){
+            $garagesIdArr =[];
+            $garagesId = Garage::whereHas('services', function($query) use ($service){
+                $query->where('services.id', $service);
+            })->get('garages.id');
 
+            foreach($garagesId as $garageId){
+                array_push($garagesIdArr ,$garageId->id);
+            }
 
-    public function prova($services) {
-        $garage = Garage::with(['services'])->whereHas('services', function($query) use ($services) {
-            $query->where('service_id', $services);
-        })->get();
-
-
-        return response()->json([
-
-            'success' => 'ok',
-            'results' => $garage
-
-        ]);
+            if($filteredGaragesId){
+                $result = array_intersect($filteredGaragesId, $garagesIdArr);
+                $filteredGaragesId = $result;
+            } else {
+                $filteredGaragesId = $garagesIdArr;
+            }
+        }
+        return $filteredGaragesId;
     }
 
     public function show($id)
