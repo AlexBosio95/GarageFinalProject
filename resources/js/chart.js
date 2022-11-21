@@ -37,7 +37,7 @@ if (!isNull(document.getElementById('myChart'))) {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 
             datasets: [{
-                label: '# of Votes',
+                label: 'Views',
                 
                 data: [
                     january,
