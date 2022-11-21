@@ -2,7 +2,14 @@
 
 @section('content')
     <div class="container">
-        <h1 class="text-center text-primary">Messages</h1>
+        <a
+        class="btn btn-primary mb-5" 
+        href="{{route('admin.garages.show', ['garage' => $garage])}}"
+        >
+            Back
+        </a>
+
+        <h1 class="text-center text-primary mb-5">Messages</h1>
 
         @foreach ($garage->messages as $message)
             <div class="message-wrapper d-flex justify-content-around">

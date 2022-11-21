@@ -1,7 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+
+<div class="container">
+        <a
+        class="btn btn-primary mb-5" 
+        href="{{route('admin.garages.show', ['garage' => $garage])}}"
+        >
+            Back
+        </a>
+
         <h1 class="text-center">
             Title: <br>
             {{$garage->title}}
