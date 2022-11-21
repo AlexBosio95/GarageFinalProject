@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\NewMail;
 use App\Models\Garage;
 use App\Models\Message;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -16,19 +17,22 @@ class MessageController extends Controller
             'name' => 'required',
             'surname' => 'required',
             'email' => 'required|email',
-            'text' => 'required'
+            'text' => 'required',
+            'garage_id' => 'required|numeric'
         ]);
-        
+
         $data = $request->all();
-
+        
         $message = new Message();
-
-        //$message->garage_id = 
 
         $message->fill($data);
         $message->save();
 
-        Mail::to('verapersona@sicuro.it')->send(new NewMail($message));
+        $garage = Garage::find($message->garage_id);
+
+        $user = User::find($garage->user_id);
+
+        Mail::to($user->email)->send(new NewMail($message));
 
         return response()->json([
             'success' => true

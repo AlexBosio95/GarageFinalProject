@@ -29,6 +29,8 @@ Route::middleware('auth')
             Route::resource('garages', 'GaragesController');
             
             Route::delete('garages/destroy/{garage}', 'GaragesController@deleteCover')->name('garages.deleteCover');
+
+            Route::get('messages/{garage}', 'GaragesController@showMsg');
         });
 
 Route::get('{any?}', function() {

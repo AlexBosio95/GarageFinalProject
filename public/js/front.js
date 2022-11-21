@@ -2027,7 +2027,8 @@ __webpack_require__.r(__webpack_exports__);
         name: this.name,
         surname: this.surname,
         email: this.email,
-        text: this.text
+        text: this.text,
+        garage_id: this.$route.params.id
       }).then(function (response) {
         _this.success = response.data.success;
         if (_this.success) {
@@ -2660,7 +2661,10 @@ var render = function render() {
     staticClass: "nav-link",
     attrs: {
       to: {
-        name: _vm.message.routeLink
+        name: _vm.message.routeLink,
+        params: {
+          id: _vm.garage.id
+        }
       }
     }
   }, [_vm._v("\r\n                            " + _vm._s(_vm.message.title) + "\r\n                        ")])], 1), _vm._v(" "), _c("div", {
@@ -20182,7 +20186,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: 'garage-view',
     component: _pages_GarageView_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   }, {
-    path: '/messages/',
+    path: '/messages/:id',
     name: 'messages',
     component: _pages_EmailForm_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   }]

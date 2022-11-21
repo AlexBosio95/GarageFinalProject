@@ -13,7 +13,7 @@
                         <p class="card-text">Length = {{garage.length}}</p>
                         <p class="card-text">Width = {{garage.width}}</p>
                         <p class="card-text">Description = {{garage.description}}</p>
-                        <router-link class="nav-link" :to="{name: message.routeLink}">
+                        <router-link class="nav-link" :to="{name: message.routeLink, params: {id: garage.id}}">
                             {{message.title}}
                         </router-link>
                     </div>

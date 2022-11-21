@@ -29,7 +29,7 @@ const router = new VueRouter({
             component: GarageView
         },
         {
-            path: '/messages/',
+            path: '/messages/:id',
             name: 'messages',
             component: EmailForm
         },

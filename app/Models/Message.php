@@ -11,6 +11,7 @@ class Message extends Model
         'name',
         'surname',
         'text',
+        'garage_id'
     ];
 
     public function garage() {

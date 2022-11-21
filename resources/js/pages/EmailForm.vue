@@ -67,12 +67,14 @@ export default {
     methods: {
 		sendMail() {
 			this.isSending = true;
+            
 
 			axios.post('/api/messages', {
 				name: this.name,
 				surname: this.surname,
 				email: this.email,
-				text: this.text
+				text: this.text,
+                garage_id: this.$route.params.id 
 			})
 			.then(response => {
 				this.success = response.data.success;
