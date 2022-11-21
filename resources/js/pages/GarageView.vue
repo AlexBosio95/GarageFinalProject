@@ -13,6 +13,9 @@
                         <p class="card-text">Length = {{garage.length}}</p>
                         <p class="card-text">Width = {{garage.width}}</p>
                         <p class="card-text">Description = {{garage.description}}</p>
+                        <router-link class="nav-link" :to="{name: message.routeLink, params: {id: garage.id}}">
+                            {{message.title}}
+                        </router-link>
                     </div>
                     <div class="col text-right">
                         <img class="img-map" :src="imageMap" :alt="garage.title" srcset="">
@@ -26,6 +29,7 @@
 </template>
 
 <script>
+
 export default {
     name: 'GarageView',
 
@@ -33,7 +37,11 @@ export default {
         return{
             garage: '',
             addressGarage: [],
-            imageMap: ''
+            imageMap: '',
+            message: {
+                title: 'Messages',
+                routeLink : 'messages'
+            },
         }
     },
 

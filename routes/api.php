@@ -25,3 +25,5 @@ Route::get('garages/{radius}/{lat}/{long}/{n_parking}/{services}', 'Api\GarageCo
 Route::get('services', 'Api\ServicesController@index');
 
 Route::get('garage/{slug}', 'Api\GarageController@show');
+
+Route::post('messages', 'Api\MessageController@sendMessage');
