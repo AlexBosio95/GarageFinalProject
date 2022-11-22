@@ -55,13 +55,10 @@
 
                 <div class="col">
                     <!-- Radius km -->
-<<<<<<< HEAD
                     <div class="card-filter area-select">
                         <!--<div class="row h-100">
-=======
                     <div class="card-filter">
                         <div class="row h-100">
->>>>>>> 4ccb1d9d4a3c6c8d9627f7e80919e8f8767bdc6b
                             <div class="col-4 d-flex justify-content-center align-items-center">
                                 <i class="fa-solid fa-location-dot"></i>
                             </div>
@@ -70,7 +67,6 @@
                                     <option v-for="(option, index) in dataRadius.options" :key="index" :value="option.value">{{option.text}}</option>
                                 </select>
                             </div>
-<<<<<<< HEAD
                         </div> -->
                         <div class="input-group d-flex align-items-center">
                             <div class="input-group-prepend">
@@ -79,10 +75,8 @@
                             <select class="custom-select" v-model="currentRadius" id="select_radius">
                                 <option v-for="(option, index) in dataRadius.options" :key="index" :value="option.value">{{option.text}}</option>
                             </select>
-=======
->>>>>>> 4ccb1d9d4a3c6c8d9627f7e80919e8f8767bdc6b
                         </div>
-                    </div> 
+                    </div>
                 </div>
 
                 <div class="col">
