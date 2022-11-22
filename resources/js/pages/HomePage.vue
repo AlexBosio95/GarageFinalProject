@@ -66,7 +66,7 @@
                                 </select>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
 
                 <div class="col">
@@ -181,7 +181,7 @@ export default
             searchText: '',
             currentLat: 0,
             currentLong: 0,
-            currentRadius: 10000,
+            currentRadius: 20000,
             currentParkingNumber: 0,
             data: [],
             ArrayRadius: [],
