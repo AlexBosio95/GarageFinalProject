@@ -2,6 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/js/axios.js": "/js/axios.js",
+    "/js/chart.js": "/js/chart.js",
     "/js/front.js": "/js/front.js",
     "/js/functions.js": "/js/functions.js",
     "/js/validation.js": "/js/validation.js"

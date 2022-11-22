@@ -2261,7 +2261,7 @@ __webpack_require__.r(__webpack_exports__);
           if (checked && checked.length > 0) {
             btnText.innerText = "".concat(checked.length, " Selected");
           } else {
-            btnText.innerText = "Select Language";
+            btnText.innerText = "Select Services";
           }
         });
       });
@@ -2313,50 +2313,38 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("header", [_c("nav", {
-    staticClass: "navbar navbar-expand-lg navbar-light"
-  }, [_c("a", {
-    staticClass: "navbar-brand",
-    attrs: {
-      href: "#"
-    }
-  }, [_vm._v("Garages")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
-    staticClass: "collapse navbar-collapse",
-    attrs: {
-      id: "navbarNav"
-    }
-  }, [_c("ul", {
-    staticClass: "navbar-nav"
-  }, _vm._l(_vm.menu, function (item, index) {
-    return _c("li", {
-      key: index,
-      staticClass: "nav-item active"
-    }, [_c("router-link", {
-      staticClass: "nav-link",
-      attrs: {
-        to: {
-          name: item.routeLink
-        }
-      }
-    }, [_vm._v(_vm._s(item.title))])], 1);
-  }), 0)])])]);
+  return _vm._m(0);
 };
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("button", {
-    staticClass: "navbar-toggler",
+  return _c("header", [_c("nav", {
+    staticClass: "navbar navbar-expand-lg navbar-light"
+  }, [_c("div", {
+    staticClass: "logo"
+  }, [_c("img", {
     attrs: {
-      type: "button",
-      "data-toggle": "collapse",
-      "data-target": "#navbarNav",
-      "aria-controls": "navbarNav",
-      "aria-expanded": "false",
-      "aria-label": "Toggle navigation"
+      src: "",
+      alt: ""
     }
-  }, [_c("span", {
-    staticClass: "navbar-toggler-icon"
-  })]);
+  }), _vm._v(" "), _c("a", {
+    staticClass: "navbar-brand",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("Garages")])]), _vm._v(" "), _c("div", {
+    staticClass: "admin-link"
+  }, [_c("a", {
+    staticClass: "route-btn",
+    attrs: {
+      href: "http://127.0.0.1:8000/register"
+    }
+  }, [_vm._v("register")]), _vm._v(" "), _c("a", {
+    staticClass: "route-btn",
+    attrs: {
+      href: "http://127.0.0.1:8000/admin"
+    }
+  }, [_vm._v("login")])])])]);
 }];
 render._withStripped = true;
 
@@ -2421,7 +2409,14 @@ var render = function render() {
     staticClass: "fa-solid fa-square-parking icon"
   }), _vm._v(" "), _c("span", {
     staticClass: "text"
-  }, [_vm._v(_vm._s(_vm.n_parking))])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.n_parking))])]), _vm._v(" "), _c("div", {
+    staticClass: "mt-3 services"
+  }, _vm._l(_vm.services, function (service) {
+    return _c("span", {
+      key: service.id,
+      staticClass: "service"
+    }, [_vm._v(_vm._s(_vm.services.length == 0 ? "No service" : service.name))]);
+  }), 0)]), _vm._v(" "), _c("div", {
     staticClass: "view-btn"
   }, [_c("router-link", {
     staticClass: "text-btn",
@@ -2660,37 +2655,74 @@ var render = function render() {
         name: "home"
       }
     }
-  }, [_vm._v(" < Back")]), _vm._v(" "), _c("div", {
-    staticClass: "card mt-4"
+  }, [_vm._v(" Back")]), _vm._v(" "), _c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col"
+  }, [_c("div", {
+    staticClass: "card-info"
   }, [_c("img", {
-    staticClass: "card-img-top max-heigth",
+    staticClass: "card-img",
     attrs: {
       src: _vm.garage.image,
       alt: _vm.garage.title
     }
-  }), _vm._v(" "), _c("div", {
-    staticClass: "card-body my-card"
-  }, [_c("div", {
-    staticClass: "row"
-  }, [_c("div", {
-    staticClass: "col"
-  }, [_c("h5", {
+  }), _vm._v(" "), _c("h5", {
     staticClass: "card-title"
-  }, [_vm._v("\r\n                            Title: " + _vm._s(_vm.garage.title) + "\r\n                        ")]), _vm._v(" "), _c("div", {
-    staticClass: "card-body"
+  }, [_vm._v("\n                        Title: " + _vm._s(_vm.garage.title) + "\n                    ")]), _vm._v(" "), _c("div", {
+    staticClass: "main-card"
+  }, [_c("div", {
+    staticClass: "row align-items-center"
+  }, [_vm._m(0), _vm._v(" "), _c("div", {
+    staticClass: "col-9"
+  }, [_c("div", {
+    staticClass: "container-text"
   }, [_c("p", {
     staticClass: "card-text"
-  }, [_vm._v("Parking number: " + _vm._s(_vm.garage.n_parking))]), _vm._v(" "), _c("p", {
+  }, [_vm._v("Address: " + _vm._s(_vm.garage.address))])])])]), _vm._v(" "), _c("div", {
+    staticClass: "row mt-4"
+  }, [_vm._m(1), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_c("div", {
+    staticClass: "container-text"
+  }, [_c("p", {
     staticClass: "card-text"
-  }, [_vm._v("Address: " + _vm._s(_vm.garage.address))]), _vm._v(" "), _c("p", {
+  }, [_vm._v(_vm._s(_vm.garage.length))])])]), _vm._v(" "), _vm._m(2), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_c("div", {
+    staticClass: "container-text"
+  }, [_c("p", {
     staticClass: "card-text"
-  }, [_vm._v("Length: " + _vm._s(_vm.garage.length))]), _vm._v(" "), _c("p", {
+  }, [_vm._v(_vm._s(_vm.garage.height))])])])]), _vm._v(" "), _c("div", {
+    staticClass: "row mt-4"
+  }, [_vm._m(3), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_c("div", {
+    staticClass: "container-text"
+  }, [_c("p", {
     staticClass: "card-text"
-  }, [_vm._v("Width: " + _vm._s(_vm.garage.width))]), _vm._v(" "), _c("p", {
+  }, [_vm._v(_vm._s(_vm.garage.width))])])]), _vm._v(" "), _vm._m(4), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_c("div", {
+    staticClass: "container-text"
+  }, [_c("p", {
     staticClass: "card-text"
-  }, [_vm._v("Square meters: " + _vm._s(_vm.garage.sqmt))]), _vm._v(" "), _c("p", {
-    staticClass: "card-text"
-  }, [_vm._v("Description: " + _vm._s(_vm.garage.description))]), _vm._v(" "), _c("router-link", {
+  }, [_vm._v(_vm._s(_vm.garage.n_parking))])])])]), _vm._v(" "), _c("p", {
+    staticClass: "card-text mt-4"
+  }, [_vm._v("Description: " + _vm._s(_vm.garage.description))])])])]), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_c("div", {
+    staticClass: "card-map"
+  }, [_c("img", {
+    staticClass: "img-map",
+    attrs: {
+      src: _vm.imageMap,
+      alt: _vm.garage.title,
+      srcset: ""
+    }
+  }), _vm._v(" "), _c("div", {
+    staticClass: "container-send-msg"
+  }, [_c("router-link", {
     staticClass: "messages-link btn",
     attrs: {
       to: {
@@ -2700,18 +2732,59 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("\r\n                                Send a message to the owner\r\n                            ")])], 1)]), _vm._v(" "), _c("div", {
-    staticClass: "col text-right"
-  }, [_c("img", {
-    staticClass: "img-map",
-    attrs: {
-      src: _vm.imageMap,
-      alt: _vm.garage.title,
-      srcset: ""
-    }
-  })])])])])], 1)]);
+  }, [_vm._v("\n                            Send a message to the owner\n                        ")])], 1)])])])], 1)]);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "col-3"
+  }, [_c("div", [_c("i", {
+    staticClass: "fa-solid fa-location-dot icon"
+  }), _vm._v(" "), _c("span", {
+    staticClass: "card-text tag-icon"
+  }, [_vm._v("Address")])])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "col"
+  }, [_c("div", [_c("i", {
+    staticClass: "fa-solid fa-ruler-horizontal icon"
+  }), _vm._v(" "), _c("span", {
+    staticClass: "card-text tag-icon"
+  }, [_vm._v("Length")])])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "col"
+  }, [_c("div", [_c("i", {
+    staticClass: "fa-solid fa-ruler-combined icon"
+  }), _vm._v(" "), _c("span", {
+    staticClass: "card-text tag-icon"
+  }, [_vm._v("Height")])])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "col"
+  }, [_c("div", [_c("i", {
+    staticClass: "fa-solid fa-ruler-vertical icon"
+  }), _vm._v(" "), _c("span", {
+    staticClass: "card-text tag-icon"
+  }, [_vm._v("width")])])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "col"
+  }, [_c("div", [_c("i", {
+    staticClass: "fa-solid fa-square-parking icon"
+  }), _vm._v(" "), _c("span", {
+    staticClass: "card-text tag-icon"
+  }, [_vm._v("Parking")])])]);
+}];
 render._withStripped = true;
 
 
@@ -2815,22 +2888,37 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "card-filter"
   }, [_c("div", {
-    staticClass: "row h-100"
-  }, [_vm._m(1), _vm._v(" "), _c("div", {
-    staticClass: "col-7 d-flex flex-column justify-content-center align-items-center"
-  }, [_c("div", {
-    staticClass: "value"
-  }, [_vm._v(_vm._s(_vm.currentRadius) + " km")]), _vm._v(" "), _c("input", {
-    attrs: {
-      type: "range",
-      min: "5000",
-      max: "50000",
-      step: "1000"
-    },
-    domProps: {
-      value: _vm.currentRadius
+    staticClass: "input-group mb-3"
+  }, [_vm._m(1), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.currentRadius,
+      expression: "currentRadius"
+    }],
+    staticClass: "custom-select justify-content-center",
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.currentRadius = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
     }
-  })])])])]), _vm._v(" "), _c("div", {
+  }, _vm._l(_vm.dataRadius.options, function (option, index) {
+    return _c("option", {
+      key: index,
+      attrs: {
+        id: "select_radius"
+      },
+      domProps: {
+        value: option.value
+      }
+    }, [_vm._v(_vm._s(option.text))]);
+  }), 0)])])]), _vm._v(" "), _c("div", {
     staticClass: "col"
   }, [_c("div", {
     staticClass: "card-filter"
@@ -2997,10 +3085,13 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "col-4 d-flex justify-content-center align-items-center"
-  }, [_c("i", {
-    staticClass: "fa-solid fa-map-location"
-  })]);
+    staticClass: "input-group-prepend justify-content-center"
+  }, [_c("label", {
+    staticClass: "input-group-text",
+    attrs: {
+      "for": "select_radius"
+    }
+  }, [_vm._v("Select Radius")])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
@@ -3069,7 +3160,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "header[data-v-1f42fb90] {\n  height: 10vh;\n  background-color: #252525;\n}\nheader nav[data-v-1f42fb90] {\n  background-color: #252525;\n}", ""]);
+exports.push([module.i, "header[data-v-1f42fb90] {\n  height: 10vh;\n  background-color: #252525;\n}\nheader nav[data-v-1f42fb90] {\n  background-color: #252525;\n  display: flex;\n  justify-content: space-between;\n}\nheader nav .admin-link .route-btn[data-v-1f42fb90] {\n  color: #000;\n  text-decoration: none;\n  margin: 5px;\n  background-color: #F9D73A;\n  border-radius: 5px;\n  border: none;\n  padding: 0.1rem 1.8rem;\n  text-align: center;\n}\nheader nav .admin-link .route-btn[data-v-1f42fb90]:hover {\n  transform: scale(1.1);\n  transition: 0.5s;\n}", ""]);
 
 // exports
 
@@ -3107,7 +3198,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".my-card[data-v-07801362] {\n  width: 100%;\n  border: none;\n  height: 500px;\n}\n.my-card .img-conatiner[data-v-07801362] {\n  min-height: 262px;\n}\n.my-card .image-card[data-v-07801362] {\n  width: 100%;\n  border-radius: 0.3rem;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.my-card .main-card[data-v-07801362] {\n  color: white;\n  padding: 1.5rem 0;\n}\n.my-card .main-card .title[data-v-07801362] {\n  font-size: 24px;\n  height: 30px;\n}\n.my-card .main-card .icon[data-v-07801362] {\n  font-size: 2rem;\n  margin-right: 0.5rem;\n  color: #F9D73A;\n}\n.my-card .main-card .text-address[data-v-07801362] {\n  height: 40px;\n  overflow: scroll;\n}\n.my-card .view-btn[data-v-07801362] {\n  background-color: #F9D73A;\n  border: none;\n  width: 60%;\n  height: 35px;\n  border-radius: 0.3rem;\n  text-align: center;\n  cursor: pointer;\n}\n.my-card .view-btn .text-btn[data-v-07801362] {\n  color: #252525;\n  text-decoration: none;\n  line-height: 30px;\n  font-size: 15px;\n  font-family: \"Inter\", sans-serif;\n  font-weight: 900;\n}\n.my-card .view-btn[data-v-07801362]:hover {\n  transform: scale(1.03);\n  transition: 0.5s;\n}", ""]);
+exports.push([module.i, ".my-card[data-v-07801362] {\n  width: 100%;\n  border: none;\n  height: 550px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  background-color: #373737;\n  border-radius: 3px;\n}\n.my-card .img-conatiner[data-v-07801362] {\n  min-height: 262px;\n}\n.my-card .image-card[data-v-07801362] {\n  width: 100%;\n  border-radius: 0.3rem;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.my-card .main-card[data-v-07801362] {\n  color: white;\n  padding: 1rem;\n}\n.my-card .main-card .title[data-v-07801362] {\n  font-size: 24px;\n  height: 30px;\n}\n.my-card .main-card .icon[data-v-07801362] {\n  font-size: 2rem;\n  margin-right: 0.5rem;\n  color: #F9D73A;\n}\n.my-card .main-card .text-address[data-v-07801362] {\n  height: 40px;\n}\n.my-card .main-card .services[data-v-07801362] {\n  display: flex;\n  flex-wrap: wrap;\n}\n.my-card .main-card .service[data-v-07801362] {\n  color: #252525;\n  background-color: #F9D73A;\n  padding: 0.3rem 0.3rem;\n  margin: 0.5rem 0.2rem;\n}\n.my-card .view-btn[data-v-07801362] {\n  background-color: #F9D73A;\n  border: none;\n  width: 100%;\n  height: 35px;\n  border-radius: 0.3rem;\n  text-align: center;\n  cursor: pointer;\n}\n.my-card .view-btn .text-btn[data-v-07801362] {\n  color: #252525;\n  text-decoration: none;\n  line-height: 30px;\n  font-size: 15px;\n  font-family: \"Inter\", sans-serif;\n  font-weight: 900;\n}\n.my-card .view-btn[data-v-07801362]:hover {\n  transform: scale(1.03);\n  transition: 0.5s;\n}", ""]);
 
 // exports
 
@@ -3145,7 +3236,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".bg[data-v-5370dab5] {\n  background-color: #2D2D2D;\n}\n.max-heigth[data-v-5370dab5] {\n  height: 350px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.img-map[data-v-5370dab5] {\n  width: 250px;\n  height: 250px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: 1rem;\n}\n.my-card[data-v-5370dab5] {\n  background-color: rgb(0, 0, 0);\n}\n.my-card .card-title[data-v-5370dab5] {\n  color: #F9D73A;\n}\n.my-card .card-text[data-v-5370dab5] {\n  color: #dcba23;\n}\n.my-card .messages-link[data-v-5370dab5] {\n  color: rgb(0, 0, 0);\n  background-color: #F9D73A;\n}", ""]);
+exports.push([module.i, ".bg[data-v-5370dab5] {\n  background-color: #2D2D2D;\n}\n.card-map[data-v-5370dab5] {\n  border-radius: 0.5rem;\n}\n.card-map .img-map[data-v-5370dab5] {\n  width: 100%;\n  height: 480px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: 0.5rem;\n}\n.card-map .container-send-msg[data-v-5370dab5] {\n  background-color: #252525;\n  width: 100%;\n  border-radius: 0.5rem;\n  margin-top: 1rem;\n  padding: 2rem;\n  text-align: center;\n}\n.card-map .messages-link[data-v-5370dab5] {\n  color: #252525;\n  background-color: #F9D73A;\n}\n.card-info[data-v-5370dab5] {\n  border-radius: 0.5rem;\n  padding: 1.5rem;\n  background-color: #252525;\n  height: 600px;\n}\n.card-info .card-img[data-v-5370dab5] {\n  max-height: 200px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.card-info .card-title[data-v-5370dab5] {\n  color: #F9D73A;\n  margin-top: 1rem;\n}\n.card-info .card-text[data-v-5370dab5] {\n  color: #dcba23;\n}\n.card-info .tag-icon[data-v-5370dab5] {\n  font-size: 20px;\n}\n.card-info .icon[data-v-5370dab5] {\n  color: #F9D73A;\n  font-size: 1.5rem;\n}\n.card-info .container-text[data-v-5370dab5] {\n  background-color: #2D2D2D;\n  padding: 0.5rem;\n  border-radius: 0.5rem;\n}", ""]);
 
 // exports
 
@@ -20356,7 +20447,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })
