@@ -1,7 +1,7 @@
 <template>
 <div class="bg">
     <div class="container mt-4">
-        <router-link class="btn btn-primary" :to="{name: 'home'}"> < Back</router-link>
+        <router-link class="btn btn-primary" :to="{name: 'home'}"> Back</router-link>
         
         <div class="row">
             <div class="col">
