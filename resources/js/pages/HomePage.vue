@@ -88,6 +88,9 @@
                             </div>
                         </div>
                     </div>
+
+                    
+
                 </div>
 
                 <div class="col">
@@ -338,7 +341,7 @@ export default
                         if(checked && checked.length > 0){
                             btnText.innerText = `${checked.length} Selected`;
                         }else{
-                            btnText.innerText = "Select Language";
+                            btnText.innerText = "Select Services";
                         }
                 });
             })
