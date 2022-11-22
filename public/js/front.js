@@ -2121,7 +2121,7 @@ __webpack_require__.r(__webpack_exports__);
       searchText: '',
       currentLat: 0,
       currentLong: 0,
-      currentRadius: 20000,
+      currentRadius: 10000,
       currentParkingNumber: 0,
       data: [],
       ArrayRadius: [],
@@ -2131,6 +2131,12 @@ __webpack_require__.r(__webpack_exports__);
       dataRadius: {
         selected: 20000,
         options: [{
+          text: '5 km',
+          value: 5000
+        }, {
+          text: '10 km',
+          value: 10000
+        }, {
           text: '20 km',
           value: 20000
         }, {
@@ -2161,7 +2167,8 @@ __webpack_require__.r(__webpack_exports__);
         }]
       },
       services: [],
-      selectedServices: []
+      selectedServices: [],
+      loading: true
     };
   },
   methods: {
@@ -2193,6 +2200,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.AllArrayGarages = response.data.results.data;
         _this.currentPage = response.data.results.current_page;
         _this.lastPage = response.data.results.last_page;
+        _this.loading = false;
       });
     },
     getAllServices: function getAllServices() {
@@ -2207,6 +2215,9 @@ __webpack_require__.r(__webpack_exports__);
       this.AllArrayGarages = [];
       this.alertAddress = null;
       this.isFull = true;
+      this.loading = true;
+      this.currentPage = 0;
+      this.lastPage = 0;
       if (this.searchText != '') {
         axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
           _this3.data = response.data.results;
@@ -2223,16 +2234,23 @@ __webpack_require__.r(__webpack_exports__);
             _this3.ArrayGarages = response.data.results.data;
             _this3.currentPage = response.data.results.current_page;
             _this3.lastPage = response.data.results.last_page;
-            console.log(response.data.results);
+
+            //console.log(response.data.results);
+
             if (_this3.selectedServices.includes(0)) {
               _this3.selectedServices.splice(0, 1);
             }
             if (_this3.ArrayGarages.length == 0) {
               _this3.isFull = false;
             }
+            _this3.loading = false;
           });
         })["catch"](function (error) {
           console.log(error);
+          _this3.loading = false;
+          _this3.currentPage = 0;
+          _this3.lastPage = 0;
+          _this3.isFull = false;
         });
       } else {
         this.alertAddress = 'Address is required !';
@@ -2245,6 +2263,7 @@ __webpack_require__.r(__webpack_exports__);
         this.addressArray = [];
         this.ArrayGarages = [];
         this.isFull = true;
+        this.loading = false;
         this.getAllGarages(1);
       } else {
         axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT').then(function (response) {
@@ -2933,15 +2952,17 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "card-filter"
   }, [_c("div", {
-    staticClass: "input-group mb-3"
-  }, [_vm._m(0), _vm._v(" "), _c("select", {
+    staticClass: "row h-100"
+  }, [_vm._m(0), _vm._v(" "), _c("div", {
+    staticClass: "col-7 d-flex justify-content-center align-items-center"
+  }, [_c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.currentRadius,
       expression: "currentRadius"
     }],
-    staticClass: "custom-select justify-content-center",
+    staticClass: "custom-select",
     on: {
       change: function change($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
@@ -2956,14 +2977,11 @@ var render = function render() {
   }, _vm._l(_vm.dataRadius.options, function (option, index) {
     return _c("option", {
       key: index,
-      attrs: {
-        id: "select_radius"
-      },
       domProps: {
         value: option.value
       }
     }, [_vm._v(_vm._s(option.text))]);
-  }), 0)])])]), _vm._v(" "), _c("div", {
+  }), 0)])])])]), _vm._v(" "), _c("div", {
     staticClass: "col"
   }, [_c("div", {
     staticClass: "card-filter"
@@ -3055,7 +3073,9 @@ var render = function render() {
     }, [_vm._v(_vm._s(service.name))])]);
   }), 0)])])])])])])]), _vm._v(" "), _c("div", {
     staticClass: "container mt-5"
-  }, [_c("div", {
+  }, [_vm.loading ? _c("div", {
+    staticClass: "text-center"
+  }, [_vm._m(4)]) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "alert alert-danger",
     "class": {
       "d-none": _vm.isFull
@@ -3082,17 +3102,10 @@ var render = function render() {
     })], 1);
   }), 0), _vm._v(" "), _c("div", {
     staticClass: "mt-4"
-  }, [_c("nav", {
-    attrs: {
-      "aria-label": "Page navigation example"
-    }
-  }, [_c("ul", {
-    staticClass: "pagination"
-  }, [_c("li", {
-    staticClass: "page-item",
-    "class": _vm.currentPage == 1 ? "disabled" : ""
-  }, [_c("a", {
-    staticClass: "page-link",
+  }, [_c("nav", [_vm.currentPage != _vm.lastPage ? _c("ul", {
+    staticClass: "pagination justify-content-center"
+  }, [_c("li", [_c("a", {
+    staticClass: "page-btn",
     attrs: {
       href: "#"
     },
@@ -3102,11 +3115,10 @@ var render = function render() {
         return _vm.prevPage(_vm.currentPage);
       }
     }
-  }, [_vm._v("Previous")])]), _vm._v(" "), _c("li", {
-    staticClass: "page-item",
-    "class": _vm.currentPage == _vm.lastPage ? "disabled" : ""
-  }, [_c("a", {
-    staticClass: "page-link",
+  }, [_c("i", {
+    staticClass: "fa-solid fa-angles-left"
+  })])]), _vm._v(" "), _c("li", [_c("a", {
+    staticClass: "page-btn",
     attrs: {
       href: "#"
     },
@@ -3116,19 +3128,18 @@ var render = function render() {
         return _vm.nextPage(_vm.currentPage);
       }
     }
-  }, [_vm._v("Next")])])])])])])]);
+  }, [_c("i", {
+    staticClass: "fa-solid fa-angles-right"
+  })])])]) : _vm._e()])])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "input-group-prepend justify-content-center"
-  }, [_c("label", {
-    staticClass: "input-group-text",
-    attrs: {
-      "for": "select_radius"
-    }
-  }, [_vm._v("Select Radius")])]);
+    staticClass: "col-4 d-flex justify-content-center align-items-center"
+  }, [_c("i", {
+    staticClass: "fa-solid fa-location-dot"
+  })]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
@@ -3157,6 +3168,17 @@ var staticRenderFns = [function () {
   }, [_c("i", {
     staticClass: "fa-solid fa-chevron-down"
   })])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "spinner-grow text-warning",
+    attrs: {
+      role: "status"
+    }
+  }, [_c("span", {
+    staticClass: "sr-only"
+  }, [_vm._v("Loading...")])]);
 }];
 render._withStripped = true;
 
@@ -3311,7 +3333,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".search-container[data-v-04c29797] {\n  background-color: #252525;\n  position: relative;\n  padding-bottom: 3rem;\n}\n.search-container .title[data-v-04c29797] {\n  font-family: \"Inter\", sans-serif;\n  color: white;\n  text-align: center;\n  font-weight: bold;\n  font-size: 48px;\n}\n.search-container .title[data-v-04c29797]::after {\n  content: \"finder\";\n  color: #F9D73A;\n}\n.search-container .subtitle[data-v-04c29797] {\n  font-family: \"Inter\", sans-serif;\n  color: white;\n  text-align: center;\n  font-weight: bold;\n  font-size: 20px;\n}\n.search-container .capsule-btn[data-v-04c29797] {\n  background-color: #F9D73A;\n  border-radius: 2rem;\n  border: none;\n  padding: 0.1rem 1.8rem;\n  text-align: center;\n}\n.search-container .capsule-btn .text-btn[data-v-04c29797] {\n  color: #252525;\n  text-decoration: none;\n  line-height: 30px;\n  font-size: 15px;\n  font-family: \"Inter\", sans-serif;\n  font-weight: 900;\n}\n.search-container .capsule-btn[data-v-04c29797]:hover {\n  transform: scale(1.03);\n  transition: 0.5s;\n}\n.search-container .search-container[data-v-04c29797] {\n  position: absolute;\n  bottom: -4.5rem;\n  left: 50%;\n  transform: translate(-50%);\n  width: 100%;\n  background-color: transparent;\n}\n.search-container .search-container .search-bar[data-v-04c29797] {\n  border: none;\n  width: 100%;\n  border-radius: 5px;\n  height: 46px;\n  z-index: 1;\n  width: 100%;\n  padding: 0.8rem;\n}\n.search-container .search-container .search-btn[data-v-04c29797] {\n  border: none;\n  padding: 0 2rem;\n  background-color: #F9D73A;\n  border-radius: 4rem;\n  height: 46px;\n  cursor: pointer;\n}\n.search-container .search-container .search-btn[data-v-04c29797]:hover {\n  transform: scale(1.1);\n  transition: 0.5s;\n}\n.search-container .search-container .search-btn i[data-v-04c29797] {\n  color: #252525;\n  font-size: 1.5rem;\n}\n.card-filter[data-v-04c29797] {\n  background-color: #252525;\n  height: 65px;\n  border-radius: 0.3rem;\n}\n.card-filter i[data-v-04c29797] {\n  color: #F9D73A;\n  font-size: 2.5rem;\n}\n.card-filter .value[data-v-04c29797] {\n  color: white;\n}\n.card-filter select[data-v-04c29797] {\n  background-color: #F9D73A;\n  color: #252525;\n  border: none;\n}\n.card-filter input[type=range][data-v-04c29797] {\n  display: block;\n  width: 100%;\n  -webkit-appearance: none;\n  background-color: #F9D73A;\n  height: 10px;\n  border-radius: 5px;\n  margin: 0 auto;\n  outline: 0;\n}\n.card-filter input[type=range][data-v-04c29797]::-webkit-slider-thumb {\n  -webkit-appearance: none;\n  background-color: #e74c3c;\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n  border: 2px solid white;\n  cursor: pointer;\n  -webkit-transition: 0.3s ease-in-out;\n  transition: 0.3s ease-in-out;\n}\n.card-filter input[type=range][data-v-04c29797]::-webkit-slider-thumb:hover {\n  background-color: white;\n  border: 2px solid #e74c3c;\n}\n.card-filter input[type=range][data-v-04c29797]::-webkit-slider-thumb:active {\n  transform: scale(1.6);\n}\n.card-filter[data-v-04c29797] {\n  background-color: #252525;\n  height: 65px;\n  border-radius: 0.3rem;\n}\n.card-filter .card-container[data-v-04c29797] {\n  display: flex;\n  height: 100%;\n}\n.card-filter .card-container .icon[data-v-04c29797] {\n  width: 30%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.card-filter .card-container .icon i[data-v-04c29797] {\n  color: #F9D73A;\n  font-size: 2.5rem;\n}\n.card-filter .card-container .select[data-v-04c29797] {\n  width: 70%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  padding: 0 1rem;\n}\n.card-filter .card-container .my-container[data-v-04c29797] {\n  position: relative;\n  width: 100%;\n}\n.card-filter .card-container .my-container .select-btn[data-v-04c29797] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 14px;\n  border-radius: 5px;\n  cursor: pointer;\n  background-color: #F9D73A;\n  height: 35px;\n}\n.card-filter .card-container .my-container .select-btn .btn-text[data-v-04c29797] {\n  font-size: 17px;\n  font-weight: 400;\n  color: #252525;\n}\n.card-filter .card-container .my-container .select-btn .arrow-dwn[data-v-04c29797] {\n  transition: 0.3s;\n  z-index: 1;\n}\n.card-filter .card-container .my-container .select-btn .arrow-dwn i[data-v-04c29797] {\n  color: #252525;\n  font-size: 2rem;\n}\n.card-filter .card-container .my-container .select-btn.open .arrow-dwn[data-v-04c29797] {\n  transform: rotate(-180deg);\n}\n.card-filter .card-container .my-container .list-items[data-v-04c29797] {\n  position: absolute;\n  width: 100%;\n  top: 3rem;\n  border-radius: 5px;\n  padding: 16px;\n  background-color: #F9D73A;\n  display: none;\n  z-index: 1;\n}\n.card-filter .card-container .my-container .list-items .item[data-v-04c29797] {\n  display: flex;\n  align-items: center;\n  list-style: none;\n  height: 50px;\n  cursor: pointer;\n  transition: 0.3s;\n  padding: 0 15px;\n  border-radius: 8px;\n}\n.card-filter .card-container .my-container .list-items .item[data-v-04c29797]:hover {\n  background-color: #dcba23;\n}\n.card-filter .card-container .my-container .list-items .item .checkbox[data-v-04c29797] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 16px;\n  width: 16px;\n  border-radius: 4px;\n  margin-right: 12px;\n  border: 1.5px solid #252525;\n  transition: all 0.3s ease-in-out;\n}\n.card-filter .card-container .my-container .list-items .item.checked .checkbox[data-v-04c29797] {\n  background-color: #4070f4;\n  border-color: #4070f4;\n}\n.card-filter .card-container .my-container .list-items .item .check-icon[data-v-04c29797] {\n  color: #fff;\n  font-size: 11px;\n  transform: scale(0);\n  transition: all 0.2s ease-in-out;\n}\n.card-filter .card-container .my-container .list-items .item.checked .check-icon[data-v-04c29797] {\n  transform: scale(1);\n}\n.card-filter .card-container .my-container .list-items .item-text[data-v-04c29797] {\n  font-size: 16px;\n  font-weight: 400;\n  color: #333;\n}\n.card-filter .card-container .my-container .select-btn.open ~ .list-items[data-v-04c29797] {\n  display: block;\n}", ""]);
+exports.push([module.i, ".search-container[data-v-04c29797] {\n  background-color: #252525;\n  position: relative;\n  padding-bottom: 3rem;\n}\n.search-container .title[data-v-04c29797] {\n  font-family: \"Inter\", sans-serif;\n  color: white;\n  text-align: center;\n  font-weight: bold;\n  font-size: 48px;\n}\n.search-container .title[data-v-04c29797]::after {\n  content: \"finder\";\n  color: #F9D73A;\n}\n.search-container .subtitle[data-v-04c29797] {\n  font-family: \"Inter\", sans-serif;\n  color: white;\n  text-align: center;\n  font-weight: bold;\n  font-size: 20px;\n}\n.search-container .capsule-btn[data-v-04c29797] {\n  background-color: #F9D73A;\n  border-radius: 2rem;\n  border: none;\n  padding: 0.1rem 1.8rem;\n  text-align: center;\n}\n.search-container .capsule-btn .text-btn[data-v-04c29797] {\n  color: #252525;\n  text-decoration: none;\n  line-height: 30px;\n  font-size: 15px;\n  font-family: \"Inter\", sans-serif;\n  font-weight: 900;\n}\n.search-container .capsule-btn[data-v-04c29797]:hover {\n  transform: scale(1.03);\n  transition: 0.5s;\n}\n.search-container .search-container[data-v-04c29797] {\n  position: absolute;\n  bottom: -4.5rem;\n  left: 50%;\n  transform: translate(-50%);\n  width: 100%;\n  background-color: transparent;\n}\n.search-container .search-container .search-bar[data-v-04c29797] {\n  border: none;\n  width: 100%;\n  border-radius: 5px;\n  height: 46px;\n  z-index: 1;\n  width: 100%;\n  padding: 0.8rem;\n}\n.search-container .search-container .search-btn[data-v-04c29797] {\n  border: none;\n  padding: 0 2rem;\n  background-color: #F9D73A;\n  border-radius: 4rem;\n  height: 46px;\n  cursor: pointer;\n}\n.search-container .search-container .search-btn[data-v-04c29797]:hover {\n  transform: scale(1.1);\n  transition: 0.5s;\n}\n.search-container .search-container .search-btn i[data-v-04c29797] {\n  color: #252525;\n  font-size: 1.5rem;\n}\n.area-select[data-v-04c29797] {\n  display: flex;\n  align-items: center;\n  padding: 0 16px;\n}\n.card-filter[data-v-04c29797] {\n  background-color: #252525;\n  height: 65px;\n  border-radius: 0.3rem;\n}\n.card-filter i[data-v-04c29797] {\n  color: #F9D73A;\n  font-size: 2.5rem;\n}\n.card-filter .value[data-v-04c29797] {\n  color: white;\n}\n.card-filter select[data-v-04c29797] {\n  background-color: #F9D73A;\n  color: #252525;\n  border: none;\n}\n.card-filter input[type=range][data-v-04c29797] {\n  display: block;\n  width: 100%;\n  -webkit-appearance: none;\n  background-color: #F9D73A;\n  height: 10px;\n  border-radius: 5px;\n  margin: 0 auto;\n  outline: 0;\n}\n.card-filter input[type=range][data-v-04c29797]::-webkit-slider-thumb {\n  -webkit-appearance: none;\n  background-color: #e74c3c;\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n  border: 2px solid white;\n  cursor: pointer;\n  -webkit-transition: 0.3s ease-in-out;\n  transition: 0.3s ease-in-out;\n}\n.card-filter input[type=range][data-v-04c29797]::-webkit-slider-thumb:hover {\n  background-color: white;\n  border: 2px solid #e74c3c;\n}\n.card-filter input[type=range][data-v-04c29797]::-webkit-slider-thumb:active {\n  transform: scale(1.6);\n}\n.card-filter[data-v-04c29797] {\n  background-color: #252525;\n  height: 65px;\n  border-radius: 0.3rem;\n}\n.card-filter .card-container[data-v-04c29797] {\n  display: flex;\n  height: 100%;\n}\n.card-filter .card-container .icon[data-v-04c29797] {\n  width: 30%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.card-filter .card-container .icon i[data-v-04c29797] {\n  color: #F9D73A;\n  font-size: 2.5rem;\n}\n.card-filter .card-container .select[data-v-04c29797] {\n  width: 70%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  padding: 0 1rem;\n}\n.card-filter .card-container .my-container[data-v-04c29797] {\n  position: relative;\n  width: 100%;\n}\n.card-filter .card-container .my-container .select-btn[data-v-04c29797] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 14px;\n  border-radius: 5px;\n  cursor: pointer;\n  background-color: #F9D73A;\n  height: 35px;\n}\n.card-filter .card-container .my-container .select-btn .btn-text[data-v-04c29797] {\n  font-size: 0.9rem;\n  color: #252525;\n}\n.card-filter .card-container .my-container .select-btn .arrow-dwn[data-v-04c29797] {\n  transition: 0.3s;\n  z-index: 1;\n}\n.card-filter .card-container .my-container .select-btn .arrow-dwn i[data-v-04c29797] {\n  color: #252525;\n  font-size: 1rem;\n}\n.card-filter .card-container .my-container .select-btn.open .arrow-dwn[data-v-04c29797] {\n  transform: rotate(-180deg);\n}\n.card-filter .card-container .my-container .list-items[data-v-04c29797] {\n  position: absolute;\n  width: 100%;\n  top: 3rem;\n  border-radius: 5px;\n  padding: 16px;\n  background-color: #F9D73A;\n  display: none;\n  z-index: 1;\n}\n.card-filter .card-container .my-container .list-items .item[data-v-04c29797] {\n  display: flex;\n  align-items: center;\n  list-style: none;\n  height: 50px;\n  cursor: pointer;\n  transition: 0.3s;\n  padding: 0 15px;\n  border-radius: 8px;\n}\n.card-filter .card-container .my-container .list-items .item[data-v-04c29797]:hover {\n  background-color: #dcba23;\n}\n.card-filter .card-container .my-container .list-items .item .checkbox[data-v-04c29797] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 16px;\n  width: 16px;\n  border-radius: 4px;\n  margin-right: 12px;\n  border: 1.5px solid #252525;\n  transition: all 0.3s ease-in-out;\n}\n.card-filter .card-container .my-container .list-items .item.checked .checkbox[data-v-04c29797] {\n  background-color: #4070f4;\n  border-color: #4070f4;\n}\n.card-filter .card-container .my-container .list-items .item .check-icon[data-v-04c29797] {\n  color: #fff;\n  font-size: 11px;\n  transform: scale(0);\n  transition: all 0.2s ease-in-out;\n}\n.card-filter .card-container .my-container .list-items .item.checked .check-icon[data-v-04c29797] {\n  transform: scale(1);\n}\n.card-filter .card-container .my-container .list-items .item-text[data-v-04c29797] {\n  font-size: 16px;\n  font-weight: 400;\n  color: #333;\n}\n.card-filter .card-container .my-container .select-btn.open ~ .list-items[data-v-04c29797] {\n  display: block;\n}\n.page-btn[data-v-04c29797] {\n  background-color: #F9D73A;\n  color: #252525;\n  padding: 0.5rem 1rem;\n  margin: 0.5rem;\n  border-radius: 0.5rem;\n  text-decoration: none;\n}\n.page-btn[data-v-04c29797]:hover {\n  color: #F9D73A;\n  background-color: #252525;\n}", ""]);
 
 // exports
 
