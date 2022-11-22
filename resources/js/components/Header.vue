@@ -3,7 +3,7 @@
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="logo">
                 <img src="" alt="">
-                <a class="navbar-brand" href="#">Garages</a>
+                <router-link class="tex" :to="{name: 'home'}" >Garage<span>fnider</span></router-link>
             </div>
             <div class="admin-link">
                 <a class="route-btn" href="http://127.0.0.1:8000/register">register</a>

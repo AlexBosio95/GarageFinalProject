@@ -13,7 +13,7 @@
 
                 <div class="text-center">
                     <button class="capsule-btn">
-                        <router-link class="text-btn" :to="{name: 'about-us', params: {slug: slug}}" >AboutUs</router-link>
+                        <router-link class="text-btn" :to="{name: 'about-us'}" >About Us</router-link>
                     </button>
                 </div>
 
