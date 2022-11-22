@@ -15,7 +15,11 @@
                     <i class="fa-solid fa-square-parking icon"></i>
                     <span class="text">{{n_parking}}</span>
                 </div>
+                <div class="mt-3 services">
+                    <span class="service" v-for="(service) in services" :key="service.id">{{(services.length == 0) ? 'No service' : service.name}}</span>
+                </div>
             </div>
+
 
             <div class="view-btn">
                 <router-link class="text-btn" :to="{name: 'garage-view', params: {slug: slug}}" >Check out the garage</router-link>
@@ -26,14 +30,15 @@
 
 <script>
 export default {
-    props: { 
+    props: {
         title : String,
-        image: String, 
-        n_parking: Number, 
-        address: String, 
-        slug: String, 
-        services: Array, 
-        ArrayGarages: Array },
+        image: String,
+        n_parking: Number,
+        address: String,
+        slug: String,
+        services: Array,
+        ArrayGarages: Array
+        },
 
         methods: {
             getImage(image){
@@ -51,7 +56,7 @@ export default {
                 }
             }
         }
-    
+
 
 }
 </script>
@@ -63,7 +68,12 @@ export default {
 .my-card{
     width: 100%;
     border: none;
-    height: 500px;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #373737;
+    border-radius: 3px;
 
     .img-conatiner{
         min-height: 262px;
@@ -77,7 +87,7 @@ export default {
 
     .main-card{
         color: white;
-        padding: 1.5rem 0;
+        padding: 1rem;
 
         .title{
             font-size: 24px;
@@ -92,14 +102,24 @@ export default {
 
         .text-address{
             height: 40px;
-            overflow: scroll;
+        }
+
+        .services{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .service{
+            color: $bg-head;
+            background-color: $my-yellow;
+            padding: .3rem .3rem;
+            margin: .5rem .2rem;
         }
     }
 
     .view-btn{
         background-color: $my-yellow;
         border: none;
-        width: 60%;
+        width: 100%;
         height: 35px;
         border-radius: .3rem;
         text-align: center;

@@ -5,7 +5,7 @@
 
         <!-- Select City or address -->
         <div class="search-container">
-            
+
             <div class="container">
 
                 <h1 class="title">Garage</h1>
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                
+
 
                 <div v-if="alertAddress" class="alert alert-danger" role="alert">
                     {{alertAddress}}
@@ -54,7 +54,7 @@
                 <div class="col">
                     <!-- Radius km -->
                     <div class="card-filter">
-                        <div class="row h-100">
+                        <!--<div class="row h-100">
                             <div class="col-4 d-flex justify-content-center align-items-center">
                                 <i class="fa-solid fa-map-location"></i>
                             </div>
@@ -62,15 +62,15 @@
                                 <div class="value">{{currentRadius}} km</div>
                                 <input type="range" min="5000" max="50000" step="1000" :value="currentRadius">
                             </div>
-                        </div>
-                        <!-- <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Select Radius</label>
-                            </div>
-                            <select class="custom-select" v-model="currentRadius">
-                                <option v-for="(option, index) in dataRadius.options" :key="index" :value="option.value">{{option.text}}</option>
-                            </select>
                         </div> -->
+                        <div class="input-group mb-3 ">
+                            <div class="input-group-prepend justify-content-center">
+                                <label class="input-group-text" for="select_radius">Select Radius</label>
+                            </div>
+                            <select class="custom-select justify-content-center" v-model="currentRadius">
+                                <option v-for="(option, index) in dataRadius.options" :key="index" :value="option.value" id="select_radius">{{option.text}}</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
@@ -88,6 +88,9 @@
                             </div>
                         </div>
                     </div>
+
+
+
                 </div>
 
                 <div class="col">
@@ -168,7 +171,7 @@
 <script>
 import cardGarage from "../components/cardGarage.vue"
 
-export default 
+export default
     {
     components: { cardGarage },
     name: 'MainPost',
@@ -338,13 +341,13 @@ export default
                         if(checked && checked.length > 0){
                             btnText.innerText = `${checked.length} Selected`;
                         }else{
-                            btnText.innerText = "Select Language";
+                            btnText.innerText = "Select Services";
                         }
                 });
             })
 
         }
-        
+
     },
     mounted(){
         this.getAllGarages(1);
@@ -383,7 +386,7 @@ export default
         text-align: center;
         font-weight: bold;
         font-size: 20px;
-        
+
     }
 
     .capsule-btn{
@@ -416,7 +419,7 @@ export default
             width: 100%;
             padding: .8rem;
         }
-    
+
         .search-btn{
             border: none;
             padding: 0 2rem;
@@ -470,7 +473,7 @@ export default
         margin: 0 auto;
         outline: 0;
         }
-        
+
         input[type="range"]::-webkit-slider-thumb {
         -webkit-appearance: none;
         background-color: #e74c3c;
@@ -481,7 +484,7 @@ export default
         cursor: pointer;
         transition: .3s ease-in-out;
         }
-    
+
         input[type="range"]::-webkit-slider-thumb:hover {
             background-color: white;
             border: 2px solid #e74c3c;
@@ -491,7 +494,7 @@ export default
             transform: scale(1.6);
         }
 
-        
+
 
 }
 
