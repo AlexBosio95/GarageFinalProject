@@ -55,8 +55,6 @@
 
                 <div class="col">
                     <!-- Radius km -->
-                    <div class="card-filter area-select">
-                        <!--<div class="row h-100">
                     <div class="card-filter">
                         <div class="row h-100">
                             <div class="col-4 d-flex justify-content-center align-items-center">
@@ -67,16 +65,8 @@
                                     <option v-for="(option, index) in dataRadius.options" :key="index" :value="option.value">{{option.text}}</option>
                                 </select>
                             </div>
-                        </div> -->
-                        <div class="input-group d-flex align-items-center">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="select_radius">Select Radius</label>
-                            </div>
-                            <select class="custom-select" v-model="currentRadius" id="select_radius">
-                                <option v-for="(option, index) in dataRadius.options" :key="index" :value="option.value">{{option.text}}</option>
-                            </select>
                         </div>
-                    </div>
+                    </div> 
                 </div>
 
                 <div class="col">
@@ -137,6 +127,12 @@
 
         <div class="container mt-5">
 
+            <div class="text-center" v-if="loading">
+                <div class="spinner-grow text-warning" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+
             <div class="alert alert-danger" :class="{ 'd-none' : isFull }"  role="alert">
                 The search has no results
             </div>
@@ -157,10 +153,10 @@
 
             <div class="mt-4">
                 <nav>
-                        <ul class="pagination justify-content-center">
-                            <li :class="(currentPage == 1) ? 'disabled': '' "><a class="page-btn" href="#" @click.prevent="prevPage(currentPage)"><i class="fa-solid fa-angles-left"></i></a></li>
-                            <li :class="(currentPage == lastPage) ? 'disabled': '' "><a class="page-btn" href="#" @click.prevent="nextPage(currentPage)"><i class="fa-solid fa-angles-right"></i></a></li>
-                        </ul>
+                    <ul class="pagination justify-content-center" v-if="currentPage != lastPage">
+                        <li><a class="page-btn" href="#" @click.prevent="prevPage(currentPage)"><i class="fa-solid fa-angles-left"></i></a></li>
+                        <li><a class="page-btn" href="#" @click.prevent="nextPage(currentPage)"><i class="fa-solid fa-angles-right"></i></a></li>
+                    </ul>
                 </nav>
             </div>
         </div>
@@ -216,6 +212,7 @@ export default
             },
             services: [],
             selectedServices: [],
+            loading: true
         }
     },
     methods: {
@@ -249,6 +246,7 @@ export default
                 this.AllArrayGarages = response.data.results.data;
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
+                this.loading = false
             });
         },
 
@@ -264,6 +262,9 @@ export default
             this.AllArrayGarages = [];
             this.alertAddress = null;
             this.isFull = true;
+            this.loading = true;
+            this.currentPage = 0;
+            this.lastPage = 0;
 
             if (this.searchText != '') {
 
@@ -294,12 +295,17 @@ export default
                                 if (this.ArrayGarages.length == 0) {
                                     this.isFull = false
                                 }
+                                this.loading = false
                             })
 
                     })
 
                     .catch((error) => {
                         console.log(error);
+                        this.loading = false
+                        this.currentPage = 0
+                        this.lastPage = 0
+                        this.isFull = false
 
                     })
 
@@ -316,6 +322,7 @@ export default
                 this.addressArray = [];
                 this.ArrayGarages = [];
                 this.isFull= true;
+                this.loading = false;
                 this.getAllGarages(1);
             } else {
                 axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')
@@ -356,7 +363,6 @@ export default
         this.getAllGarages(1);
         this.getAllServices();
         this.selectService();
-
     }
 }
 </script>
@@ -399,7 +405,7 @@ export default
         padding: 0.1rem 1.8rem;
         text-align: center;
 
-         .text-btn{
+        .text-btn{
             color: $bg-head;
             text-decoration: none;
             line-height: 30px;
