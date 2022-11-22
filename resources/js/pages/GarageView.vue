@@ -1,15 +1,11 @@
 <template>
 <div class="bg">
-    <div class="container mt-4">
-        <router-link class="btn btn-primary" :to="{name: 'home'}"> Back</router-link>
-        
+    <div class="container mt-4">        
         <div class="row">
             <div class="col">
                 <div class="card-info">
                     <img :src="garage.image" class="card-img" :alt="garage.title">
-                    <h5 class="card-title">
-                        Title: {{garage.title}}
-                    </h5>
+                    <h5 class="card-title">{{garage.title}}</h5>
                     <div class="main-card">
 
                         <!-- Riga con address -->
@@ -83,6 +79,10 @@
 
                     </div>
                 </div>
+                <div class="service-container mb-4">
+                    <span class="services" v-for="(service) in garage.services" :key="service.id">{{service.name}}</span>
+                    <span v-if="!service" class="services">No service</span>
+                </div>
             </div>
 
             <div class="col">
@@ -97,6 +97,9 @@
 
                 </div>
             </div>
+        </div>
+        <div class="mb-3">
+            <router-link class="btn-back" :to="{name: 'home'}"> Back</router-link>
         </div>
     </div>
 </div>
@@ -113,6 +116,7 @@ export default {
             garage: '',
             addressGarage: [],
             imageMap: '',
+            service: false,
             message: {
                 title: 'Messages',
                 routeLink : 'messages'
@@ -131,7 +135,11 @@ export default {
 
                     this.imageMap = 'https://api.tomtom.com/map/1/staticimage?key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&zoom=13&center=' + this.garage.longitude + ',' + this.garage.latitude +'&format=jpg&layer=basic&style=main&width=1305&height=748&view=Unified&language=it-IT';
 
-                    console.log(this.imageMap);
+                    if (this.garage.services.length == 0) {
+                        this.service = false
+                    } else {
+                        this.service = true
+                    }
                     
             }).catch(function (error){
                 console.log(error);
@@ -215,6 +223,31 @@ export default {
         padding: .5rem;
         border-radius: .5rem;
     }
+
+}
+
+.service-container{
+    margin-top: 1rem;
+    background-color: $bg-head;
+    padding: 2rem;
+    border-radius: .5rem;
+
+    .services{
+        background-color: $my-yellow;
+        font-size: 1rem;
+        color: $bg-head;
+        padding: .5rem;
+        margin-right: .8rem;
+        border-radius: .5rem;
+    }
+}
+
+.btn-back{
+    background-color: $my-yellow;
+    padding: .5rem 2rem;
+    border-radius: .5rem;
+    color: $bg-head;
+
 }
 
 </style>
