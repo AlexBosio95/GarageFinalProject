@@ -2318,11 +2318,6 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm._m(0);
-};
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
   return _c("header", [_c("nav", {
     staticClass: "navbar navbar-expand-lg navbar-light"
   }, [_c("div", {
@@ -2332,12 +2327,19 @@ var staticRenderFns = [function () {
       src: "",
       alt: ""
     }
-  }), _vm._v(" "), _c("a", {
-    staticClass: "navbar-brand",
+  }), _vm._v(" "), _c("router-link", {
+    staticClass: "tex",
     attrs: {
-      href: "#"
+      to: {
+        name: "home"
+      }
     }
-  }, [_vm._v("Garages")])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Garage"), _c("span", [_vm._v("fnider")])])], 1), _vm._v(" "), _vm._m(0)])]);
+};
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
     staticClass: "admin-link"
   }, [_c("a", {
     staticClass: "route-btn",
@@ -2349,7 +2351,7 @@ var staticRenderFns = [function () {
     attrs: {
       href: "http://127.0.0.1:8000/admin"
     }
-  }, [_vm._v("login")])])])]);
+  }, [_vm._v("login")])]);
 }];
 render._withStripped = true;
 
@@ -2739,7 +2741,7 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("\n                            Send a message to the owner\n                        ")])], 1)])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\r\n                            Send a message to the owner\r\n                        ")])], 1)])])]), _vm._v(" "), _c("div", {
     staticClass: "mb-3"
   }, [_c("router-link", {
     staticClass: "btn-back",
@@ -2836,13 +2838,10 @@ var render = function render() {
     staticClass: "text-btn",
     attrs: {
       to: {
-        name: "about-us",
-        params: {
-          slug: _vm.slug
-        }
+        name: "about-us"
       }
     }
-  }, [_vm._v("AboutUs")])], 1)]), _vm._v(" "), _c("div", {
+  }, [_vm._v("About Us")])], 1)]), _vm._v(" "), _c("div", {
     staticClass: "search-container"
   }, [_c("div", {
     staticClass: "row justify-content-center align-items-center"
@@ -20469,7 +20468,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
