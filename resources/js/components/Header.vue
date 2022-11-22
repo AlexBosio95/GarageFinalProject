@@ -1,18 +1,15 @@
 <template>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="#">Garages</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li v-for="(item, index) in menu" :key="index" class="nav-item active">
-                        <router-link class="nav-link" :to="{name: item.routeLink}">{{item.title}}</router-link>
-                    </li>
-                </ul>
+            <div class="logo">
+                <img src="" alt="">
+                <a class="navbar-brand" href="#">Garages</a>
             </div>
-            </nav>
+            <div class="admin-link">
+                <a class="route-btn" href="http://127.0.0.1:8000/register">register</a>
+                <a class="route-btn" href="http://127.0.0.1:8000/admin">login</a>
+            </div>
+        </nav>
     </header>
 </template>
 
@@ -52,6 +49,30 @@ header{
 
     nav{
         background-color: $bg-head;
+        display: flex;
+        justify-content: space-between;
+
+        .admin-link{
+
+            .route-btn{
+                color: #000;
+                text-decoration: none;
+                margin: 5px;
+                background-color: $my-yellow;
+                border-radius: 5px;
+                border: none;
+                padding: 0.1rem 1.8rem;
+                text-align: center;
+
+                &:hover{
+                        transform: scale(1.1);
+                        transition: .5s;
+                }
+            
+            }
+
+        }
+
     }
 }
 
