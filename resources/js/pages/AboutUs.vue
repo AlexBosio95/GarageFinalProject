@@ -1,7 +1,7 @@
 <template>
     <div class="container">
 
-        <h1 class="text-center">AboutUs</h1>
+        <h1 class="text-center m-5">About<span class="my-us">Us</span></h1>
         <p>        
             Garage finder è nato come progetto sviluppato da un team composto da quattro jr. full stack developer che a conclusione di un percorso formativo durato sei mesi per accquisire competenze di web developer, hanno deciso di sviluppare una web app per affito di garage a breve termine.
         </p>
@@ -11,11 +11,29 @@
 
         <h1 class="text-center">Team</h1>
 
-        <div class="container-cards">
+        <div class="cards-container">
 
             <div class="my-card">
-                <img class="round" src="" alt="">
-                <a href="">linkedin</a>
+                <img class="circle" src="../../../public/img/ab_pic.jpeg" alt="alex bosio">
+                <h3> Alex Bosio</h3>
+                <a href="https://www.linkedin.com/in/alex-bosio-dev/">linkedin</a>
+            </div>
+
+            <div class="my-card">
+                <img class="circle" src="../../../public/img/ab_pic.jpeg" alt="lorenzo bertoni">
+                <h3> Lorenzo Bertoni</h3>
+                <a href="https://www.linkedin.com/in/marco-valerio-dev/">linkedin</a>
+            </div>
+             <div class="my-card">
+                <img class="circle" src="../../../public/img/mv_pic.jpg" alt="marco vlaerio">
+                <h3> Marco Vaerio</h3>
+                <a href="https://www.linkedin.com/in/marco-valerio-dev/">linkedin</a>
+            </div>
+
+            <div class="my-card">
+                <img class="circle" src="../../../public/img/vc_pic.jpg" alt="valerio cani">
+                <h3> Valerio Cani</h3>
+                <a href="https://www.linkedin.com/in/info-valerio-cani-dev/">linkedin</a>
             </div>
             
         </div>
@@ -35,5 +53,26 @@ export default {
 
 div .container{
     color: $body-bg ;
-}
-</style>
+
+    .my-us{
+        color: $my-yellow;
+    }
+
+    .cards-container {
+        display: flex;
+        justify-content: space-around;
+        .my-card{
+            img {
+                height: 150px;
+                border-radius: 50%;
+                margin: 1rem;
+            }
+            
+        }
+    }
+
+
+        
+    }
+
+    </style>
