@@ -56,24 +56,17 @@
                 <div class="col">
                     <!-- Radius km -->
                     <div class="card-filter">
-                        <!--<div class="row h-100">
+                        <div class="row h-100">
                             <div class="col-4 d-flex justify-content-center align-items-center">
-                                <i class="fa-solid fa-map-location"></i>
+                                <i class="fa-solid fa-location-dot"></i>
                             </div>
-                            <div class="col-7 d-flex flex-column justify-content-center align-items-center">
-                                <div class="value">{{currentRadius}} km</div>
-                                <input type="range" min="5000" max="50000" step="1000" :value="currentRadius">
+                            <div class="col-7 d-flex justify-content-center align-items-center">
+                                <select class="custom-select" v-model="currentRadius">
+                                    <option v-for="(option, index) in dataRadius.options" :key="index" :value="option.value">{{option.text}}</option>
+                                </select>
                             </div>
-                        </div> -->
-                        <div class="input-group mb-3 ">
-                            <div class="input-group-prepend justify-content-center">
-                                <label class="input-group-text" for="select_radius">Select Radius</label>
-                            </div>
-                            <select class="custom-select justify-content-center" v-model="currentRadius">
-                                <option v-for="(option, index) in dataRadius.options" :key="index" :value="option.value" id="select_radius">{{option.text}}</option>
-                            </select>
                         </div>
-                    </div>
+                    </div> 
                 </div>
 
                 <div class="col">
@@ -90,9 +83,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
 
                 <div class="col">
@@ -120,7 +110,6 @@
                                             <label :for="service.name" class="form-check-label">{{service.name}}</label>
                                         </li>
                                     </ul>
-
                                 </div>
                             </div>
                         </div>
@@ -157,11 +146,11 @@
             </div>
 
             <div class="mt-4">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item" :class="(currentPage == 1) ? 'disabled': '' "><a class="page-link" href="#" @click.prevent="prevPage(currentPage)">Previous</a></li>
-                        <li class="page-item" :class="(currentPage == lastPage) ? 'disabled': '' "><a class="page-link" href="#" @click.prevent="nextPage(currentPage)">Next</a></li>
-                    </ul>
+                <nav>
+                        <ul class="pagination justify-content-center">
+                            <li :class="(currentPage == 1) ? 'disabled': '' "><a class="page-btn" href="#" @click.prevent="prevPage(currentPage)"><i class="fa-solid fa-angles-left"></i></a></li>
+                            <li :class="(currentPage == lastPage) ? 'disabled': '' "><a class="page-btn" href="#" @click.prevent="nextPage(currentPage)"><i class="fa-solid fa-angles-right"></i></a></li>
+                        </ul>
                 </nav>
             </div>
         </div>
@@ -555,8 +544,7 @@ export default
                 height: 35px;
 
                 .btn-text{
-                    font-size: 17px;
-                    font-weight: 400;
+                    font-size: 0.9rem;
                     color: $bg-head;
                 }
 
@@ -566,7 +554,7 @@ export default
 
                     i{
                         color: $bg-head;
-                        font-size: 2rem;
+                        font-size: 1rem;
                     }
                 }
 
@@ -641,6 +629,21 @@ export default
         }
     }
 
+}
+
+.page-btn{
+    background-color: $my-yellow;
+    color: $bg-head;
+    padding: .5rem 1rem;
+    margin: .5rem;
+    border-radius: .5rem;
+    text-decoration: none;
+
+    &:hover{
+        color: $my-yellow;
+        background-color: $bg-head;
+
+    }
 }
 
 
