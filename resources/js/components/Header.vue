@@ -1,9 +1,10 @@
 <template>
     <header>
         <nav class="navbar">
-            <div class="logo">
-                <img src="" alt="">
-                <router-link class="my-text" :to="{name: 'home'}" >Garage<span>fnider</span></router-link>
+            <div class="logo">                
+                <router-link class="my-text" :to="{name: 'home'}" >
+                    <img src="../../../public/img/logo.jpg"  alt="logo">
+                </router-link>
             </div>
             <div class="admin-link">
                 <a class="route-btn" href="http://127.0.0.1:8000/register">register</a>
@@ -53,6 +54,9 @@ header{
         justify-content: space-between;
 
         .logo{
+            img{
+                height: 8vh;
+            }
             .my-text{
                 color: $body-bg;
 
@@ -68,12 +72,12 @@ header{
             .route-btn{
                 color: #000;
                 text-decoration: none;
-                padding: 20px;
+                height: 10px;
                 margin: 5px;
                 background-color: $my-yellow;
-                border-radius: 5px;
+                border-radius: 3px;
                 border: none;
-                padding: 0.1rem 1.8rem;
+                padding: 0.4rem 1.8rem;
                 text-align: center;
 
                 &:hover{
