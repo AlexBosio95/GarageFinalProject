@@ -1,9 +1,9 @@
 <template>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar">
             <div class="logo">
                 <img src="" alt="">
-                <router-link class="tex" :to="{name: 'home'}" >Garage<span>fnider</span></router-link>
+                <router-link class="my-text" :to="{name: 'home'}" >Garage<span>fnider</span></router-link>
             </div>
             <div class="admin-link">
                 <a class="route-btn" href="http://127.0.0.1:8000/register">register</a>
@@ -51,6 +51,17 @@ header{
         background-color: $bg-head;
         display: flex;
         justify-content: space-between;
+
+        .logo{
+            .my-text{
+                color: $body-bg;
+
+                span{
+                    color: $my-yellow;
+                }
+
+            }
+        }
 
         .admin-link{
 
