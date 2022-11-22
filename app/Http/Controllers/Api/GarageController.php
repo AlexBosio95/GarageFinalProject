@@ -85,7 +85,7 @@ class GarageController extends Controller
                 $servicesArr =  explode(',', $services);
                 $filteredGaragesId = $this->garageIdByServices($servicesArr);
                 return $query->whereIn('id', $filteredGaragesId);
-            })->paginate(10);
+            })->paginate(9);
 
         return response()->json([
         'success' => 'ok',
