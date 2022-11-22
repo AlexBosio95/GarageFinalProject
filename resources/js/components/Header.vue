@@ -57,6 +57,7 @@ header{
             .route-btn{
                 color: #000;
                 text-decoration: none;
+                padding: 20px;
                 margin: 5px;
                 background-color: $my-yellow;
                 border-radius: 5px;

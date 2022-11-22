@@ -12,7 +12,9 @@
                 <h3 class="subtitle">The first short-term rental website for your garage</h3>
 
                 <div class="text-center">
-                    <button class="capsule-btn">About Us</button>
+                    <button class="capsule-btn">
+                        <router-link class="text-btn" :to="{name: 'about-us', params: {slug: slug}}" >AboutUs</router-link>
+                    </button>
                 </div>
 
                 <div class="search-container">
@@ -396,10 +398,19 @@ export default
         padding: 0.1rem 1.8rem;
         text-align: center;
 
+         .text-btn{
+            color: $bg-head;
+            text-decoration: none;
+            line-height: 30px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+        }
+
         &:hover{
-                transform: scale(1.1);
-                transition: .5s;
-            }
+            transform: scale(1.03);
+            transition: .5s;
+        }
     }
 
     .search-container{
