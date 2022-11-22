@@ -51,21 +51,27 @@ class GarageController extends Controller
         $longVar = 0;
 
         switch ($radius) {
+            case '5000':
+                $latVar = 0.04504;
+                $longVar = 0.05882;
+
+                break;
+
             case '20000':
-                $latVar = 0.1799;
-                $longVar = 0.2353;
+                $latVar = 0.18018;
+                $longVar = 0.23529;
 
                 break;
 
             case '50000':
-                $latVar = 0.44975;
+                $latVar = 0.45045;
                 $longVar = 0.58823;
 
                 break;
 
             default:
-                $latVar = 0.1799;
-                $longVar = 0.2353;
+                $latVar = 0.09009;
+                $longVar = 0.11764;
 
                 break;
         }
