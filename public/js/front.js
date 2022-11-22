@@ -2037,6 +2037,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.surname = '';
           _this.email = '';
           _this.text = '';
+          _this.isSending = false;
         } else {
           _this.errors = response.data.errors;
         }
@@ -2487,6 +2488,9 @@ var render = function render() {
   return _c("div", {
     staticClass: "container"
   }, [_c("form", {
+    attrs: {
+      id: "message-form"
+    },
     on: {
       submit: function submit($event) {
         $event.preventDefault();
@@ -2494,13 +2498,15 @@ var render = function render() {
       }
     }
   }, [_c("router-link", {
-    staticClass: "nav-link",
+    staticClass: "btn my-router-link",
     attrs: {
       to: {
         name: "home"
       }
     }
-  }, [_vm._v("\n            Go Back\n        ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n            Go Back\n        ")]), _vm._v(" "), _c("h1", {
+    staticClass: "title"
+  }, [_vm._v("Send a message to the owner")]), _vm._v(" "), _c("div", {
     staticClass: "input-wrapper"
   }, [_c("label", {
     staticClass: "form-label",
@@ -2517,7 +2523,8 @@ var render = function render() {
     staticClass: "input-item",
     attrs: {
       type: "email",
-      id: "email"
+      id: "email",
+      placeholder: "Your email"
     },
     domProps: {
       value: _vm.email
@@ -2545,7 +2552,8 @@ var render = function render() {
     staticClass: "input-item",
     attrs: {
       type: "text",
-      id: "name"
+      id: "name",
+      placeholder: "Your name"
     },
     domProps: {
       value: _vm.name
@@ -2573,7 +2581,8 @@ var render = function render() {
     staticClass: "input-item",
     attrs: {
       type: "text",
-      id: "surname"
+      id: "surname",
+      placeholder: "Your surname"
     },
     domProps: {
       value: _vm.surname
@@ -2602,8 +2611,7 @@ var render = function render() {
     attrs: {
       id: "text",
       cols: "30",
-      rows: "10",
-      placeholder: "Send a message to the owner"
+      rows: "10"
     },
     domProps: {
       value: _vm.text
@@ -2616,9 +2624,10 @@ var render = function render() {
     }
   })]), _vm._v(" "), _c("button", {
     attrs: {
-      type: "submit"
+      type: "submit",
+      disabled: _vm.isSending
     }
-  }, [_vm._v("Send Message")])], 1)]);
+  }, [_vm._v("\n            Send Message\n        ")])], 1)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -3117,7 +3126,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".container[data-v-daf49172] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.container .input-wrapper[data-v-daf49172] {\n  margin: 20px 0;\n}\n.container .form-label[data-v-daf49172] {\n  color: white;\n  margin-right: 20px;\n}\n.container .input-item[data-v-daf49172] {\n  width: 100%;\n  border-radius: 0.5rem;\n}", ""]);
+exports.push([module.i, ".container[data-v-daf49172] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.container .title[data-v-daf49172] {\n  color: #F9D73A;\n  margin-top: 1rem;\n}\n.container .my-router-link[data-v-daf49172], .container button[data-v-daf49172] {\n  background-color: black;\n  color: white;\n  margin-top: 1rem;\n  transition: 0.5s linear;\n}\n.container .my-router-link[data-v-daf49172]:hover, .container button[data-v-daf49172]:hover {\n  background-color: #F9D73A;\n  color: black;\n}\n.container .input-wrapper[data-v-daf49172] {\n  margin: 20px 0;\n}\n.container .form-label[data-v-daf49172] {\n  color: #F9D73A;\n  margin-right: 20px;\n}\n.container .input-item[data-v-daf49172] {\n  width: 100%;\n  border-radius: 0.5rem;\n  padding: 0.5rem 3rem;\n}\n.container .input-item[data-v-daf49172]:focus {\n  outline: solid 2px #F9D73A;\n  background-color: black;\n  color: white;\n}\n.container button[data-v-daf49172] {\n  padding: 0.3rem 1rem;\n  border-radius: 0.5rem;\n}", ""]);
 
 // exports
 
