@@ -13,7 +13,7 @@
 
                 <div class="text-center">
                     <button class="capsule-btn">
-                        <router-link class="text-btn" :to="{name: 'about-us'}" >About Us</router-link>
+                        <router-link class="text-btn" :to="{name: 'about-us'}">About Us</router-link>
                     </button>
                 </div>
 
@@ -55,7 +55,7 @@
 
                 <div class="col">
                     <!-- Radius km -->
-                    <div class="card-filter">
+                    <div class="card-filter area-select">
                         <!--<div class="row h-100">
                             <div class="col-4 d-flex justify-content-center align-items-center">
                                 <i class="fa-solid fa-map-location"></i>
@@ -65,12 +65,12 @@
                                 <input type="range" min="5000" max="50000" step="1000" :value="currentRadius">
                             </div>
                         </div> -->
-                        <div class="input-group mb-3 ">
-                            <div class="input-group-prepend justify-content-center">
+                        <div class="input-group d-flex align-items-center">
+                            <div class="input-group-prepend">
                                 <label class="input-group-text" for="select_radius">Select Radius</label>
                             </div>
-                            <select class="custom-select justify-content-center" v-model="currentRadius">
-                                <option v-for="(option, index) in dataRadius.options" :key="index" :value="option.value" id="select_radius">{{option.text}}</option>
+                            <select class="custom-select" v-model="currentRadius" id="select_radius">
+                                <option v-for="(option, index) in dataRadius.options" :key="index" :value="option.value">{{option.text}}</option>
                             </select>
                         </div>
                     </div>
@@ -186,7 +186,7 @@ export default
             searchText: '',
             currentLat: 0,
             currentLong: 0,
-            currentRadius: 20000,
+            currentRadius: 10000,
             currentParkingNumber: 0,
             data: [],
             ArrayRadius: [],
@@ -197,6 +197,8 @@ export default
             {
                 selected: 20000,
                 options: [
+                    { text: '5 km' , value: 5000},
+                    { text: '10 km' , value: 10000},
                     { text: '20 km' , value: 20000},
                     { text: '50 km' , value: 50000}
                 ]
@@ -262,7 +264,7 @@ export default
             this.ArrayGarages = [];
             this.AllArrayGarages = [];
             this.alertAddress = null;
-            this.isFull = true
+            this.isFull = true;
 
             if (this.searchText != '') {
 
@@ -284,7 +286,7 @@ export default
                                 this.currentPage = response.data.results.current_page;
                                 this.lastPage = response.data.results.last_page;
 
-                                console.log(response.data.results);
+                                //console.log(response.data.results);
 
                                 if (this.selectedServices.includes(0)) {
                                     this.selectedServices.splice(0, 1);
@@ -452,6 +454,12 @@ export default
 
     }
 
+}
+
+.area-select{
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
 }
 
 .card-filter{
