@@ -15,7 +15,11 @@
                     <i class="fa-solid fa-square-parking icon"></i>
                     <span class="text">{{n_parking}}</span>
                 </div>
+                <div class="mt-3">
+                    <span class="service" v-for="(service) in services" :key="service.id">{{(services.length == 0) ? 'No service' : service.name}}</span>
+                </div>
             </div>
+
 
             <div class="view-btn">
                 <router-link class="text-btn" :to="{name: 'garage-view', params: {slug: slug}}" >Check out the garage</router-link>
@@ -33,7 +37,8 @@ export default {
         address: String, 
         slug: String, 
         services: Array, 
-        ArrayGarages: Array },
+        ArrayGarages: Array 
+        },
 
         methods: {
             getImage(image){
@@ -93,6 +98,13 @@ export default {
         .text-address{
             height: 40px;
             overflow: scroll;
+        }
+
+        .service{
+            color: $bg-head;
+            background-color: $my-yellow;
+            padding: .3rem .3rem;
+            margin-top: .5rem;
         }
     }
 
