@@ -2350,7 +2350,7 @@ var render = function render() {
     }
   }, [_c("img", {
     attrs: {
-      src: __webpack_require__(/*! ../../../public/img/logo.jpg */ "./public/img/logo.jpg"),
+      src: __webpack_require__(/*! ../../../public/img/logo.png */ "./public/img/logo.png"),
       alt: "logo"
     }
   })])], 1), _vm._v(" "), _vm._m(0)])]);
@@ -2361,16 +2361,18 @@ var staticRenderFns = [function () {
   return _c("div", {
     staticClass: "admin-link"
   }, [_c("a", {
-    staticClass: "route-btn",
     attrs: {
       href: "http://127.0.0.1:8000/register"
     }
-  }, [_vm._v("register")]), _vm._v(" "), _c("a", {
-    staticClass: "route-btn",
+  }, [_c("span", {
+    staticClass: "route-btn"
+  }, [_vm._v("register")])]), _vm._v(" "), _c("a", {
     attrs: {
       href: "http://127.0.0.1:8000/admin"
     }
-  }, [_vm._v("login")])]);
+  }, [_c("span", {
+    staticClass: "route-btn-reverse"
+  }, [_vm._v("login")])])]);
 }];
 render._withStripped = true;
 
@@ -2484,22 +2486,60 @@ var staticRenderFns = [function () {
   return _c("div", {
     staticClass: "container"
   }, [_c("h1", {
-    staticClass: "text-center"
-  }, [_vm._v("AboutUs")]), _vm._v(" "), _c("p", [_vm._v("        \n        Garage finder è nato come progetto sviluppato da un team composto da quattro jr. full stack developer che a conclusione di un percorso formativo durato sei mesi per accquisire competenze di web developer, hanno deciso di sviluppare una web app per affito di garage a breve termine.\n    ")]), _vm._v(" "), _c("p", [_vm._v("\n        Con questo progetto abbiamo messo alla prova le competenze sia front-end che back-end apprese durante il corso, costruendo la parte back-end con laravel e la parte front con vue-router. Grazie all’utilizzo delle api di tomtom-dev siamo riusciti a localizzare i garage in una mappa. Utilizzando html css e bootstrap abbiamo ideato e creato una grafica per il nostro sito.\n    ")]), _vm._v(" "), _c("h1", {
+    staticClass: "text-center m-5"
+  }, [_vm._v("About"), _c("span", {
+    staticClass: "my-us"
+  }, [_vm._v("Us")])]), _vm._v(" "), _c("p", [_vm._v("        \n        Garage finder è nato come progetto sviluppato in un team composto da quattro jr. full stack developer, che a conclusione di un percorso formativo per accquisire le competenze da web developer, hanno deciso di sviluppare una web app per affito di garage a breve termine.\n    ")]), _vm._v(" "), _c("p", [_vm._v("\n        Con questo progetto abbiamo messo alla prova le competenze sia front-end che back-end apprese durante il corso, costruendo la parte back-end con laravel e la parte front con vue-router. Grazie all’utilizzo delle api di tomtom-dev siamo riusciti a localizzare i garage su una mappa. Utilizzando html css e bootstrap abbiamo ideato e creato e costruito un interfacciagrafica per il nostro sito.\n    ")]), _vm._v(" "), _c("h1", {
     staticClass: "text-center"
   }, [_vm._v("Team")]), _vm._v(" "), _c("div", {
-    staticClass: "container-cards"
+    staticClass: "cards-container"
   }, [_c("div", {
     staticClass: "my-card"
   }, [_c("img", {
-    staticClass: "round",
+    staticClass: "circle",
     attrs: {
-      src: "",
-      alt: ""
+      src: __webpack_require__(/*! ../../../public/img/ab_pic.jpeg */ "./public/img/ab_pic.jpeg"),
+      alt: "alex bosio"
     }
-  }), _vm._v(" "), _c("a", {
+  }), _vm._v(" "), _c("h3", [_vm._v(" Alex Bosio")]), _vm._v(" "), _c("a", {
     attrs: {
-      href: ""
+      href: "https://www.linkedin.com/in/alex-bosio-dev/"
+    }
+  }, [_vm._v("linkedin")])]), _vm._v(" "), _c("div", {
+    staticClass: "my-card"
+  }, [_c("img", {
+    staticClass: "circle",
+    attrs: {
+      src: __webpack_require__(/*! ../../../public/img/ab_pic.jpeg */ "./public/img/ab_pic.jpeg"),
+      alt: "lorenzo bertoni"
+    }
+  }), _vm._v(" "), _c("h3", [_vm._v(" Lorenzo Bertoni")]), _vm._v(" "), _c("a", {
+    attrs: {
+      href: "https://www.linkedin.com/in/marco-valerio-dev/"
+    }
+  }, [_vm._v("linkedin")])]), _vm._v(" "), _c("div", {
+    staticClass: "my-card"
+  }, [_c("img", {
+    staticClass: "circle",
+    attrs: {
+      src: __webpack_require__(/*! ../../../public/img/mv_pic.jpg */ "./public/img/mv_pic.jpg"),
+      alt: "marco vlaerio"
+    }
+  }), _vm._v(" "), _c("h3", [_vm._v(" Marco Vaerio")]), _vm._v(" "), _c("a", {
+    attrs: {
+      href: "https://www.linkedin.com/in/marco-valerio-dev/"
+    }
+  }, [_vm._v("linkedin")])]), _vm._v(" "), _c("div", {
+    staticClass: "my-card"
+  }, [_c("img", {
+    staticClass: "circle",
+    attrs: {
+      src: __webpack_require__(/*! ../../../public/img/vc_pic.jpg */ "./public/img/vc_pic.jpg"),
+      alt: "valerio cani"
+    }
+  }), _vm._v(" "), _c("h3", [_vm._v(" Valerio Cani")]), _vm._v(" "), _c("a", {
+    attrs: {
+      href: "https://www.linkedin.com/in/info-valerio-cani-dev/"
     }
   }, [_vm._v("linkedin")])])])]);
 }];
@@ -3219,7 +3259,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "header[data-v-1f42fb90] {\n  height: 10vh;\n  background-color: #252525;\n}\nheader nav[data-v-1f42fb90] {\n  background-color: #252525;\n  display: flex;\n  justify-content: space-between;\n}\nheader nav .logo img[data-v-1f42fb90] {\n  height: 8vh;\n}\nheader nav .logo .my-text[data-v-1f42fb90] {\n  color: #f8fafc;\n}\nheader nav .logo .my-text span[data-v-1f42fb90] {\n  color: #F9D73A;\n}\nheader nav .admin-link .route-btn[data-v-1f42fb90] {\n  color: #000;\n  text-decoration: none;\n  height: 10px;\n  margin: 5px;\n  background-color: #F9D73A;\n  border-radius: 3px;\n  border: none;\n  padding: 0.4rem 1.8rem;\n  text-align: center;\n}\nheader nav .admin-link .route-btn[data-v-1f42fb90]:hover {\n  transform: scale(1.1);\n  transition: 0.5s;\n}", ""]);
+exports.push([module.i, "header[data-v-1f42fb90] {\n  height: 10vh;\n  background-color: #252525;\n}\nheader nav[data-v-1f42fb90] {\n  background-color: #252525;\n  display: flex;\n  justify-content: space-between;\n}\nheader nav .logo img[data-v-1f42fb90] {\n  height: 8vh;\n}\nheader nav .logo .my-text[data-v-1f42fb90] {\n  color: #f8fafc;\n}\nheader nav .logo .my-text span[data-v-1f42fb90] {\n  color: #F9D73A;\n}\nheader nav .admin-link .route-btn[data-v-1f42fb90] {\n  color: #2D2D2D;\n  font-weight: bold;\n  text-decoration: none;\n  height: 10px;\n  margin: 5px;\n  background-color: #F9D73A;\n  border-radius: 3px;\n  border: none;\n  padding: 0.4rem 1.8rem;\n  text-align: center;\n}\nheader nav .admin-link .route-btn-reverse[data-v-1f42fb90] {\n  font-weight: bold;\n  color: #F9D73A;\n  text-decoration: none;\n  height: 10px;\n  margin: 5px;\n  background-color: #2D2D2D;\n  border-radius: 3px;\n  border: none;\n  padding: 0.4rem 1.8rem;\n  text-align: center;\n}", ""]);
 
 // exports
 
@@ -3276,7 +3316,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "div .container[data-v-3eec1a12] {\n  color: #f8fafc;\n}", ""]);
+exports.push([module.i, "div .container[data-v-3eec1a12] {\n  color: #f8fafc;\n}\ndiv .container .my-us[data-v-3eec1a12] {\n  color: #F9D73A;\n}\ndiv .container .cards-container[data-v-3eec1a12] {\n  display: flex;\n  justify-content: space-around;\n}\ndiv .container .cards-container .my-card img[data-v-3eec1a12] {\n  height: 150px;\n  border-radius: 50%;\n  margin: 1rem;\n}", ""]);
 
 // exports
 
@@ -19796,14 +19836,47 @@ module.exports = g;
 
 /***/ }),
 
-/***/ "./public/img/logo.jpg":
+/***/ "./public/img/ab_pic.jpeg":
+/*!********************************!*\
+  !*** ./public/img/ab_pic.jpeg ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/ab_pic.jpeg?d96a3d2d71fab73b81b461048f850d01";
+
+/***/ }),
+
+/***/ "./public/img/logo.png":
 /*!*****************************!*\
-  !*** ./public/img/logo.jpg ***!
+  !*** ./public/img/logo.png ***!
   \*****************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/logo.jpg?f7ac8ef4e23d95a1890af4e6bb237d16";
+module.exports = "/images/logo.png?6c91123b41c2ad818b04f7c4a58950c3";
+
+/***/ }),
+
+/***/ "./public/img/mv_pic.jpg":
+/*!*******************************!*\
+  !*** ./public/img/mv_pic.jpg ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/mv_pic.jpg?9a62404e3bb69bdac303a90d22928b54";
+
+/***/ }),
+
+/***/ "./public/img/vc_pic.jpg":
+/*!*******************************!*\
+  !*** ./public/img/vc_pic.jpg ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/vc_pic.jpg?9fc2d87954bc4858d34afdece8227ef7";
 
 /***/ }),
 
