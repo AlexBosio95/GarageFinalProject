@@ -3142,9 +3142,9 @@ var render = function render() {
     })], 1);
   }), 0), _vm._v(" "), _c("div", {
     staticClass: "mt-4"
-  }, [_c("nav", [_vm.currentPage != _vm.lastPage ? _c("ul", {
+  }, [_c("nav", [_c("ul", {
     staticClass: "pagination justify-content-center"
-  }, [_c("li", [_c("a", {
+  }, [_vm.currentPage != 1 ? _c("li", [_c("a", {
     staticClass: "page-btn",
     attrs: {
       href: "#"
@@ -3157,7 +3157,7 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "fa-solid fa-angles-left"
-  })])]), _vm._v(" "), _c("li", [_c("a", {
+  })])]) : _vm._e(), _vm._v(" "), _vm.currentPage != _vm.lastPage ? _c("li", [_c("a", {
     staticClass: "page-btn",
     attrs: {
       href: "#"
@@ -3170,7 +3170,7 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "fa-solid fa-angles-right"
-  })])])]) : _vm._e()])])])]);
+  })])]) : _vm._e()])])])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,

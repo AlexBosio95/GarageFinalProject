@@ -153,9 +153,9 @@
 
             <div class="mt-4">
                 <nav>
-                    <ul class="pagination justify-content-center" v-if="currentPage != lastPage">
-                        <li><a class="page-btn" href="#" @click.prevent="prevPage(currentPage)"><i class="fa-solid fa-angles-left"></i></a></li>
-                        <li><a class="page-btn" href="#" @click.prevent="nextPage(currentPage)"><i class="fa-solid fa-angles-right"></i></a></li>
+                    <ul class="pagination justify-content-center">
+                        <li v-if="currentPage != 1"><a class="page-btn" href="#" @click.prevent="prevPage(currentPage)"><i class="fa-solid fa-angles-left"></i></a></li>
+                        <li v-if="currentPage != lastPage"><a class="page-btn" href="#" @click.prevent="nextPage(currentPage)"><i class="fa-solid fa-angles-right"></i></a></li>
                     </ul>
                 </nav>
             </div>
