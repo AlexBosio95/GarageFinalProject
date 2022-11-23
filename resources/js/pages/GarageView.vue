@@ -2,7 +2,7 @@
 <div class="bg">
     <div class="container mt-4">
         <div class="row" v-if="garage">
-            <div class="col">
+            <div class="col-12 col-md-6">
                 <div class="card-info">
                     <img :src="garage.image" class="card-img" :alt="garage.title">
                     <h5 class="card-title">{{garage.title}}</h5>
@@ -10,13 +10,13 @@
 
                         <!-- Riga con address -->
                         <div class="row align-items-center">
-                            <div class="col-3">
+                            <div class="col-12 col-md-3">
                                 <div>
                                     <i class="fa-solid fa-location-dot icon"></i>
                                     <span class="card-text tag-icon">Address</span>
                                 </div>
                             </div>
-                            <div class="col-9">
+                            <div class="col-12 col-md-9 mar-sm">
                                 <div class="container-text">
                                     <p class="card-text">Address: {{garage.address}}</p>
                                 </div>
@@ -24,51 +24,51 @@
                         </div>
 
                         <!-- Riga con length e height -->
-                        <div class="row mt-4">
-                            <div class="col">
-                                <div>
+                        <div class="row mt-4 align-items-center">
+                            <div class="col-6 col-md-3">
+                                <div class="d-flex align-items-center">
                                     <i class="fa-solid fa-ruler-horizontal icon"></i>
                                     <span class="card-text tag-icon">Length</span>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-6 col-md-3">
                                 <div class="container-text">
                                     <p class="card-text">{{garage.length}}</p>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div>
+                            <div class="col-6 col-md-3 mar-sm">
+                                <div class="d-flex align-items-center">
                                     <i class="fa-solid fa-ruler-combined icon"></i>
                                     <span class="card-text tag-icon">Height</span>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-6 col-md-3 mar-sm">
                                 <div class="container-text">
-                                    <p class="card-text">{{garage.height}}</p>
+                                    <p class="card-text">{{(!isHeight) ? '-' : garage.height}}</p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Riga con parking e width -->
-                        <div class="row mt-4">
-                            <div class="col">
-                                <div>
+                        <div class="row mt-4 align-items-center">
+                            <div class="col-6 col-md-3">
+                                <div class="d-flex align-items-center">
                                     <i class="fa-solid fa-ruler-vertical icon"></i>
                                     <span class="card-text tag-icon">width</span>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-6 col-md-3">
                                 <div class="container-text">
                                     <p class="card-text">{{garage.width}}</p>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div>
+                            <div class="col-6 col-md-3 mar-sm">
+                                <div class="d-flex align-items-center">
                                     <i class="fa-solid fa-square-parking icon"></i>
                                     <span class="card-text tag-icon">Parking</span>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-6 col-md-3 mar-sm">
                                 <div class="container-text">
                                     <p class="card-text">{{garage.n_parking}}</p>
                                 </div>
@@ -79,13 +79,13 @@
 
                     </div>
                 </div>
-                <div class="service-container mb-4">
+                <div class="service-container mb-4 d-flex flex-wrap">
                     <span class="services" v-for="(service) in garage.services" :key="service.id">{{service.name}}</span>
                     <span v-if="!service" class="services">No service</span>
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col-12 col-md-6">
                 <div class="card-map">
                     <img class="img-map" :src="imageMap" :alt="garage.title" srcset="">
 
@@ -124,6 +124,7 @@ export default {
             garage: null,
             addressGarage: [],
             imageMap: '',
+            isHeight: false,
             service: false,
             error: '',
             message: {
@@ -149,6 +150,11 @@ export default {
                     } else {
                         this.service = true
                     }
+
+                    if (this.garage.height) {
+                        this.isHeight = true
+                    }
+
                     
             }).catch(function (error){
                 console.log(error);
@@ -224,7 +230,7 @@ export default {
     }
 
     .card-text {
-        color: $my-yellow-s;
+        color: $my-yellow;
     }
 
     .tag-icon{
@@ -256,6 +262,7 @@ export default {
         color: $bg-head;
         padding: .5rem;
         margin-right: .8rem;
+        margin-top: .8rem;
         border-radius: .5rem;
     }
 }
@@ -270,6 +277,27 @@ export default {
 
 .title{
     color: $my-yellow;
+}
+
+
+@media screen and (max-width: 600px) {
+
+    .card-info{
+        height: 700px;
+
+        .card-text {
+            font-size: .9rem;
+        }
+
+        i{
+            margin-right: .5rem;
+        }
+    }
+
+    .mar-sm{
+        margin-top: .8rem;
+    }
+
 }
 
 </style>
