@@ -11058,3 +11058,7 @@ a.text-dark:focus {
   color: #fff;
 }
 
+.form-control {
+  border: none;
+}
+

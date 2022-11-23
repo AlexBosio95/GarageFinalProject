@@ -2064,6 +2064,7 @@ __webpack_require__.r(__webpack_exports__);
       garage: null,
       addressGarage: [],
       imageMap: '',
+      isHeight: false,
       service: false,
       error: '',
       message: {
@@ -2084,6 +2085,9 @@ __webpack_require__.r(__webpack_exports__);
           _this.service = false;
         } else {
           _this.service = true;
+        }
+        if (_this.garage.height) {
+          _this.isHeight = true;
         }
       })["catch"](function (error) {
         console.log(error);
@@ -2485,7 +2489,7 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "container"
+    staticClass: "my-container"
   }, [_c("h1", {
     staticClass: "text-center m-5"
   }, [_vm._v("About"), _c("span", {
@@ -2734,7 +2738,7 @@ var render = function render() {
   }, [_vm.garage ? _c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col"
+    staticClass: "col-12 col-md-6"
   }, [_c("div", {
     staticClass: "card-info"
   }, [_c("img", {
@@ -2750,35 +2754,35 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "row align-items-center"
   }, [_vm._m(0), _vm._v(" "), _c("div", {
-    staticClass: "col-9"
+    staticClass: "col-12 col-md-9 mar-sm"
   }, [_c("div", {
     staticClass: "container-text"
   }, [_c("p", {
     staticClass: "card-text"
   }, [_vm._v("Address: " + _vm._s(_vm.garage.address))])])])]), _vm._v(" "), _c("div", {
-    staticClass: "row mt-4"
+    staticClass: "row mt-4 align-items-center"
   }, [_vm._m(1), _vm._v(" "), _c("div", {
-    staticClass: "col"
+    staticClass: "col-6 col-md-3"
   }, [_c("div", {
     staticClass: "container-text"
   }, [_c("p", {
     staticClass: "card-text"
   }, [_vm._v(_vm._s(_vm.garage.length))])])]), _vm._v(" "), _vm._m(2), _vm._v(" "), _c("div", {
-    staticClass: "col"
+    staticClass: "col-6 col-md-3 mar-sm"
   }, [_c("div", {
     staticClass: "container-text"
   }, [_c("p", {
     staticClass: "card-text"
-  }, [_vm._v(_vm._s(_vm.garage.height))])])])]), _vm._v(" "), _c("div", {
-    staticClass: "row mt-4"
+  }, [_vm._v(_vm._s(!_vm.isHeight ? "-" : _vm.garage.height))])])])]), _vm._v(" "), _c("div", {
+    staticClass: "row mt-4 align-items-center"
   }, [_vm._m(3), _vm._v(" "), _c("div", {
-    staticClass: "col"
+    staticClass: "col-6 col-md-3"
   }, [_c("div", {
     staticClass: "container-text"
   }, [_c("p", {
     staticClass: "card-text"
   }, [_vm._v(_vm._s(_vm.garage.width))])])]), _vm._v(" "), _vm._m(4), _vm._v(" "), _c("div", {
-    staticClass: "col"
+    staticClass: "col-6 col-md-3 mar-sm"
   }, [_c("div", {
     staticClass: "container-text"
   }, [_c("p", {
@@ -2786,7 +2790,7 @@ var render = function render() {
   }, [_vm._v(_vm._s(_vm.garage.n_parking))])])])]), _vm._v(" "), _c("p", {
     staticClass: "card-text mt-4"
   }, [_vm._v("Description: " + _vm._s(_vm.garage.description))])])]), _vm._v(" "), _c("div", {
-    staticClass: "service-container mb-4"
+    staticClass: "service-container mb-4 d-flex flex-wrap"
   }, [_vm._l(_vm.garage.services, function (service) {
     return _c("span", {
       key: service.id,
@@ -2795,7 +2799,7 @@ var render = function render() {
   }), _vm._v(" "), !_vm.service ? _c("span", {
     staticClass: "services"
   }, [_vm._v("No service")]) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col"
+    staticClass: "col-12 col-md-6"
   }, [_c("div", {
     staticClass: "card-map"
   }, [_c("img", {
@@ -2817,7 +2821,7 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("\r\n                            Send a message to the owner\r\n                        ")])], 1)])])]) : _c("div", {
+  }, [_vm._v("\n                            Send a message to the owner\n                        ")])], 1)])])]) : _c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_vm.error == "" ? _c("div", {
     staticClass: "spinner-grow text-warning",
@@ -2843,7 +2847,7 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "col-3"
+    staticClass: "col-12 col-md-3"
   }, [_c("div", [_c("i", {
     staticClass: "fa-solid fa-location-dot icon"
   }), _vm._v(" "), _c("span", {
@@ -2853,8 +2857,10 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "col"
-  }, [_c("div", [_c("i", {
+    staticClass: "col-6 col-md-3"
+  }, [_c("div", {
+    staticClass: "d-flex align-items-center"
+  }, [_c("i", {
     staticClass: "fa-solid fa-ruler-horizontal icon"
   }), _vm._v(" "), _c("span", {
     staticClass: "card-text tag-icon"
@@ -2863,8 +2869,10 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "col"
-  }, [_c("div", [_c("i", {
+    staticClass: "col-6 col-md-3 mar-sm"
+  }, [_c("div", {
+    staticClass: "d-flex align-items-center"
+  }, [_c("i", {
     staticClass: "fa-solid fa-ruler-combined icon"
   }), _vm._v(" "), _c("span", {
     staticClass: "card-text tag-icon"
@@ -2873,8 +2881,10 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "col"
-  }, [_c("div", [_c("i", {
+    staticClass: "col-6 col-md-3"
+  }, [_c("div", {
+    staticClass: "d-flex align-items-center"
+  }, [_c("i", {
     staticClass: "fa-solid fa-ruler-vertical icon"
   }), _vm._v(" "), _c("span", {
     staticClass: "card-text tag-icon"
@@ -2883,8 +2893,10 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "col"
-  }, [_c("div", [_c("i", {
+    staticClass: "col-6 col-md-3 mar-sm"
+  }, [_c("div", {
+    staticClass: "d-flex align-items-center"
+  }, [_c("i", {
     staticClass: "fa-solid fa-square-parking icon"
   }), _vm._v(" "), _c("span", {
     staticClass: "card-text tag-icon"
@@ -3337,7 +3349,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "div .container[data-v-3eec1a12] {\n  color: #f8fafc;\n}\ndiv .container .my-us[data-v-3eec1a12] {\n  color: #F9D73A;\n}\ndiv .container .cards-container[data-v-3eec1a12] {\n  display: flex;\n  justify-content: space-around;\n}\ndiv .container .cards-container .my-card img[data-v-3eec1a12] {\n  height: 150px;\n  border-radius: 50%;\n  margin: 1rem;\n}", ""]);
+exports.push([module.i, "div .my-container[data-v-3eec1a12] {\n  color: #f8fafc;\n}\ndiv .my-container .my-us[data-v-3eec1a12] {\n  color: #F9D73A;\n}\ndiv .my-container .cards-container[data-v-3eec1a12] {\n  display: flex;\n  justify-content: space-around;\n}\ndiv .my-container .cards-container .my-card img[data-v-3eec1a12] {\n  height: 150px;\n  border-radius: 50%;\n  margin: 1rem;\n}\n@media screen and (max-width: 600px) {\n.my-container[data-v-3eec1a12] {\n    width: 90%;\n    margin: auto;\n}\n.my-container .cards-container[data-v-3eec1a12] {\n    margin-top: 2rem;\n    flex-wrap: wrap;\n}\n.my-container .cards-container .my-card[data-v-3eec1a12] {\n    margin: 2rem;\n}\n}", ""]);
 
 // exports
 
@@ -3375,7 +3387,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".bg[data-v-5370dab5] {\n  background-color: #2D2D2D;\n}\n.card-map[data-v-5370dab5] {\n  border-radius: 0.5rem;\n}\n.card-map .img-map[data-v-5370dab5] {\n  width: 100%;\n  height: 480px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: 0.5rem;\n}\n.card-map .container-send-msg[data-v-5370dab5] {\n  background-color: #252525;\n  width: 100%;\n  border-radius: 0.5rem;\n  margin-top: 1rem;\n  padding: 2rem;\n  text-align: center;\n}\n.card-map .messages-link[data-v-5370dab5] {\n  color: #252525;\n  background-color: #F9D73A;\n}\n.card-info[data-v-5370dab5] {\n  border-radius: 0.5rem;\n  padding: 1.5rem;\n  background-color: #252525;\n  height: 600px;\n}\n.card-info .card-img[data-v-5370dab5] {\n  max-height: 200px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.card-info .card-title[data-v-5370dab5] {\n  color: #F9D73A;\n  margin-top: 1rem;\n}\n.card-info .card-text[data-v-5370dab5] {\n  color: #dcba23;\n}\n.card-info .tag-icon[data-v-5370dab5] {\n  font-size: 20px;\n}\n.card-info .icon[data-v-5370dab5] {\n  color: #F9D73A;\n  font-size: 1.5rem;\n}\n.card-info .container-text[data-v-5370dab5] {\n  background-color: #2D2D2D;\n  padding: 0.5rem;\n  border-radius: 0.5rem;\n}\n.service-container[data-v-5370dab5] {\n  margin-top: 1rem;\n  background-color: #252525;\n  padding: 2rem;\n  border-radius: 0.5rem;\n}\n.service-container .services[data-v-5370dab5] {\n  background-color: #F9D73A;\n  font-size: 1rem;\n  color: #252525;\n  padding: 0.5rem;\n  margin-right: 0.8rem;\n  border-radius: 0.5rem;\n}\n.btn-back[data-v-5370dab5] {\n  background-color: #F9D73A;\n  padding: 0.5rem 2rem;\n  border-radius: 0.5rem;\n  color: #252525;\n}\n.title[data-v-5370dab5] {\n  color: #F9D73A;\n}", ""]);
+exports.push([module.i, ".bg[data-v-5370dab5] {\n  background-color: #2D2D2D;\n}\n.card-map[data-v-5370dab5] {\n  border-radius: 0.5rem;\n}\n.card-map .img-map[data-v-5370dab5] {\n  width: 100%;\n  height: 480px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: 0.5rem;\n}\n.card-map .container-send-msg[data-v-5370dab5] {\n  background-color: #252525;\n  width: 100%;\n  border-radius: 0.5rem;\n  margin-top: 1rem;\n  padding: 2rem;\n  text-align: center;\n}\n.card-map .messages-link[data-v-5370dab5] {\n  color: #252525;\n  background-color: #F9D73A;\n}\n.card-info[data-v-5370dab5] {\n  border-radius: 0.5rem;\n  padding: 1.5rem;\n  background-color: #252525;\n  height: 600px;\n}\n.card-info .card-img[data-v-5370dab5] {\n  max-height: 200px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.card-info .card-title[data-v-5370dab5] {\n  color: #F9D73A;\n  margin-top: 1rem;\n}\n.card-info .card-text[data-v-5370dab5] {\n  color: #F9D73A;\n}\n.card-info .tag-icon[data-v-5370dab5] {\n  font-size: 20px;\n}\n.card-info .icon[data-v-5370dab5] {\n  color: #F9D73A;\n  font-size: 1.5rem;\n}\n.card-info .container-text[data-v-5370dab5] {\n  background-color: #2D2D2D;\n  padding: 0.5rem;\n  border-radius: 0.5rem;\n}\n.service-container[data-v-5370dab5] {\n  margin-top: 1rem;\n  background-color: #252525;\n  padding: 2rem;\n  border-radius: 0.5rem;\n}\n.service-container .services[data-v-5370dab5] {\n  background-color: #F9D73A;\n  font-size: 1rem;\n  color: #252525;\n  padding: 0.5rem;\n  margin-right: 0.8rem;\n  margin-top: 0.8rem;\n  border-radius: 0.5rem;\n}\n.btn-back[data-v-5370dab5] {\n  background-color: #F9D73A;\n  padding: 0.5rem 2rem;\n  border-radius: 0.5rem;\n  color: #252525;\n}\n.title[data-v-5370dab5] {\n  color: #F9D73A;\n}\n@media screen and (max-width: 600px) {\n.card-info[data-v-5370dab5] {\n    height: 700px;\n}\n.card-info .card-text[data-v-5370dab5] {\n    font-size: 0.9rem;\n}\n.card-info i[data-v-5370dab5] {\n    margin-right: 0.5rem;\n}\n.mar-sm[data-v-5370dab5] {\n    margin-top: 0.8rem;\n}\n}", ""]);
 
 // exports
 
@@ -20689,7 +20701,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })
