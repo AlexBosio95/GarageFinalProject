@@ -9,7 +9,7 @@
             </div>
 
             <div class="main-card">
-                <h5 class="title">{{textFormatted(title, 20)}}</h5>
+                <h5 class="title">{{textFormatted(title, 30)}}</h5>
                 <p class="text-address">{{textFormatted(address, 80)}}</p>
                 <div class="d-flex align-items-center">
                     <i class="fa-solid fa-square-parking icon"></i>
@@ -50,7 +50,7 @@ export default {
             },
             textFormatted(title, cut){
                 if (title.length > cut) {
-                    return title.slice(1, cut) + '...'
+                    return title.slice(0, cut) + '...'
                 } else {
                     return title
                 }

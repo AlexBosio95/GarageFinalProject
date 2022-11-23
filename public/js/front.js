@@ -1972,7 +1972,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     textFormatted: function textFormatted(title, cut) {
       if (title.length > cut) {
-        return title.slice(1, cut) + '...';
+        return title.slice(0, cut) + '...';
       } else {
         return title;
       }
@@ -2420,7 +2420,7 @@ var render = function render() {
     staticClass: "main-card"
   }, [_c("h5", {
     staticClass: "title"
-  }, [_vm._v(_vm._s(_vm.textFormatted(_vm.title, 20)))]), _vm._v(" "), _c("p", {
+  }, [_vm._v(_vm._s(_vm.textFormatted(_vm.title, 30)))]), _vm._v(" "), _c("p", {
     staticClass: "text-address"
   }, [_vm._v(_vm._s(_vm.textFormatted(_vm.address, 80)))]), _vm._v(" "), _c("div", {
     staticClass: "d-flex align-items-center"
