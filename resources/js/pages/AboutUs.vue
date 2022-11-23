@@ -53,6 +53,8 @@ export default {
 
 div .my-container{
     color: $body-bg ;
+    width:90%;
+    margin:auto;
 
     .my-us{
         color: $my-yellow;
