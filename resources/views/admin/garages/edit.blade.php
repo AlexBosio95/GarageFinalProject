@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title') {{'- Edit Garage'}} @endsection
+
 @section('content')
 <div class="container">
   <a href="{{ route('admin.garages.index') }}" class="btn btn-warning mb-2">< back </a>
