@@ -1,7 +1,7 @@
 <template>
 <div class="bg">
-    <div class="container mt-4">        
-        <div class="row">
+    <div class="container mt-4">
+        <div class="row" v-if="garage">
             <div class="col">
                 <div class="card-info">
                     <img :src="garage.image" class="card-img" :alt="garage.title">
@@ -98,6 +98,14 @@
                 </div>
             </div>
         </div>
+        <div v-else class="d-flex justify-content-center">
+            <div v-if="(error == '')" class="spinner-grow text-warning" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div v-else>
+                <h1 class="text-center title">{{error}}</h1>
+            </div>
+        </div>
         <div class="mb-3">
             <router-link class="btn-back" :to="{name: 'home'}"> Back</router-link>
         </div>
@@ -113,10 +121,11 @@ export default {
 
     data: function(){
         return{
-            garage: '',
+            garage: null,
             addressGarage: [],
             imageMap: '',
             service: false,
+            error: '',
             message: {
                 title: 'Messages',
                 routeLink : 'messages'
@@ -144,10 +153,19 @@ export default {
             }).catch(function (error){
                 console.log(error);
             })
+        },
+
+        timerNoGarage(){
+            if (this.post == null) {
+                setTimeout(() =>{
+                    this.error = 'Garage not exist'
+                }, 2000)
+            }
         }
     },
     mounted() {
         this.getViewGarage();
+        this.timerNoGarage();
     }
 
 }
@@ -248,6 +266,10 @@ export default {
     border-radius: .5rem;
     color: $bg-head;
 
+}
+
+.title{
+    color: $my-yellow;
 }
 
 </style>
