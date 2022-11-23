@@ -87,7 +87,10 @@
 
             <div class="col-12 col-md-6">
                 <div class="card-map">
-                    <img class="img-map" :src="imageMap" :alt="garage.title" srcset="">
+                    <div class="position-relative">
+                        <img class="img-map" :src="imageMap" :alt="garage.title" srcset="">
+                        <i class="fa-solid fa-location-dot icon-gps"></i>
+                    </div>
 
                     <div class="container-send-msg">
                         <router-link class="messages-link btn" :to="{name: message.routeLink, params: {id: garage.id}}">
@@ -208,6 +211,14 @@ export default {
     .messages-link {
         color: $bg-head;
         background-color: $my-yellow;
+    }
+
+    .icon-gps{
+        position: absolute;
+        font-size: 2rem;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 }
 
