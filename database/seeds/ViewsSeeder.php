@@ -13,11 +13,12 @@ class ViewsSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        for($i = 0; $i < 500; $i++) {
+        for($i = 0; $i < 5000; $i++) {
             $views = new View();
     
             $views->date = $faker->dateTimeBetween('-11 month', '+1 week');
             $views->ip_address = $faker->randomDigitNotZero();
+            $views->garage_id = $faker->numberBetween(1,15);
             $views->save();
         }
     }

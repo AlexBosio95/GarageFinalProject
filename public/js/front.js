@@ -2510,7 +2510,7 @@ var staticRenderFns = [function () {
   }, [_c("img", {
     staticClass: "circle my-image",
     attrs: {
-      src: __webpack_require__(/*! ../../../public/img/_C9R5578.jpg */ "./public/img/_C9R5578.jpg"),
+      src: __webpack_require__(/*! ../../../public/img/lb_pic.jpeg */ "./public/img/lb_pic.jpeg"),
       alt: "lorenzo bertoni"
     }
   }), _vm._v(" "), _c("h3", [_vm._v(" Lorenzo Bertoni")]), _vm._v(" "), _c("a", {
@@ -19836,17 +19836,6 @@ module.exports = g;
 
 /***/ }),
 
-/***/ "./public/img/_C9R5578.jpg":
-/*!*********************************!*\
-  !*** ./public/img/_C9R5578.jpg ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/_C9R5578.jpg?db0446172a7e82abd923539d90a0cfd7";
-
-/***/ }),
-
 /***/ "./public/img/ab_pic.jpeg":
 /*!********************************!*\
   !*** ./public/img/ab_pic.jpeg ***!
@@ -19855,6 +19844,17 @@ module.exports = "/images/_C9R5578.jpg?db0446172a7e82abd923539d90a0cfd7";
 /***/ (function(module, exports) {
 
 module.exports = "/images/ab_pic.jpeg?d96a3d2d71fab73b81b461048f850d01";
+
+/***/ }),
+
+/***/ "./public/img/lb_pic.jpeg":
+/*!********************************!*\
+  !*** ./public/img/lb_pic.jpeg ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/lb_pic.jpeg?1ed2214177cb9acf84c158fabad574e1";
 
 /***/ }),
 
