@@ -71,7 +71,7 @@ header{
         .admin-link{
 
             .route-btn{
-                color: $bg-main;
+                color: #373737;
                 font-weight: bold;
                 text-decoration: none;
                 height: 10px;
@@ -88,7 +88,7 @@ header{
                 text-decoration: none;
                 height: 10px;
                 margin: 5px;
-                background-color: $bg-main;
+                background-color: #373737;
                 border-radius: 3px;
                 border: none;
                 padding: 0.4rem 1.8rem;
