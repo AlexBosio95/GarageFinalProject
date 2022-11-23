@@ -2121,7 +2121,7 @@ __webpack_require__.r(__webpack_exports__);
       searchText: '',
       currentLat: 0,
       currentLong: 0,
-      currentRadius: 10000,
+      currentRadius: 20000,
       currentParkingNumber: 0,
       data: [],
       ArrayRadius: [],
@@ -2508,14 +2508,14 @@ var staticRenderFns = [function () {
   }, [_vm._v("linkedin")])]), _vm._v(" "), _c("div", {
     staticClass: "my-card"
   }, [_c("img", {
-    staticClass: "circle",
+    staticClass: "circle my-image",
     attrs: {
-      src: __webpack_require__(/*! ../../../public/img/ab_pic.jpeg */ "./public/img/ab_pic.jpeg"),
+      src: __webpack_require__(/*! ../../../public/img/_C9R5578.jpg */ "./public/img/_C9R5578.jpg"),
       alt: "lorenzo bertoni"
     }
   }), _vm._v(" "), _c("h3", [_vm._v(" Lorenzo Bertoni")]), _vm._v(" "), _c("a", {
     attrs: {
-      href: "https://www.linkedin.com/in/marco-valerio-dev/"
+      href: "https://www.linkedin.com/in/lorenzo-bertoni-0a8019255/"
     }
   }, [_vm._v("linkedin")])]), _vm._v(" "), _c("div", {
     staticClass: "my-card"
@@ -2816,7 +2816,7 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("\n                            Send a message to the owner\n                        ")])], 1)])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\r\n                            Send a message to the owner\r\n                        ")])], 1)])])]), _vm._v(" "), _c("div", {
     staticClass: "mb-3"
   }, [_c("router-link", {
     staticClass: "btn-back",
@@ -19836,6 +19836,17 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./public/img/_C9R5578.jpg":
+/*!*********************************!*\
+  !*** ./public/img/_C9R5578.jpg ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/_C9R5578.jpg?db0446172a7e82abd923539d90a0cfd7";
+
+/***/ }),
+
 /***/ "./public/img/ab_pic.jpeg":
 /*!********************************!*\
   !*** ./public/img/ab_pic.jpeg ***!
@@ -20657,7 +20668,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
