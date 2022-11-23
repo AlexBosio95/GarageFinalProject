@@ -240,6 +240,7 @@ export default {
     .icon{
         color: $my-yellow;
         font-size: 1.5rem;
+        margin-right: .5rem;
     }
 
     .container-text{
