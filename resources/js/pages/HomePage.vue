@@ -21,7 +21,7 @@
                     <div class="row justify-content-center align-items-center">
                         <div class="col-4">
                             <div>
-                                <input type="search" list="mylist" placeholder="Insert an address to start looking for your perfect garage"  class="search-bar" id="search-bar" aria-describedby="emailHelp"  v-model="searchText" @input="selectCity">
+                                <input type="search" @click="open = false" list="mylist" placeholder="Insert an address to start looking for your perfect garage"  class="search-bar" id="search-bar" aria-describedby="emailHelp"  v-model="searchText" @input="selectCity">
                             </div>
 
                             <datalist id="mylist" class="data-list">
@@ -97,8 +97,8 @@
                             <div class="select">
                                 <div class="my-container">
 
-                                    <div class="select-btn">
-                                        <span class="btn-text">Select Services</span>
+                                    <div class="select-btn" :class=" (open) ? 'open' : ''" @click="open = !open">
+                                        <span class="btn-text">{{servicesSelected()}}</span>
                                         <span class="arrow-dwn">
                                             <i class="fa-solid fa-chevron-down"></i>
                                         </span>
@@ -212,7 +212,8 @@ export default
             },
             services: [],
             selectedServices: [],
-            loading: true
+            loading: true,
+            open: false,
         }
     },
     methods: {
@@ -246,7 +247,8 @@ export default
                 this.AllArrayGarages = response.data.results.data;
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
-                this.loading = false
+                this.loading = false;
+                this.open = false;
             });
         },
 
@@ -265,6 +267,7 @@ export default
             this.loading = true;
             this.currentPage = 0;
             this.lastPage = 0;
+            this.open = false;
 
             if (this.searchText != '') {
 
@@ -324,6 +327,7 @@ export default
                 this.isFull= true;
                 this.loading = false;
                 this.getAllGarages(1);
+                this.open = false;
             } else {
                 axios.get('https://api.tomtom.com/search/2/geocode/' + this.searchText + '.json?storeResult=false&view=Unified&key=4Hp3L2fnTAkWmOm1ZdH2caelj0iHxlMM&countrySet=IT')
                 .then((response) => {
@@ -333,36 +337,18 @@ export default
             }
         },
 
-        selectService(){
-            const selectBtn = document.querySelector(".select-btn"),
-                items = document.querySelectorAll(".item");
-
-            selectBtn.addEventListener("click", () => {
-                selectBtn.classList.toggle("open");
-            });
-
-            items.forEach(item => {
-                item.addEventListener("click", () => {
-                    item.classList.toggle("checked");
-
-                    let checked = document.querySelectorAll(".checked"),
-                        btnText = document.querySelector(".btn-text");
-
-                        if(checked && checked.length > 0){
-                            btnText.innerText = `${checked.length} Selected`;
-                        }else{
-                            btnText.innerText = "Select Services";
-                        }
-                });
-            })
-
+        servicesSelected(){
+            if (this.selectedServices.length == 0) {
+                return 'Select Services'
+            } else {
+                return this.selectedServices.length + ' Selected'
+            }
         }
 
     },
     mounted(){
         this.getAllGarages(1);
         this.getAllServices();
-        this.selectService();
     }
 }
 </script>
@@ -487,39 +473,6 @@ export default
         border: none;
     }
 
-    input[type="range"] {
-        display: block;
-        width: 100%;
-        -webkit-appearance: none;
-        background-color: $my-yellow;
-        height: 10px;
-        border-radius: 5px;
-        margin: 0 auto;
-        outline: 0;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        background-color: #e74c3c;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        border: 2px solid white;
-        cursor: pointer;
-        transition: .3s ease-in-out;
-        }
-
-        input[type="range"]::-webkit-slider-thumb:hover {
-            background-color: white;
-            border: 2px solid #e74c3c;
-        }
-
-        input[type="range"]::-webkit-slider-thumb:active {
-            transform: scale(1.6);
-        }
-
-
-
 }
 
 
@@ -606,9 +559,19 @@ export default
                     transition: 0.3s;
                     padding: 0 15px;
                     border-radius: 8px;
+                    position: relative;
 
-                    &:hover{
-                        background-color: $my-yellow-s;
+                    label{
+
+                        &::before{
+                            font-family: "Font Awesome 5 Free";
+                            content: '\f111';
+                            font-size: 20px;
+                            position: absolute;
+                            top: 50%;
+                            left: 7%;
+                            transform: translate(0, - 50%);
+                        }
                     }
 
                     .checkbox{
@@ -621,22 +584,21 @@ export default
                         margin-right: 12px;
                         border: 1.5px solid $bg-head;
                         transition: all 0.3s ease-in-out;
+                        opacity: 0;
+
+                        &:checked + label::before{
+                            font-family: "Font Awesome 5 Free";
+                            content: '\f058';
+                            font-size: 20px;
+                            position: absolute;
+                            top: 50%;
+                            left: 7%;
+                            transform: translate(0, - 50%);
+                        }
                     }
 
-                    &.checked .checkbox{
-                        background-color: #4070f4;
-                        border-color: #4070f4;
-                    }
-
-                    .check-icon{
-                        color: #fff;
-                        font-size: 11px;
-                        transform: scale(0);
-                        transition: all 0.2s ease-in-out;
-                    }
-
-                    &.checked .check-icon{
-                        transform: scale(1);
+                    &:hover{
+                        background-color: $my-yellow-s;
                     }
                 }
 
