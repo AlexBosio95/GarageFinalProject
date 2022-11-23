@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="my-container">
 
         <h1 class="text-center m-5">About<span class="my-us">Us</span></h1>
         <p>        
@@ -51,7 +51,7 @@ export default {
 <style lang='scss' scoped>
 @import '../../sass/variables.scss';
 
-div .container{
+div .my-container{
     color: $body-bg ;
 
     .my-us{
@@ -70,9 +70,28 @@ div .container{
             
         }
     }
+}
+
+@media screen and (max-width: 600px) {
+
+    .my-container{
+        width: 90%;
+        margin: auto;
+
+        .cards-container{
+            margin-top: 2rem;
+            flex-wrap: wrap;
+
+            .my-card{
+                margin: 2rem;
+            }
+        }
+    }
+
+
 
 
         
-    }
+}
 
-    </style>
+</style>
