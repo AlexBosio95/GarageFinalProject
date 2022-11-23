@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="container">
-    <a href="{{ route('admin.garages.index') }}" class="btn btn-primary mb-2 mr-3">< back </a>
-    
-    <a href="{{ route('admin.messages', ['garage' => $garage]) }}" class="btn btn-primary mb-2 mr-3">Show correlated messages</a>
-    
-    <a href="{{ route('admin.views', ['garage' => $garage]) }}" class="btn btn-primary mb-2 mr-3">Check views</a>
+    <a href="{{ route('admin.garages.index') }}" class="btn btn-warning mb-2 mr-3">< back </a>
+
+    <a href="{{ route('admin.messages', ['garage' => $garage]) }}" class="btn btn-warning mb-2 mr-3">Show correlated messages</a>
+
+    <a href="{{ route('admin.views', ['garage' => $garage]) }}" class="btn btn-warning mb-2 mr-3">Check views</a>
 
     <div class="card mb-3">
         @if ($garage->image)
@@ -17,80 +17,80 @@
 
         <div class="card-body">
             <h5 class="card-title">
-                <span class="text-primary">Title:</span>
+                <span class="text-warning">Title:</span>
                 {{$garage->title}}
             </h5>
 
             <p class="card-text">
-                <span class="text-primary">Address:</span>
+                <span class="text-warning">Address:</span>
                 <span class="text-muted">{{$garage->address}}</span>
             </p>
 
             <p class="card-text">
-                <span class="text-primary">Longitude:</span>
+                <span class="text-warning">Longitude:</span>
                 <span class="text-muted">{{$garage->longitude}}</span>
             </p>
 
             <p class="card-text">
-                <span class="text-primary">Latitude:</span>
+                <span class="text-warning">Latitude:</span>
                 <span class="text-muted">{{$garage->latitude}}</span>
             </p>
 
             @if ($garage->sqmt > 1)
                 <p class="card-text">
-                    <span class="text-primary">Garage total area:</span>
+                    <span class="text-warning">Garage total area:</span>
                     {{$garage->sqmt}} m²
                 </p>
             @else
                 <p class="card-text">
-                    <span class="text-primary">Garage total area:</span>
+                    <span class="text-warning">Garage total area:</span>
                     <span class="text-muted">Not available</span>
                 </p>
             @endif
 
             @if ($garage->length > 1)
                 <p class="card-text">
-                    <span class="text-primary">Length:</span>
+                    <span class="text-warning">Length:</span>
                     {{$garage->length}} mt
                 </p>
             @else
                 <p class="card-text">
-                    <span class="text-primary">Length:</span>
+                    <span class="text-warning">Length:</span>
                     <span class="text-muted">Not available</span>
                 </p>
             @endif
 
             @if ($garage->width > 1)
                 <p class="card-text">
-                    <span class="text-primary">Width:</span>
+                    <span class="text-warning">Width:</span>
                     {{$garage->width}} mt
                 </p>
             @else
                 <p class="card-text">
-                    <span class="text-primary">Width:</span>
+                    <span class="text-warning">Width:</span>
                     <span class="text-muted">Not available</span>
                 </p>
             @endif
             @if ($garage->height > 1)
                 <p class="card-text">
-                    <span class="text-primary">Height:</span>
+                    <span class="text-warning">Height:</span>
                     {{$garage->height}} mt
                 </p>
             @else
                 <p class="card-text">
-                    <span class="text-primary">Height:</span>
+                    <span class="text-warning">Height:</span>
                     <span class="text-muted">Not available</span>
                 </p>
             @endif
 
             <p class="card-text">
-                <span class="text-primary">N_Parking:</span>
+                <span class="text-warning">N_Parking:</span>
                 {{$garage->n_parking}}
             </p>
 
             @if (count($garage->services) > 0)
                 <p class="card-text">
-                    <span class="text-primary">Services:</span>
+                    <span class="text-warning">Services:</span>
                     @foreach ($garage->services as $service)
                         <span class="text-success">
                             {{$service->name}} |
@@ -99,19 +99,19 @@
                 </p>
             @else
                 <p class="card-text">
-                    <span class="text-primary">Services:</span>
+                    <span class="text-warning">Services:</span>
                     <span class="text-muted">Not available</span>
                 </p>
             @endif
 
             @if ($garage->description)
                 <p class="card-text">
-                    <span class="text-primary">Description:</span>
+                    <span class="text-warning">Description:</span>
                     {{$garage->description}}
                 </p>
             @else
                 <p class="card-text">
-                    <span class="text-primary">Description:</span>
+                    <span class="text-warning">Description:</span>
                     <span class="text-muted">Not available</span>
                 </p>
             @endif

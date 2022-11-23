@@ -1,0 +1,15 @@
+.navbar, .card-header{
+    background-color: $bg-head;
+    color: $my-yellow;
+}
+
+.outer_cont{
+    background-color: $bg-main;
+    color: #fff;
+    min-height: 100vh;
+}
+
+.card-body{
+    background-color: $bg-main;
+    color: #fff;
+}

@@ -11041,3 +11041,20 @@ a.text-dark:focus {
   }
 }
 
+.navbar,
+.card-header {
+  background-color: #252525;
+  color: #F9D73A;
+}
+
+.outer_cont {
+  background-color: #2D2D2D;
+  color: #fff;
+  min-height: 100vh;
+}
+
+.card-body {
+  background-color: #2D2D2D;
+  color: #fff;
+}
+

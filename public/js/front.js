@@ -2121,7 +2121,7 @@ __webpack_require__.r(__webpack_exports__);
       searchText: '',
       currentLat: 0,
       currentLong: 0,
-      currentRadius: 10000,
+      currentRadius: 20000,
       currentParkingNumber: 0,
       data: [],
       ArrayRadius: [],
@@ -2816,7 +2816,7 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("\n                            Send a message to the owner\n                        ")])], 1)])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\r\n                            Send a message to the owner\r\n                        ")])], 1)])])]), _vm._v(" "), _c("div", {
     staticClass: "mb-3"
   }, [_c("router-link", {
     staticClass: "btn-back",
@@ -20657,7 +20657,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! D:\Utenti\Valerio\OneDrive\Desktop\BOOLEAN\Repositorys\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
