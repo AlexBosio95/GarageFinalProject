@@ -68,7 +68,6 @@ export default {
 .my-card{
     width: 100%;
     border: none;
-    height: 550px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -81,6 +80,7 @@ export default {
 
     .image-card{
         width: 100%;
+        height: 240px;
         border-radius: .3rem;
         object-fit: cover;
     }
@@ -107,12 +107,15 @@ export default {
         .services{
             display: flex;
             flex-wrap: wrap;
+            height: 100px;
+            align-items: flex-start;
         }
         .service{
             color: $bg-head;
             background-color: $my-yellow;
             padding: .3rem .3rem;
             margin: .5rem .2rem;
+
         }
     }
 
