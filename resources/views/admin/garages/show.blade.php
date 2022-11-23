@@ -23,17 +23,17 @@
 
             <p class="card-text">
                 <span class="text-warning">Address:</span>
-                <span class="text-muted">{{$garage->address}}</span>
+                <span >{{$garage->address}}</span>
             </p>
 
             <p class="card-text">
                 <span class="text-warning">Longitude:</span>
-                <span class="text-muted">{{$garage->longitude}}</span>
+                <span >{{$garage->longitude}}</span>
             </p>
 
             <p class="card-text">
                 <span class="text-warning">Latitude:</span>
-                <span class="text-muted">{{$garage->latitude}}</span>
+                <span >{{$garage->latitude}}</span>
             </p>
 
             @if ($garage->sqmt > 1)
@@ -44,7 +44,7 @@
             @else
                 <p class="card-text">
                     <span class="text-warning">Garage total area:</span>
-                    <span class="text-muted">Not available</span>
+                    <span >Not available</span>
                 </p>
             @endif
 
@@ -56,7 +56,7 @@
             @else
                 <p class="card-text">
                     <span class="text-warning">Length:</span>
-                    <span class="text-muted">Not available</span>
+                    <span >Not available</span>
                 </p>
             @endif
 
@@ -68,7 +68,7 @@
             @else
                 <p class="card-text">
                     <span class="text-warning">Width:</span>
-                    <span class="text-muted">Not available</span>
+                    <span >Not available</span>
                 </p>
             @endif
             @if ($garage->height > 1)
@@ -79,7 +79,7 @@
             @else
                 <p class="card-text">
                     <span class="text-warning">Height:</span>
-                    <span class="text-muted">Not available</span>
+                    <span >Not available</span>
                 </p>
             @endif
 
@@ -100,7 +100,7 @@
             @else
                 <p class="card-text">
                     <span class="text-warning">Services:</span>
-                    <span class="text-muted">Not available</span>
+                    <span >Not available</span>
                 </p>
             @endif
 
@@ -112,7 +112,7 @@
             @else
                 <p class="card-text">
                     <span class="text-warning">Description:</span>
-                    <span class="text-muted">Not available</span>
+                    <span >Not available</span>
                 </p>
             @endif
         </div>

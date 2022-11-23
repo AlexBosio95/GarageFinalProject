@@ -4,13 +4,13 @@
 
 <div class="container">
         <a
-        class="btn btn-primary mb-5" 
+        class="btn btn-warning mb-5"
         href="{{route('admin.garages.show', ['garage' => $garage])}}"
         >
             Back
         </a>
 
-        <h1 class="text-center">
+        <h1 class="text-center text-warning">
             Title: <br>
             {{$garage->title}}
         </h1>

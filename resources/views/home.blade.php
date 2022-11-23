@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="text-center">
-        <a href="{{ route('admin.garages.index') }}" class="btn btn-primary mt-2">Garage List</a> 
+        <a href="{{ route('admin.garages.index') }}" class="btn btn-warning mt-2">Garage List</a>
     </div>
 </div>
 @endsection
