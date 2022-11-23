@@ -606,9 +606,19 @@ export default
                     transition: 0.3s;
                     padding: 0 15px;
                     border-radius: 8px;
+                    position: relative;
 
-                    &:hover{
-                        background-color: $my-yellow-s;
+                    label{
+
+                        &::before{
+                            font-family: "Font Awesome 5 Free";
+                            content: '\f111';
+                            font-size: 20px;
+                            position: absolute;
+                            top: 50%;
+                            left: 7%;
+                            transform: translate(0, - 50%);
+                        }
                     }
 
                     .checkbox{
@@ -621,22 +631,21 @@ export default
                         margin-right: 12px;
                         border: 1.5px solid $bg-head;
                         transition: all 0.3s ease-in-out;
+                        opacity: 0;
+
+                        &:checked + label::before{
+                            font-family: "Font Awesome 5 Free";
+                            content: '\f058';
+                            font-size: 20px;
+                            position: absolute;
+                            top: 50%;
+                            left: 7%;
+                            transform: translate(0, - 50%);
+                        }
                     }
 
-                    &.checked .checkbox{
-                        background-color: #4070f4;
-                        border-color: #4070f4;
-                    }
-
-                    .check-icon{
-                        color: #fff;
-                        font-size: 11px;
-                        transform: scale(0);
-                        transition: all 0.2s ease-in-out;
-                    }
-
-                    &.checked .check-icon{
-                        transform: scale(1);
+                    &:hover{
+                        background-color: $my-yellow-s;
                     }
                 }
 
