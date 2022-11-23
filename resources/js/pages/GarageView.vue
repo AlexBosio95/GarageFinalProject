@@ -284,6 +284,7 @@ export default {
     padding: .5rem 2rem;
     border-radius: .5rem;
     color: $bg-head;
+    text-decoration: none;
 
 }
 
