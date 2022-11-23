@@ -106,7 +106,7 @@
                 <h1 class="text-center title">{{error}}</h1>
             </div>
         </div>
-        <div class="mb-3">
+        <div class="my-3">
             <router-link class="btn-back" :to="{name: 'home'}"> Back</router-link>
         </div>
     </div>

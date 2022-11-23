@@ -16,10 +16,10 @@
                         <router-link class="text-btn" :to="{name: 'about-us'}">About Us</router-link>
                     </button>
                 </div>
-
-                <div class="search-container">
+                
+                <div class="search-box">
                     <div class="row justify-content-center align-items-center">
-                        <div class="col-4">
+                        <div class="col-12 col-md-4">
                             <div>
                                 <input type="search" @click="open = false" list="mylist" placeholder="Insert an address to start looking for your perfect garage"  class="search-bar" id="search-bar" aria-describedby="emailHelp"  v-model="searchText" @input="selectCity">
                             </div>
@@ -33,7 +33,7 @@
 
                         </div>
 
-                        <div class="col-2 d-flex justify-content-left">
+                        <div class="col-12 col-md-2 d-flex justify-content-left">
                             <button class="search-btn" :disabled = " searchText === '' " @click="searchGarages(1)"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </div>
@@ -50,10 +50,10 @@
 
         <!-- Filter selection -->
 
-        <div class="container mt-5">
+        <div class="container filter-content">
             <div class="row justify-content-center">
 
-                <div class="col">
+                <div class="col-11 col-md-4">
                     <!-- Radius km -->
                     <div class="card-filter">
                         <div class="row h-100">
@@ -69,7 +69,7 @@
                     </div>
                 </div>
 
-                <div class="col">
+                <div class="col-11 col-md-4">
                     <!-- Parking -->
                     <div class="card-filter">
                         <div class="row h-100">
@@ -85,7 +85,7 @@
                     </div>
                 </div>
 
-                <div class="col">
+                <div class="col-11 col-md-4">
                     <!-- Services -->
                     <div class="card-filter">
                         <div class="card-container">
@@ -137,8 +137,8 @@
                 The search has no results
             </div>
 
-            <div class="row row-cols-3 mt-4">
-                <div class="col" v-for="(garage, index) in (ArrayGarages.length == 0) ? AllArrayGarages : ArrayGarages" :key="index">
+            <div class="row row-cols-1 row-cols-md-3 mt-4">
+                <div class="col center-card" v-for="(garage, index) in (ArrayGarages.length == 0) ? AllArrayGarages : ArrayGarages" :key="index">
                     <cardGarage
                     :ArrayGarages = 'ArrayGarages'
                     :title = 'garage.title'
@@ -372,7 +372,7 @@ export default
         &::after {
             content: 'finder';
             color: $my-yellow;
-}
+        }
     }
 
     .subtitle{
@@ -406,9 +406,9 @@ export default
         }
     }
 
-    .search-container{
+    .search-box{
         position: absolute;
-        bottom: -4.5rem;
+        bottom: -1.5rem;
         left: 50%;
         transform: translate(-50%);
         width: 100%;
@@ -445,6 +445,10 @@ export default
 
     }
 
+}
+
+.filter-content{
+    margin-top: 4rem;
 }
 
 .area-select{
@@ -630,6 +634,50 @@ export default
         background-color: $bg-head;
 
     }
+}
+
+
+
+@media screen and (max-width: 600px) {
+
+    .search-container{
+    background-color: $bg-head;
+    position: relative;
+    padding-bottom: 3rem;
+
+    
+
+        .search-box{
+            position: absolute;
+            bottom: -5rem;
+            width: 80%;
+            
+            .search-btn{
+                border: none;
+                padding: 0 2rem;
+                background-color: $my-yellow;
+                border-radius: 4rem;
+                height: 46px;
+                cursor: pointer;
+
+                margin-top: 1rem;
+                width: 100%;
+            }
+        }
+    }
+
+    .filter-content{
+    margin-top: 6rem;
+    }
+
+    .card-filter{
+        margin-top: .5rem;
+    }
+
+    .center-card{
+        padding-left: 0;
+    }
+
 }
 
 
