@@ -20,7 +20,7 @@
             </div>
 
             <div class="my-card">
-                <img class="circle my-image" src="../../../public/img/_C9R5578.jpg" alt="lorenzo bertoni">
+                <img class="circle my-image" src="../../../public/img/lb_pic.jpeg" alt="lorenzo bertoni">
                 <h3> Lorenzo Bertoni</h3>
                 <a href="https://www.linkedin.com/in/lorenzo-bertoni-0a8019255/">linkedin</a>
             </div>
