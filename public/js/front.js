@@ -3259,7 +3259,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "header[data-v-1f42fb90] {\n  height: 10vh;\n  background-color: #252525;\n}\nheader nav[data-v-1f42fb90] {\n  background-color: #252525;\n  display: flex;\n  justify-content: space-between;\n}\nheader nav .logo img[data-v-1f42fb90] {\n  height: 8vh;\n}\nheader nav .logo .my-text[data-v-1f42fb90] {\n  color: #f8fafc;\n}\nheader nav .logo .my-text span[data-v-1f42fb90] {\n  color: #F9D73A;\n}\nheader nav .admin-link .route-btn[data-v-1f42fb90] {\n  color: #2D2D2D;\n  font-weight: bold;\n  text-decoration: none;\n  height: 10px;\n  margin: 5px;\n  background-color: #F9D73A;\n  border-radius: 3px;\n  border: none;\n  padding: 0.4rem 1.8rem;\n  text-align: center;\n}\nheader nav .admin-link .route-btn-reverse[data-v-1f42fb90] {\n  font-weight: bold;\n  color: #F9D73A;\n  text-decoration: none;\n  height: 10px;\n  margin: 5px;\n  background-color: #2D2D2D;\n  border-radius: 3px;\n  border: none;\n  padding: 0.4rem 1.8rem;\n  text-align: center;\n}", ""]);
+exports.push([module.i, "header[data-v-1f42fb90] {\n  height: 10vh;\n  background-color: #252525;\n}\nheader nav[data-v-1f42fb90] {\n  background-color: #252525;\n  display: flex;\n  justify-content: space-between;\n}\nheader nav .logo img[data-v-1f42fb90] {\n  height: 8vh;\n}\nheader nav .logo .my-text[data-v-1f42fb90] {\n  color: #f8fafc;\n}\nheader nav .logo .my-text span[data-v-1f42fb90] {\n  color: #F9D73A;\n}\nheader nav .admin-link .route-btn[data-v-1f42fb90] {\n  color: #373737;\n  font-weight: bold;\n  text-decoration: none;\n  height: 10px;\n  margin: 5px;\n  background-color: #F9D73A;\n  border-radius: 3px;\n  border: none;\n  padding: 0.4rem 1.8rem;\n  text-align: center;\n}\nheader nav .admin-link .route-btn-reverse[data-v-1f42fb90] {\n  font-weight: bold;\n  color: #F9D73A;\n  text-decoration: none;\n  height: 10px;\n  margin: 5px;\n  background-color: #373737;\n  border-radius: 3px;\n  border: none;\n  padding: 0.4rem 1.8rem;\n  text-align: center;\n}", ""]);
 
 // exports
 
@@ -19865,7 +19865,7 @@ module.exports = "/images/ab_pic.jpeg?d96a3d2d71fab73b81b461048f850d01";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/logo.png?6c91123b41c2ad818b04f7c4a58950c3";
+module.exports = "/images/logo.png?161fe42a43c36179affcf3b34d1bf1ec";
 
 /***/ }),
 
