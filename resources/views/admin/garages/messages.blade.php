@@ -29,7 +29,7 @@
                 </div>
                 <div class="border border-light mb-4 text-center">
                     <span class="text-warning">Text:</span>
-                    <p class="d-flex align-items-center m-1">
+                    <p>
                         {{$message->text}}
                     </p>
                 </div>
