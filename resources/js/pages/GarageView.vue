@@ -6,13 +6,14 @@
                 <div class="card-info">
                     <img :src="garage.image" class="card-img" :alt="garage.title">
                     <h5 class="card-title">{{garage.title}}</h5>
-                    <div class="main-card">
+                    
+                    <div class="main-card mt-4">
 
                         <!-- Riga con address -->
                         <div class="row align-items-center">
                             <div class="col-12 col-md-3">
                                 <div>
-                                    <i class="fa-solid fa-location-dot icon"></i>
+                                    <i class="fa-solid fa-location-dot icon m-0"></i>
                                     <span class="card-text tag-icon">Address</span>
                                 </div>
                             </div>
@@ -75,7 +76,12 @@
                             </div>
                         </div>
 
-                        <p class="card-text mt-4">Description: {{garage.description}}</p>
+                        <!-- Riga con description -->
+
+                        <div class="desc-container">
+                            <p class="card-text">{{(!isDescription) ? 'No Description' : garage.description}}</p>
+                        </div>
+
 
                     </div>
                 </div>
@@ -128,6 +134,7 @@ export default {
             addressGarage: [],
             imageMap: '',
             isHeight: false,
+            isDescription: false,
             service: false,
             error: '',
             message: {
@@ -156,6 +163,12 @@ export default {
 
                     if (this.garage.height) {
                         this.isHeight = true
+                    }
+
+                    if (this.garage.description.length == 0) {
+                        this.isDescription = false
+                    } else {
+                        this.isDescription = true
                     }
 
                     
@@ -228,7 +241,7 @@ export default {
     border-radius: .5rem;
     padding: 1.5rem;
     background-color: $bg-head;
-    height: 600px;
+    min-height: 600px;
 
     .card-img{
         max-height: 200px;
@@ -258,6 +271,13 @@ export default {
         background-color: $bg-main;
         padding: .5rem;
         border-radius: .5rem;
+    }
+
+    .desc-container{
+        background-color: $bg-main;
+        padding: 1rem;
+        border-radius: .5rem;
+        margin-top: 1.5rem;
     }
 
 }
@@ -296,7 +316,7 @@ export default {
 @media screen and (max-width: 600px) {
 
     .card-info{
-        height: 700px;
+        min-height: 700px;
 
         .card-text {
             font-size: .9rem;
