@@ -27,6 +27,9 @@
                     <p class="d-flex align-items-center m-0">
                         {{$message->surname}}
                     </p>
+                </div>
+                <div class="border border-light mb-4">
+
                     <span class="text-warning">Text:</span>
                     <p class="d-flex align-items-center m-0">
                         {{$message->text}}
