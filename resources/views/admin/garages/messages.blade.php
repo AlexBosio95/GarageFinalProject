@@ -20,7 +20,6 @@
                     </p>
                     <span class="text-warning">Name:</span>
                     <p class="d-flex align-items-center m-0">
-                        Name:
                         {{$message->name}}
                     </p>
                     <span class="text-warning">Surname:</span>
@@ -28,10 +27,9 @@
                         {{$message->surname}}
                     </p>
                 </div>
-                <div class="border border-light mb-4">
-
+                <div class="border border-light mb-4 text-center">
                     <span class="text-warning">Text:</span>
-                    <p class="d-flex align-items-center m-0">
+                    <p class="d-flex align-items-center m-1">
                         {{$message->text}}
                     </p>
                 </div>
