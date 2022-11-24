@@ -2832,7 +2832,7 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("\r\n                            Send a message to the owner\r\n                        ")])], 1)])])]) : _c("div", {
+  }, [_vm._v("\n                            Send a message to the owner\n                        ")])], 1)])])]) : _c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_vm.error == "" ? _c("div", {
     staticClass: "spinner-grow text-warning",
@@ -3341,7 +3341,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".my-card[data-v-07801362] {\n  width: 100%;\n  border: none;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  background-color: #373737;\n  border-radius: 3px;\n}\n.my-card .img-conatiner[data-v-07801362] {\n  min-height: 262px;\n}\n.my-card .image-card[data-v-07801362] {\n  width: 100%;\n  height: 240px;\n  border-radius: 0.3rem;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.my-card .main-card[data-v-07801362] {\n  color: white;\n  padding: 1rem;\n}\n.my-card .main-card .title[data-v-07801362] {\n  font-size: 24px;\n  height: 30px;\n}\n.my-card .main-card .icon[data-v-07801362] {\n  font-size: 2rem;\n  margin-right: 0.5rem;\n  color: #F9D73A;\n}\n.my-card .main-card .text-address[data-v-07801362] {\n  height: 40px;\n}\n.my-card .main-card .services[data-v-07801362] {\n  display: flex;\n  flex-wrap: wrap;\n  height: 100px;\n  align-items: flex-start;\n}\n.my-card .main-card .service[data-v-07801362] {\n  color: #252525;\n  background-color: #F9D73A;\n  padding: 0.3rem 0.3rem;\n  margin: 0.5rem 0.2rem;\n}\n.my-card .view-btn[data-v-07801362] {\n  background-color: #F9D73A;\n  border: none;\n  width: 100%;\n  height: 35px;\n  border-radius: 0.3rem;\n  text-align: center;\n  cursor: pointer;\n}\n.my-card .view-btn .text-btn[data-v-07801362] {\n  color: #252525;\n  text-decoration: none;\n  line-height: 30px;\n  font-size: 15px;\n  font-family: \"Inter\", sans-serif;\n  font-weight: 900;\n}\n.my-card .view-btn[data-v-07801362]:hover {\n  transform: scale(1.03);\n  transition: 0.5s;\n}", ""]);
+exports.push([module.i, ".my-card[data-v-07801362] {\n  width: 100%;\n  border: none;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  background-color: #373737;\n  border-radius: 3px;\n}\n.my-card .img-conatiner[data-v-07801362] {\n  min-height: 262px;\n}\n.my-card .image-card[data-v-07801362] {\n  width: 100%;\n  height: 240px;\n  border-radius: 0.3rem;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.my-card .main-card[data-v-07801362] {\n  color: white;\n  padding: 1rem;\n}\n.my-card .main-card .title[data-v-07801362] {\n  font-size: 24px;\n  height: 30px;\n}\n.my-card .main-card .icon[data-v-07801362] {\n  font-size: 2rem;\n  margin-right: 0.5rem;\n  color: #F9D73A;\n}\n.my-card .main-card .text-address[data-v-07801362] {\n  height: 40px;\n}\n.my-card .main-card .services[data-v-07801362] {\n  display: flex;\n  flex-wrap: wrap;\n  height: 100px;\n  align-items: flex-start;\n}\n.my-card .main-card .service[data-v-07801362] {\n  color: #252525;\n  background-color: #F9D73A;\n  padding: 0.3rem 0.3rem;\n  margin: 0.5rem 0.5rem 0 0;\n  border-radius: 0.3rem;\n}\n.my-card .view-btn[data-v-07801362] {\n  background-color: #F9D73A;\n  border: none;\n  width: 100%;\n  height: 35px;\n  border-radius: 0.3rem;\n  text-align: center;\n  cursor: pointer;\n}\n.my-card .view-btn .text-btn[data-v-07801362] {\n  color: #252525;\n  text-decoration: none;\n  line-height: 30px;\n  font-size: 15px;\n  font-family: \"Inter\", sans-serif;\n  font-weight: 900;\n}\n.my-card .view-btn[data-v-07801362]:hover {\n  transform: scale(1.03);\n  transition: 0.5s;\n}", ""]);
 
 // exports
 
@@ -20712,7 +20712,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })
