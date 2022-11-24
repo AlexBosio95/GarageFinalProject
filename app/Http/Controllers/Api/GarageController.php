@@ -14,7 +14,7 @@ class GarageController extends Controller
 {
     public function index()
     {
-        $garages = Garage::with(['services'])->paginate(9);
+        $garages = Garage::with(['services'])->where('available', true)->paginate(9);
         //dd($garages);
 
         foreach ($garages as $garage) {
@@ -91,7 +91,7 @@ class GarageController extends Controller
                 $servicesArr =  explode(',', $services);
                 $filteredGaragesId = $this->garageIdByServices($servicesArr);
                 return $query->whereIn('id', $filteredGaragesId);
-            })->paginate(9);
+            })->where('available', true)->paginate(9);
 
         return response()->json([
         'success' => 'ok',
@@ -124,7 +124,7 @@ class GarageController extends Controller
 
     public function show($id)
     {
-        $garage = Garage::where('slug', $id)->with(['services'])->firstOrFail();
+        $garage = Garage::where('slug', $id)->with(['services'])->where('available', true)->firstOrFail();
 
         if ($garage->image) {
             $garage->image = asset('storage/' . $garage->image);

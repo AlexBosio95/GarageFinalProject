@@ -2068,6 +2068,7 @@ __webpack_require__.r(__webpack_exports__);
       addressGarage: [],
       imageMap: '',
       isHeight: false,
+      isDescription: false,
       service: false,
       error: '',
       message: {
@@ -2091,6 +2092,11 @@ __webpack_require__.r(__webpack_exports__);
         }
         if (_this.garage.height) {
           _this.isHeight = true;
+        }
+        if (_this.garage.description.length == 0) {
+          _this.isDescription = false;
+        } else {
+          _this.isDescription = true;
         }
       })["catch"](function (error) {
         console.log(error);
@@ -2755,7 +2761,7 @@ var render = function render() {
   }), _vm._v(" "), _c("h5", {
     staticClass: "card-title"
   }, [_vm._v(_vm._s(_vm.garage.title))]), _vm._v(" "), _c("div", {
-    staticClass: "main-card"
+    staticClass: "main-card mt-4"
   }, [_c("div", {
     staticClass: "row align-items-center"
   }, [_vm._m(0), _vm._v(" "), _c("div", {
@@ -2792,9 +2798,11 @@ var render = function render() {
     staticClass: "container-text"
   }, [_c("p", {
     staticClass: "card-text"
-  }, [_vm._v(_vm._s(_vm.garage.n_parking))])])])]), _vm._v(" "), _c("p", {
-    staticClass: "card-text mt-4"
-  }, [_vm._v("Description: " + _vm._s(_vm.garage.description))])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.garage.n_parking))])])])]), _vm._v(" "), _c("div", {
+    staticClass: "desc-container"
+  }, [_c("p", {
+    staticClass: "card-text"
+  }, [_vm._v(_vm._s(!_vm.isDescription ? "No Description" : _vm.garage.description))])])])]), _vm._v(" "), _c("div", {
     staticClass: "service-container mb-4 d-flex flex-wrap"
   }, [_vm._l(_vm.garage.services, function (service) {
     return _c("span", {
@@ -2858,7 +2866,7 @@ var staticRenderFns = [function () {
   return _c("div", {
     staticClass: "col-12 col-md-3"
   }, [_c("div", [_c("i", {
-    staticClass: "fa-solid fa-location-dot icon"
+    staticClass: "fa-solid fa-location-dot icon m-0"
   }), _vm._v(" "), _c("span", {
     staticClass: "card-text tag-icon"
   }, [_vm._v("Address")])])]);
@@ -3339,7 +3347,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".my-card[data-v-07801362] {\n  width: 100%;\n  border: none;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  background-color: #373737;\n  border-radius: 3px;\n}\n.my-card .img-conatiner[data-v-07801362] {\n  min-height: 262px;\n}\n.my-card .image-card[data-v-07801362] {\n  width: 100%;\n  height: 240px;\n  border-radius: 0.3rem;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.my-card .main-card[data-v-07801362] {\n  color: white;\n  padding: 1rem;\n}\n.my-card .main-card .title[data-v-07801362] {\n  font-size: 24px;\n  height: 30px;\n}\n.my-card .main-card .icon[data-v-07801362] {\n  font-size: 2rem;\n  margin-right: 0.5rem;\n  color: #F9D73A;\n}\n.my-card .main-card .text-address[data-v-07801362] {\n  height: 40px;\n}\n.my-card .main-card .services[data-v-07801362] {\n  display: flex;\n  flex-wrap: wrap;\n  height: 100px;\n  align-items: flex-start;\n}\n.my-card .main-card .service[data-v-07801362] {\n  color: #252525;\n  background-color: #F9D73A;\n  padding: 0.3rem 0.3rem;\n  margin: 0.5rem 0.2rem;\n}\n.my-card .view-btn[data-v-07801362] {\n  background-color: #F9D73A;\n  border: none;\n  width: 100%;\n  height: 35px;\n  border-radius: 0.3rem;\n  text-align: center;\n  cursor: pointer;\n}\n.my-card .view-btn .text-btn[data-v-07801362] {\n  color: #252525;\n  text-decoration: none;\n  line-height: 30px;\n  font-size: 15px;\n  font-family: \"Inter\", sans-serif;\n  font-weight: 900;\n}\n.my-card .view-btn[data-v-07801362]:hover {\n  transform: scale(1.03);\n  transition: 0.5s;\n}", ""]);
+exports.push([module.i, ".my-card[data-v-07801362] {\n  width: 100%;\n  border: none;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  background-color: #373737;\n  border-radius: 3px;\n}\n.my-card .img-conatiner[data-v-07801362] {\n  min-height: 262px;\n}\n.my-card .image-card[data-v-07801362] {\n  width: 100%;\n  height: 240px;\n  border-radius: 0.3rem;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.my-card .main-card[data-v-07801362] {\n  color: white;\n  padding: 1rem;\n}\n.my-card .main-card .title[data-v-07801362] {\n  font-size: 24px;\n  height: 30px;\n}\n.my-card .main-card .icon[data-v-07801362] {\n  font-size: 2rem;\n  margin-right: 0.5rem;\n  color: #F9D73A;\n}\n.my-card .main-card .text-address[data-v-07801362] {\n  height: 40px;\n}\n.my-card .main-card .services[data-v-07801362] {\n  display: flex;\n  flex-wrap: wrap;\n  height: 100px;\n  align-items: flex-start;\n}\n.my-card .main-card .service[data-v-07801362] {\n  color: #252525;\n  background-color: #F9D73A;\n  padding: 0.3rem 0.3rem;\n  margin: 0.5rem 0.5rem 0 0;\n  border-radius: 0.3rem;\n}\n.my-card .view-btn[data-v-07801362] {\n  background-color: #F9D73A;\n  border: none;\n  width: 100%;\n  height: 35px;\n  border-radius: 0.3rem;\n  text-align: center;\n  cursor: pointer;\n}\n.my-card .view-btn .text-btn[data-v-07801362] {\n  color: #252525;\n  text-decoration: none;\n  line-height: 30px;\n  font-size: 15px;\n  font-family: \"Inter\", sans-serif;\n  font-weight: 900;\n}\n.my-card .view-btn[data-v-07801362]:hover {\n  transform: scale(1.03);\n  transition: 0.5s;\n}", ""]);
 
 // exports
 
@@ -3396,7 +3404,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".bg[data-v-5370dab5] {\n  background-color: #2D2D2D;\n}\n.card-map[data-v-5370dab5] {\n  border-radius: 0.5rem;\n}\n.card-map .img-map[data-v-5370dab5] {\n  width: 100%;\n  height: 480px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: 0.5rem;\n}\n.card-map .container-send-msg[data-v-5370dab5] {\n  background-color: #252525;\n  width: 100%;\n  border-radius: 0.5rem;\n  margin-top: 1rem;\n  padding: 2rem;\n  text-align: center;\n}\n.card-map .messages-link[data-v-5370dab5] {\n  color: #252525;\n  background-color: #F9D73A;\n}\n.card-map .icon-gps[data-v-5370dab5] {\n  position: absolute;\n  font-size: 2rem;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.card-info[data-v-5370dab5] {\n  border-radius: 0.5rem;\n  padding: 1.5rem;\n  background-color: #252525;\n  height: 600px;\n}\n.card-info .card-img[data-v-5370dab5] {\n  max-height: 200px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.card-info .card-title[data-v-5370dab5] {\n  color: #F9D73A;\n  margin-top: 1rem;\n}\n.card-info .card-text[data-v-5370dab5] {\n  color: #F9D73A;\n}\n.card-info .tag-icon[data-v-5370dab5] {\n  font-size: 20px;\n}\n.card-info .icon[data-v-5370dab5] {\n  color: #F9D73A;\n  font-size: 1.5rem;\n  margin-right: 0.5rem;\n}\n.card-info .container-text[data-v-5370dab5] {\n  background-color: #2D2D2D;\n  padding: 0.5rem;\n  border-radius: 0.5rem;\n}\n.service-container[data-v-5370dab5] {\n  margin-top: 1rem;\n  background-color: #252525;\n  padding: 2rem;\n  border-radius: 0.5rem;\n}\n.service-container .services[data-v-5370dab5] {\n  background-color: #F9D73A;\n  font-size: 1rem;\n  color: #252525;\n  padding: 0.5rem;\n  margin-right: 0.8rem;\n  margin-top: 0.8rem;\n  border-radius: 0.5rem;\n}\n.btn-back[data-v-5370dab5] {\n  background-color: #F9D73A;\n  padding: 0.5rem 2rem;\n  border-radius: 0.5rem;\n  color: #252525;\n  text-decoration: none;\n}\n.title[data-v-5370dab5] {\n  color: #F9D73A;\n}\n@media screen and (max-width: 600px) {\n.card-info[data-v-5370dab5] {\n    height: 700px;\n}\n.card-info .card-text[data-v-5370dab5] {\n    font-size: 0.9rem;\n}\n.card-info i[data-v-5370dab5] {\n    margin-right: 0.5rem;\n}\n.mar-sm[data-v-5370dab5] {\n    margin-top: 0.8rem;\n}\n}", ""]);
+exports.push([module.i, ".bg[data-v-5370dab5] {\n  background-color: #2D2D2D;\n}\n.card-map[data-v-5370dab5] {\n  border-radius: 0.5rem;\n}\n.card-map .img-map[data-v-5370dab5] {\n  width: 100%;\n  height: 480px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: 0.5rem;\n}\n.card-map .container-send-msg[data-v-5370dab5] {\n  background-color: #252525;\n  width: 100%;\n  border-radius: 0.5rem;\n  margin-top: 1rem;\n  padding: 2rem;\n  text-align: center;\n}\n.card-map .messages-link[data-v-5370dab5] {\n  color: #252525;\n  background-color: #F9D73A;\n}\n.card-map .icon-gps[data-v-5370dab5] {\n  position: absolute;\n  font-size: 2rem;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.card-info[data-v-5370dab5] {\n  border-radius: 0.5rem;\n  padding: 1.5rem;\n  background-color: #252525;\n  min-height: 600px;\n}\n.card-info .card-img[data-v-5370dab5] {\n  max-height: 200px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.card-info .card-title[data-v-5370dab5] {\n  color: #F9D73A;\n  margin-top: 1rem;\n}\n.card-info .card-text[data-v-5370dab5] {\n  color: #F9D73A;\n}\n.card-info .tag-icon[data-v-5370dab5] {\n  font-size: 20px;\n}\n.card-info .icon[data-v-5370dab5] {\n  color: #F9D73A;\n  font-size: 1.5rem;\n  margin-right: 0.5rem;\n}\n.card-info .container-text[data-v-5370dab5] {\n  background-color: #2D2D2D;\n  padding: 0.5rem;\n  border-radius: 0.5rem;\n}\n.card-info .desc-container[data-v-5370dab5] {\n  background-color: #2D2D2D;\n  padding: 1rem;\n  border-radius: 0.5rem;\n  margin-top: 1.5rem;\n}\n.service-container[data-v-5370dab5] {\n  margin-top: 1rem;\n  background-color: #252525;\n  padding: 2rem;\n  border-radius: 0.5rem;\n}\n.service-container .services[data-v-5370dab5] {\n  background-color: #F9D73A;\n  font-size: 1rem;\n  color: #252525;\n  padding: 0.5rem;\n  margin-right: 0.8rem;\n  margin-top: 0.8rem;\n  border-radius: 0.5rem;\n}\n.btn-back[data-v-5370dab5] {\n  background-color: #F9D73A;\n  padding: 0.5rem 2rem;\n  border-radius: 0.5rem;\n  color: #252525;\n  text-decoration: none;\n}\n.title[data-v-5370dab5] {\n  color: #F9D73A;\n}\n@media screen and (max-width: 600px) {\n.card-info[data-v-5370dab5] {\n    min-height: 700px;\n}\n.card-info .card-text[data-v-5370dab5] {\n    font-size: 0.9rem;\n}\n.card-info i[data-v-5370dab5] {\n    margin-right: 0.5rem;\n}\n.mar-sm[data-v-5370dab5] {\n    margin-top: 0.8rem;\n}\n}", ""]);
 
 // exports
 
