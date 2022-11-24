@@ -114,8 +114,7 @@ export default {
             color: $bg-head;
             background-color: $my-yellow;
             padding: .3rem .3rem;
-            margin: .5rem .5rem 0 0;
-            border-radius: .3rem;
+            margin: .5rem .2rem;
 
         }
     }
