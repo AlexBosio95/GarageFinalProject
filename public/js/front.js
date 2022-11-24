@@ -2838,7 +2838,7 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("\r\n                            Send a message to the owner\r\n                        ")])], 1)])])]) : _c("div", {
+  }, [_vm._v("\n                            Send a message to the owner\n                        ")])], 1)])])]) : _c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_vm.error == "" ? _c("div", {
     staticClass: "spinner-grow text-warning",
@@ -2847,8 +2847,8 @@ var render = function render() {
     }
   }, [_c("span", {
     staticClass: "sr-only"
-  }, [_vm._v("Loading...")])]) : _c("div", [_c("h1", {
-    staticClass: "text-center title"
+  }, [_vm._v("Loading...")])]) : _c("div", [_vm._m(5), _vm._v(" "), _c("h1", {
+    staticClass: "text-center title mt-4"
   }, [_vm._v(_vm._s(_vm.error))])])]), _vm._v(" "), _c("div", {
     staticClass: "my-3"
   }, [_c("router-link", {
@@ -2918,6 +2918,14 @@ var staticRenderFns = [function () {
   }), _vm._v(" "), _c("span", {
     staticClass: "card-text tag-icon"
   }, [_vm._v("Parking")])])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "text-center mt-4"
+  }, [_c("i", {
+    staticClass: "fa-solid fa-triangle-exclamation icon-exclamation"
+  })]);
 }];
 render._withStripped = true;
 
@@ -3404,7 +3412,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".bg[data-v-5370dab5] {\n  background-color: #2D2D2D;\n}\n.card-map[data-v-5370dab5] {\n  border-radius: 0.5rem;\n}\n.card-map .img-map[data-v-5370dab5] {\n  width: 100%;\n  height: 480px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: 0.5rem;\n}\n.card-map .container-send-msg[data-v-5370dab5] {\n  background-color: #252525;\n  width: 100%;\n  border-radius: 0.5rem;\n  margin-top: 1rem;\n  padding: 2rem;\n  text-align: center;\n}\n.card-map .messages-link[data-v-5370dab5] {\n  color: #252525;\n  background-color: #F9D73A;\n}\n.card-map .icon-gps[data-v-5370dab5] {\n  position: absolute;\n  font-size: 2rem;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.card-info[data-v-5370dab5] {\n  border-radius: 0.5rem;\n  padding: 1.5rem;\n  background-color: #252525;\n  min-height: 600px;\n}\n.card-info .card-img[data-v-5370dab5] {\n  max-height: 200px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.card-info .card-title[data-v-5370dab5] {\n  color: #F9D73A;\n  margin-top: 1rem;\n}\n.card-info .card-text[data-v-5370dab5] {\n  color: #F9D73A;\n}\n.card-info .tag-icon[data-v-5370dab5] {\n  font-size: 20px;\n}\n.card-info .icon[data-v-5370dab5] {\n  color: #F9D73A;\n  font-size: 1.5rem;\n  margin-right: 0.5rem;\n}\n.card-info .container-text[data-v-5370dab5] {\n  background-color: #2D2D2D;\n  padding: 0.5rem;\n  border-radius: 0.5rem;\n}\n.card-info .desc-container[data-v-5370dab5] {\n  background-color: #2D2D2D;\n  padding: 1rem;\n  border-radius: 0.5rem;\n  margin-top: 1.5rem;\n}\n.service-container[data-v-5370dab5] {\n  margin-top: 1rem;\n  background-color: #252525;\n  padding: 2rem;\n  border-radius: 0.5rem;\n}\n.service-container .services[data-v-5370dab5] {\n  background-color: #F9D73A;\n  font-size: 1rem;\n  color: #252525;\n  padding: 0.5rem;\n  margin-right: 0.8rem;\n  margin-top: 0.8rem;\n  border-radius: 0.5rem;\n}\n.btn-back[data-v-5370dab5] {\n  background-color: #F9D73A;\n  padding: 0.5rem 2rem;\n  border-radius: 0.5rem;\n  color: #252525;\n  text-decoration: none;\n}\n.title[data-v-5370dab5] {\n  color: #F9D73A;\n}\n@media screen and (max-width: 600px) {\n.card-info[data-v-5370dab5] {\n    min-height: 700px;\n}\n.card-info .card-text[data-v-5370dab5] {\n    font-size: 0.9rem;\n}\n.card-info i[data-v-5370dab5] {\n    margin-right: 0.5rem;\n}\n.mar-sm[data-v-5370dab5] {\n    margin-top: 0.8rem;\n}\n}", ""]);
+exports.push([module.i, ".bg[data-v-5370dab5] {\n  background-color: #2D2D2D;\n}\n.card-map[data-v-5370dab5] {\n  border-radius: 0.5rem;\n}\n.card-map .img-map[data-v-5370dab5] {\n  width: 100%;\n  height: 480px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: 0.5rem;\n}\n.card-map .container-send-msg[data-v-5370dab5] {\n  background-color: #252525;\n  width: 100%;\n  border-radius: 0.5rem;\n  margin-top: 1rem;\n  padding: 2rem;\n  text-align: center;\n}\n.card-map .messages-link[data-v-5370dab5] {\n  color: #252525;\n  background-color: #F9D73A;\n}\n.card-map .icon-gps[data-v-5370dab5] {\n  position: absolute;\n  font-size: 2rem;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.card-info[data-v-5370dab5] {\n  border-radius: 0.5rem;\n  padding: 1.5rem;\n  background-color: #252525;\n  min-height: 600px;\n}\n.card-info .card-img[data-v-5370dab5] {\n  max-height: 200px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.card-info .card-title[data-v-5370dab5] {\n  color: #F9D73A;\n  margin-top: 1rem;\n}\n.card-info .card-text[data-v-5370dab5] {\n  color: #F9D73A;\n}\n.card-info .tag-icon[data-v-5370dab5] {\n  font-size: 20px;\n}\n.card-info .icon[data-v-5370dab5] {\n  color: #F9D73A;\n  font-size: 1.5rem;\n  margin-right: 0.5rem;\n}\n.card-info .container-text[data-v-5370dab5] {\n  background-color: #2D2D2D;\n  padding: 0.5rem;\n  border-radius: 0.5rem;\n}\n.card-info .desc-container[data-v-5370dab5] {\n  background-color: #2D2D2D;\n  padding: 1rem;\n  border-radius: 0.5rem;\n  margin-top: 1.5rem;\n}\n.service-container[data-v-5370dab5] {\n  margin-top: 1rem;\n  background-color: #252525;\n  padding: 2rem;\n  border-radius: 0.5rem;\n}\n.service-container .services[data-v-5370dab5] {\n  background-color: #F9D73A;\n  font-size: 1rem;\n  color: #252525;\n  padding: 0.5rem;\n  margin-right: 0.8rem;\n  margin-top: 0.8rem;\n  border-radius: 0.5rem;\n}\n.btn-back[data-v-5370dab5] {\n  background-color: #F9D73A;\n  padding: 0.5rem 2rem;\n  border-radius: 0.5rem;\n  color: #252525;\n  text-decoration: none;\n}\n.title[data-v-5370dab5] {\n  color: #F9D73A;\n}\n.icon-exclamation[data-v-5370dab5] {\n  color: #F9D73A;\n  font-size: 4rem;\n}\n@media screen and (max-width: 600px) {\n.card-info[data-v-5370dab5] {\n    min-height: 700px;\n}\n.card-info .card-text[data-v-5370dab5] {\n    font-size: 0.9rem;\n}\n.card-info i[data-v-5370dab5] {\n    margin-right: 0.5rem;\n}\n.mar-sm[data-v-5370dab5] {\n    margin-top: 0.8rem;\n}\n}", ""]);
 
 // exports
 
@@ -20718,7 +20726,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })

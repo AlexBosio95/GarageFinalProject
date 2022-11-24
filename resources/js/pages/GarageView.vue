@@ -112,7 +112,10 @@
                 <span class="sr-only">Loading...</span>
             </div>
             <div v-else>
-                <h1 class="text-center title">{{error}}</h1>
+                <div class="text-center mt-4">
+                    <i class="fa-solid fa-triangle-exclamation icon-exclamation"></i>
+                </div>
+                <h1 class="text-center title mt-4">{{error}}</h1>
             </div>
         </div>
         <div class="my-3">
@@ -310,6 +313,11 @@ export default {
 
 .title{
     color: $my-yellow;
+}
+
+.icon-exclamation{
+    color: $my-yellow;
+    font-size: 4rem;
 }
 
 
