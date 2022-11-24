@@ -2016,13 +2016,15 @@ __webpack_require__.r(__webpack_exports__);
       text: '',
       errors: {},
       success: false,
-      isSending: false
+      isSending: false,
+      confirmSend: ''
     };
   },
   methods: {
     sendMail: function sendMail() {
       var _this = this;
       this.isSending = true;
+      this.confirmSend = '';
       axios.post('/api/messages', {
         name: this.name,
         surname: this.surname,
@@ -2038,6 +2040,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.email = '';
           _this.text = '';
           _this.isSending = false;
+          _this.confirmSend = 'Message sent succesfully';
         } else {
           _this.errors = response.data.errors;
         }
@@ -2704,7 +2707,11 @@ var render = function render() {
         _vm.text = $event.target.value;
       }
     }
-  })]), _vm._v(" "), _c("button", {
+  })]), _vm._v(" "), _vm.confirmSend != "" ? _c("div", {
+    staticClass: "input-wrapper"
+  }, [_c("div", {
+    staticClass: "alert alert-success"
+  }, [_vm._v("\n                " + _vm._s(_vm.confirmSend) + "\n            ")])]) : _vm._e(), _vm._v(" "), _c("button", {
     attrs: {
       type: "submit",
       disabled: _vm.isSending
@@ -2825,7 +2832,7 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("\n                            Send a message to the owner\n                        ")])], 1)])])]) : _c("div", {
+  }, [_vm._v("\r\n                            Send a message to the owner\r\n                        ")])], 1)])])]) : _c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_vm.error == "" ? _c("div", {
     staticClass: "spinner-grow text-warning",
@@ -3353,7 +3360,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "div .my-container[data-v-3eec1a12] {\n  color: #f8fafc;\n}\ndiv .my-container .my-us[data-v-3eec1a12] {\n  color: #F9D73A;\n}\ndiv .my-container .cards-container[data-v-3eec1a12] {\n  display: flex;\n  justify-content: space-around;\n}\ndiv .my-container .cards-container .my-card img[data-v-3eec1a12] {\n  height: 150px;\n  border-radius: 50%;\n  margin: 1rem;\n}\n@media screen and (max-width: 600px) {\n.my-container[data-v-3eec1a12] {\n    width: 90%;\n    margin: auto;\n}\n.my-container .cards-container[data-v-3eec1a12] {\n    margin-top: 2rem;\n    flex-wrap: wrap;\n}\n.my-container .cards-container .my-card[data-v-3eec1a12] {\n    margin: 2rem;\n}\n}", ""]);
+exports.push([module.i, "div .my-container[data-v-3eec1a12] {\n  color: #f8fafc;\n  width: 90%;\n  margin: auto;\n}\ndiv .my-container .my-us[data-v-3eec1a12] {\n  color: #F9D73A;\n}\ndiv .my-container .cards-container[data-v-3eec1a12] {\n  display: flex;\n  justify-content: space-around;\n}\ndiv .my-container .cards-container .my-card img[data-v-3eec1a12] {\n  height: 150px;\n  border-radius: 50%;\n  margin: 1rem;\n}\n@media screen and (max-width: 600px) {\n.my-container[data-v-3eec1a12] {\n    width: 90%;\n    margin: auto;\n}\n.my-container .cards-container[data-v-3eec1a12] {\n    margin-top: 2rem;\n    flex-wrap: wrap;\n}\n.my-container .cards-container .my-card[data-v-3eec1a12] {\n    margin: 2rem;\n}\n}", ""]);
 
 // exports
 
@@ -3372,7 +3379,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".container[data-v-daf49172] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.container .title[data-v-daf49172] {\n  color: #F9D73A;\n  margin-top: 1rem;\n}\n.container .my-router-link[data-v-daf49172], .container button[data-v-daf49172] {\n  background-color: black;\n  color: white;\n  margin-top: 1rem;\n  transition: 0.5s linear;\n}\n.container .my-router-link[data-v-daf49172]:hover, .container button[data-v-daf49172]:hover {\n  background-color: #F9D73A;\n  color: black;\n}\n.container .input-wrapper[data-v-daf49172] {\n  margin: 20px 0;\n}\n.container .form-label[data-v-daf49172] {\n  color: #F9D73A;\n  margin-right: 20px;\n}\n.container .input-item[data-v-daf49172] {\n  width: 100%;\n  border-radius: 0.5rem;\n  padding: 0.5rem 3rem;\n}\n.container .input-item[data-v-daf49172]:focus {\n  outline: solid 2px #F9D73A;\n  background-color: black;\n  color: white;\n}\n.container button[data-v-daf49172] {\n  padding: 0.3rem 1rem;\n  border-radius: 0.5rem;\n}", ""]);
+exports.push([module.i, ".container[data-v-daf49172] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.container .title[data-v-daf49172] {\n  color: #F9D73A;\n  margin-top: 1rem;\n}\n.container .my-router-link[data-v-daf49172], .container button[data-v-daf49172] {\n  background-color: black;\n  color: white;\n  margin-top: 1rem;\n  transition: 0.5s linear;\n}\n.container .my-router-link[data-v-daf49172]:hover, .container button[data-v-daf49172]:hover {\n  background-color: #F9D73A;\n  color: black;\n}\n.container .input-wrapper[data-v-daf49172] {\n  margin: 20px 0;\n}\n.container .form-label[data-v-daf49172] {\n  color: #F9D73A;\n  margin-right: 20px;\n}\n.container .input-item[data-v-daf49172] {\n  width: 100%;\n  border-radius: 0.5rem;\n  padding: 0.5rem 3rem;\n}\n.container .input-item[data-v-daf49172]:focus {\n  outline: solid 2px #F9D73A;\n  background-color: black;\n  color: white;\n}\n.container button[data-v-daf49172] {\n  padding: 0.3rem 1rem;\n  border-radius: 0.5rem;\n}\n.container .msg-sent[data-v-daf49172] {\n  background-color: #F9D73A;\n  padding: 0.5rem 12rem;\n  border-radius: 1rem;\n  color: black;\n}", ""]);
 
 // exports
 
@@ -20705,7 +20712,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

@@ -17438,7 +17438,7 @@ if (!isNull(document.getElementById('myChart'))) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/chart.js */"./resources/js/chart.js");
+module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\chart.js */"./resources/js/chart.js");
 
 
 /***/ })

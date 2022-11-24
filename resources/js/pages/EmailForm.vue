@@ -48,6 +48,16 @@
                 ></textarea>
             </div>
 
+            <div 
+            class="input-wrapper"
+            v-if="(confirmSend != '')"
+            >
+                <div class="alert alert-success">
+                    {{confirmSend}}
+                </div>
+                
+            </div>
+
             <button 
             type="submit"
             :disabled="isSending"
@@ -70,12 +80,14 @@ export default {
 			text: '',
 			errors: {},
 			success: false,
-			isSending: false
+			isSending: false,
+            confirmSend: ''
 		}
 	},
     methods: {
 		sendMail() {
 			this.isSending = true;
+            this.confirmSend = '';
             
 
 			axios.post('/api/messages', {
@@ -95,6 +107,7 @@ export default {
 					this.email = '';
 					this.text = '';
                     this.isSending = false;
+                    this.confirmSend = 'Message sent succesfully'
 				} else {
 					this.errors = response.data.errors;
 				}
@@ -153,6 +166,13 @@ export default {
         button {
             padding: .3rem 1rem;
             border-radius: .5rem;
+        }
+
+        .msg-sent {
+            background-color: $my-yellow;
+            padding: .5rem 12rem;
+            border-radius: 1rem;
+            color: black;
         }
     }
 </style>
