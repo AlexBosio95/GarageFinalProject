@@ -14,7 +14,7 @@ class GarageController extends Controller
 {
     public function index()
     {
-        $garages = Garage::with(['services'])->paginate(9);
+        $garages = Garage::with(['services'])->where('available', true)->paginate(9);
         //dd($garages);
 
         foreach ($garages as $garage) {
