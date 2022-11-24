@@ -180,7 +180,7 @@ export default {
         timerNoGarage(){
             if (this.post == null) {
                 setTimeout(() =>{
-                    this.error = 'Garage not exist'
+                    this.error = 'This garage doesn\'t exist'
                 }, 2000)
             }
         }

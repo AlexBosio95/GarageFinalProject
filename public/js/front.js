@@ -2106,7 +2106,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
       if (this.post == null) {
         setTimeout(function () {
-          _this2.error = 'Garage not exist';
+          _this2.error = 'This garage doesn\'t exist';
         }, 2000);
       }
     }
@@ -2838,7 +2838,7 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("\n                            Send a message to the owner\n                        ")])], 1)])])]) : _c("div", {
+  }, [_vm._v("\r\n                            Send a message to the owner\r\n                        ")])], 1)])])]) : _c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_vm.error == "" ? _c("div", {
     staticClass: "spinner-grow text-warning",
@@ -20718,7 +20718,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/alexbosio/Desktop/GarageFinalProject/resources/js/front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
