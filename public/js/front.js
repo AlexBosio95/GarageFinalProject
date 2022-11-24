@@ -2016,13 +2016,15 @@ __webpack_require__.r(__webpack_exports__);
       text: '',
       errors: {},
       success: false,
-      isSending: false
+      isSending: false,
+      msgSent: ''
     };
   },
   methods: {
     sendMail: function sendMail() {
       var _this = this;
       this.isSending = true;
+      this.msgSent = '';
       axios.post('/api/messages', {
         name: this.name,
         surname: this.surname,
@@ -2038,6 +2040,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.email = '';
           _this.text = '';
           _this.isSending = false;
+          _this.msgSent = 'Message sent successfully';
         } else {
           _this.errors = response.data.errors;
         }
@@ -2704,7 +2707,9 @@ var render = function render() {
         _vm.text = $event.target.value;
       }
     }
-  })]), _vm._v(" "), _c("button", {
+  })]), _vm._v(" "), _vm.msgSent != "" ? _c("div", {
+    staticClass: "alert alert-success"
+  }, [_vm._v("\n            " + _vm._s(_vm.msgSent) + "\n        ")]) : _vm._e(), _vm._v(" "), _c("button", {
     attrs: {
       type: "submit",
       disabled: _vm.isSending
@@ -20705,7 +20710,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\marco\OneDrive\Desktop\Garagefinal projet\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\GarageFinalProject\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

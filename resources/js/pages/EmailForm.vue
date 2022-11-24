@@ -48,6 +48,13 @@
                 ></textarea>
             </div>
 
+            <div
+            class="alert alert-success"
+            v-if="(msgSent != '')"
+            >
+                {{msgSent}}
+            </div>
+
             <button 
             type="submit"
             :disabled="isSending"
@@ -70,13 +77,14 @@ export default {
 			text: '',
 			errors: {},
 			success: false,
-			isSending: false
+			isSending: false,
+            msgSent: ''
 		}
 	},
     methods: {
 		sendMail() {
 			this.isSending = true;
-            
+            this.msgSent = '';
 
 			axios.post('/api/messages', {
 				name: this.name,
@@ -95,6 +103,7 @@ export default {
 					this.email = '';
 					this.text = '';
                     this.isSending = false;
+                    this.msgSent = 'Message sent successfully'
 				} else {
 					this.errors = response.data.errors;
 				}
