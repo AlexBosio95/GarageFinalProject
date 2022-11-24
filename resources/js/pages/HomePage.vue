@@ -127,6 +127,7 @@
 
         <div class="container mt-5">
 
+
             <div class="text-center" v-if="loading">
                 <div class="spinner-grow text-warning" role="status">
                     <span class="sr-only">Loading...</span>
@@ -135,6 +136,12 @@
 
             <div class="alert alert-danger" :class="{ 'd-none' : isFull }"  role="alert">
                 The search has no results
+            </div>
+
+            <!-- results number garages -->
+            <div v-if="ArrayGarages.length > 0" class="results-container">
+                <i class="fa-solid fa-warehouse results-number mr-2"></i>
+                <span class="results-number">{{ArrayGarages.length}}</span>
             </div>
 
             <div class="row row-cols-1 row-cols-md-3 mt-4">
@@ -478,6 +485,19 @@ export default
     }
 
 }
+
+.results-container{
+    background-color: $bg-head;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    width: 8%;
+    text-align: center;
+
+    .results-number{
+        color: $my-yellow;
+    }
+}
+
 
 
 .card-filter{
